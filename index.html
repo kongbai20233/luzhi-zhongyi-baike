@@ -379,6 +379,10 @@ footer a { color: var(--gold); text-decoration: none; }
       <a href="#calligraphy">墨宝</a>
       <a href="#gallery">影集</a>
     <a href="search.html" style="background:rgba(255,213,79,0.2);border:1px solid #FFD54F;border-radius:6px;padding:4px 10px;">📚 文献检索</a>
+      <form onsubmit="goSearch(event)" style="display:flex;gap:4px;margin-left:8px;">
+        <input type="text" id="navSearch" placeholder="搜索文献..." style="padding:4px 10px;border:1px solid rgba(255,255,255,0.3);border-radius:6px;background:rgba(255,255,255,0.1);color:#FFF8F0;font-size:12px;width:120px;outline:none;">
+        <button type="submit" style="padding:4px 10px;border:1px solid #FFD54F;border-radius:6px;background:#FFD54F;color:#8B4513;font-size:12px;cursor:pointer;">搜索</button>
+      </form>
     </nav>
   </div>
 </header>
@@ -1743,11 +1747,26 @@ document.addEventListener("keydown", function(e) {
 });
 document.querySelectorAll("nav a").forEach(function(a) {
   a.addEventListener("click", function(e) {
-    e.preventDefault();
-    var target = document.querySelector(a.getAttribute("href"));
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    var href = a.getAttribute("href");
+    if (href && href.startsWith("#")) {
+      e.preventDefault();
+      var target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   });
 });
+</script>
+
+<script>
+function goSearch(e) {
+  e.preventDefault();
+  var q = document.getElementById("navSearch").value.trim();
+  if (q) {
+    window.location.href = "search.html?q=" + encodeURIComponent(q);
+  } else {
+    window.location.href = "search.html";
+  }
+}
 </script>
 </body>
 </html>
