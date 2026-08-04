@@ -1742,22 +1742,31 @@ footer a { color: var(--gold); text-decoration: none; }
   <span class="lb-prev" onclick="lbPrev()">&#10094;</span>
   <span class="lb-next" onclick="lbNext()">&#10095;</span>
   <span class="lb-rotate" onclick="lbRotate()" title="旋转90°">&#8635;</span>
-  <img id="lb-img" src="" alt="放大查看" onclick="event.stopPropagation()">
+  <img id="lb-img" src="" alt="放大查看">
   <div class="lb-counter" id="lb-counter"></div>
 </div>
 
 <script>
+// 灯箱功能
 var lbImages=[],lbIdx=0,lbRotations={};
-function openLB(src){
+
+// 收集所有可点击图片
+function collectImages(){
   lbImages=[];
-  document.querySelectorAll("[onclick*=\"openLB\"]").forEach(function(el){
-    var img=el.querySelector("img");
-    if(img)lbImages.push(img.src);
+  var items=document.querySelectorAll(".cert-item, .gallery-item");
+  items.forEach(function(item){
+    var img=item.querySelector("img");
+    if(img&&img.src) lbImages.push(img.src);
   });
+}
+
+function openLB(src){
+  collectImages();
   lbIdx=lbImages.indexOf(src);
-  if(lbIdx<0)lbImages=[src],lbIdx=0;
+  if(lbIdx<0) lbImages=[src],lbIdx=0;
   showLB();
 }
+
 function showLB(){
   var img=document.getElementById("lb-img");
   img.src=lbImages[lbIdx];
@@ -1767,51 +1776,40 @@ function showLB(){
   document.body.style.overflow="hidden";
   document.getElementById("lb-counter").textContent=(lbIdx+1)+" / "+lbImages.length;
 }
+
 function closeLB(){
   document.getElementById("lightbox").classList.remove("active");
   document.body.style.overflow="auto";
 }
+
 function lbNext(){lbIdx=(lbIdx+1)%lbImages.length;showLB()}
 function lbPrev(){lbIdx=(lbIdx-1+lbImages.length)%lbImages.length;showLB()}
+
 function lbRotate(){
   lbRotations[lbIdx]=((lbRotations[lbIdx]||0)+90)%360;
   document.getElementById("lb-img").style.transform="rotate("+lbRotations[lbIdx]+"deg)";
 }
-document.addEventListener("keydown",function(e){
-document.addEventListener("keydown",function(e){
-  if(e.key==="Escape")closeLB();
-  if(e.key==="ArrowRight")lbNext();
-  if(e.key==="ArrowLeft")lbPrev();
-  if(e.key==="r"||e.key==="R")lbRotate();
-});
-document.getElementById("lightbox").addEventListener("click",function(e){
-  if(e.target===this)closeLB();
-});
-document.querySelectorAll("nav a").forEach(function(a) {
-  a.addEventListener("click", function(e) {
-    var href = a.getAttribute("href");
-    if (href && href.startsWith("#")) {
-      e.preventDefault();
-      var target = document.querySelector(href);
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  });
-});
-</script>
 
-<script>
-function goSearch(e) {
+// 键盘事件
+document.addEventListener("keydown",function(e){
+  if(!document.getElementById("lightbox").classList.contains("active")) return;
+  if(e.key==="Escape") closeLB();
+  if(e.key==="ArrowRight") lbNext();
+  if(e.key==="ArrowLeft") lbPrev();
+  if(e.key==="r"||e.key==="R") lbRotate();
+});
+
+// 点击背景关闭
+document.getElementById("lightbox").addEventListener("click",function(e){
+  if(e.target===this) closeLB();
+});
+
+// 导航栏搜索
+function goSearch(e){
   e.preventDefault();
-  var q = document.getElementById("navSearch").value.trim();
-  if (q) {
-    window.location.href = "search.html?q=" + encodeURIComponent(q);
-  } else {
-    window.location.href = "search.html";
-  }
+  var q=document.getElementById("navSearch").value.trim();
+  if(q){window.location.href="search.html?q="+encodeURIComponent(q)}
+  else{window.location.href="search.html"}
 }
 </script>
-
-
-
 </body>
-</html>
