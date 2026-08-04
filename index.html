@@ -1838,18 +1838,18 @@ function goSearch(e){
 (function(){
   var sections=['intro','lzz','timeline','academy','lujie','certs','calligraphy','gallery'];
   var header=document.querySelector('header');
-  window.addEventListener('scroll',function(){
+  function update(){
     var headerH=header?header.offsetHeight:80;
-    var scrollY=window.pageYOffset||document.documentElement.scrollTop;
-    // Top nav scroll spy
+    var activeId='';
+    for(var i=0;i<sections.length;i++){
+      var el=document.getElementById(sections[i]);
+      if(!el) continue;
+      var rect=el.getBoundingClientRect();
+      if(rect.top<=headerH+40){activeId=sections[i];}
+    }
     var topNav=document.querySelector('header nav');
     if(topNav){
       var topLinks=topNav.querySelectorAll('a[href^="#"]');
-      var activeId='';
-      for(var i=sections.length-1;i>=0;i--){
-        var el=document.getElementById(sections[i]);
-        if(el&&scrollY>=el.offsetTop-headerH-20){activeId=sections[i];break;}
-      }
       topLinks.forEach(function(a){
         var href=a.getAttribute('href');
         if(href&&href.charAt(0)==='#'){
@@ -1858,10 +1858,10 @@ function goSearch(e){
         }
       });
     }
-
-  });
-})();
-</script>
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
+})();</script>
 
 </body>
 </html>
