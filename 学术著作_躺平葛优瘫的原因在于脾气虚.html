@@ -29,7 +29,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-title::before{content:"📑";font-size:18px}
 .toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
 .toc-toggle:hover{color:#8B4513}
-.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list{list-style:none;max-height:400px;overflow-y:auto;transition:max-height 0.3s}
 .toc-list.collapsed{max-height:0;overflow:hidden}
 .toc-list li{margin:4px 0}
 .toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
@@ -38,6 +38,11 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-list .toc-h3{padding-left:20px;font-size:13px}
 @media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
 
+
+.toc-part{font-weight:bold;font-size:15px;padding:6px 0 2px;border-bottom:1px solid #E8D5C0;margin-top:8px}
+.toc-part a{font-weight:bold;color:#8B4513!important;font-size:15px}
+.toc-section{padding-left:24px;font-size:13px}
+.toc-section a{font-size:13px;color:#6D4C41}
 </style>
 </head>
 <body>
@@ -66,50 +71,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>脾气虚的人，可以试试这个药粥：原料：党参（或西洋参）3克、山药12克、陈皮3克、生薏仁10克、粳米50克（或小米）。做的时候，把除了陈皮之外的药材和粳米一起熬粥。陈皮最好用广东新会县出的新会皮，新会皮较香。陈皮需要先用水洗净泡30分钟，然后剁得碎碎的。粥快熬好时，把陈皮带水一起放入粥中，也可以根据个人的口味再加入少量的盐，稍微煮一下搅拌均匀，一道健脾益气的药粥就做成了。粥快熬好的时候，可以根据个人喜好加入一些菜叶。山药健脾养胃，陈皮行气，脾胃是升降枢纽，讲究一个“动”字，所以要加一些动力药，要让它动起来。脾气虚的人往往容易夹湿，所以加薏仁米，有些人不喜欢薏米的味道，也可以先用薏米煮汁，再用药汁和其他材料一起熬粥。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
-
-// 目录功能
-(function(){
-  // 为所有h2添加锚点ID
-  var h2s=document.querySelectorAll(".content h2");
-  h2s.forEach(function(h,i){
-    if(!h.id) h.id="section-"+i;
-  });
-  
-  // 生成目录
-  var toc=document.getElementById("toc-list");
-  if(!toc) return;
-  h2s.forEach(function(h,i){
-    var li=document.createElement("li");
-    var a=document.createElement("a");
-    a.href="#"+h.id;
-    a.textContent=h.textContent.trim().substring(0,40);
-    a.addEventListener("click",function(e){
-      e.preventDefault();
-      h.scrollIntoView({behavior:"smooth",block:"start"});
-      // 更新高亮
-      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-      a.classList.add("active");
-    });
-    li.appendChild(a);
-    toc.appendChild(li);
-  });
-  
-  // Scroll Spy
-  function updateToc(){
-    var scrollY=window.scrollY+120;
-    h2s.forEach(function(h){
-      var top=h.offsetTop;
-      var h2h=h.offsetHeight;
-      if(scrollY>=top&&scrollY<top+h2h){
-        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-        var link=toc.querySelector('a[href="#'+h.id+'"]');
-        if(link) link.classList.add("active");
-      }
-    });
-  }
-  window.addEventListener("scroll",updateToc);
-  updateToc();
-})();
+<script>
 
 function toggleToc(){
   var list=document.getElementById("toc-list");
@@ -117,6 +79,8 @@ function toggleToc(){
   list.classList.toggle("collapsed");
   btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
 }
+</script>
+
 
 </body>
 </html>

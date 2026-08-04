@@ -29,7 +29,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-title::before{content:"📑";font-size:18px}
 .toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
 .toc-toggle:hover{color:#8B4513}
-.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list{list-style:none;max-height:400px;overflow-y:auto;transition:max-height 0.3s}
 .toc-list.collapsed{max-height:0;overflow:hidden}
 .toc-list li{margin:4px 0}
 .toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
@@ -38,6 +38,11 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-list .toc-h3{padding-left:20px;font-size:13px}
 @media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
 
+
+.toc-part{font-weight:bold;font-size:15px;padding:6px 0 2px;border-bottom:1px solid #E8D5C0;margin-top:8px}
+.toc-part a{font-weight:bold;color:#8B4513!important;font-size:15px}
+.toc-section{padding-left:24px;font-size:13px}
+.toc-section a{font-size:13px;color:#6D4C41}
 </style>
 </head>
 <body>
@@ -51,7 +56,17 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>路志正医林集腋</h1>
   <div class="meta">学术著作 / 其他路氏出版书籍著作 | 189,913 字</div>
-<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+<div class="toc" id="article-toc">
+<div class="toc-title" onclick="toggleToc()" style="cursor:pointer">
+📑 目录 <span class="toc-toggle" id="toc-toggle">收起 ▲</span>
+</div>
+<ul class="toc-list" id="toc-list">
+<li class="toc-item toc-part"><a href="#中篇其他各科医话医泰">中篇其他各科医话医泰</a></li>
+<li class="toc-item toc-part"><a href="#下篇帰证杂谈">下篇帰证杂谈</a></li>
+<li class="toc-item toc-part"><a href="#上篇内科医活医案">上篇内科医活医案</a></li>
+<li class="toc-item toc-part"><a href="#下篇临证朵谈">下篇临证朵谈</a></li>
+</ul>
+</div>
   <p>医林集腋 国医大师路志正教授是我国当代著名的中 医学家。为了将其从事中医事业数十年积 累起来的对中医学术理论的见解和主要的 临证心得反映出来，本书采取以医话为主 的形式整理成书，一 37篇文章短小精悍， 说理透彻，言简意赅，文风朴实，不尚空 谈。</p>
   <h2 id="路志正泌">路志正泌</h2>
   <h2 id="国医大师">国医大师</h2>
@@ -1666,50 +1681,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <h2 id="1988年5月">1988年5月</h2>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
-
-// 目录功能
-(function(){
-  // 为所有h2添加锚点ID
-  var h2s=document.querySelectorAll(".content h2");
-  h2s.forEach(function(h,i){
-    if(!h.id) h.id="section-"+i;
-  });
-  
-  // 生成目录
-  var toc=document.getElementById("toc-list");
-  if(!toc) return;
-  h2s.forEach(function(h,i){
-    var li=document.createElement("li");
-    var a=document.createElement("a");
-    a.href="#"+h.id;
-    a.textContent=h.textContent.trim().substring(0,40);
-    a.addEventListener("click",function(e){
-      e.preventDefault();
-      h.scrollIntoView({behavior:"smooth",block:"start"});
-      // 更新高亮
-      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-      a.classList.add("active");
-    });
-    li.appendChild(a);
-    toc.appendChild(li);
-  });
-  
-  // Scroll Spy
-  function updateToc(){
-    var scrollY=window.scrollY+120;
-    h2s.forEach(function(h){
-      var top=h.offsetTop;
-      var h2h=h.offsetHeight;
-      if(scrollY>=top&&scrollY<top+h2h){
-        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-        var link=toc.querySelector('a[href="#'+h.id+'"]');
-        if(link) link.classList.add("active");
-      }
-    });
-  }
-  window.addEventListener("scroll",updateToc);
-  updateToc();
-})();
+<script>
 
 function toggleToc(){
   var list=document.getElementById("toc-list");
@@ -1717,6 +1689,8 @@ function toggleToc(){
   list.classList.toggle("collapsed");
   btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
 }
+</script>
+
 
 </body>
 </html>

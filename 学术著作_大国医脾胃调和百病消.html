@@ -29,7 +29,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-title::before{content:"📑";font-size:18px}
 .toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
 .toc-toggle:hover{color:#8B4513}
-.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list{list-style:none;max-height:400px;overflow-y:auto;transition:max-height 0.3s}
 .toc-list.collapsed{max-height:0;overflow:hidden}
 .toc-list li{margin:4px 0}
 .toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
@@ -38,6 +38,11 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-list .toc-h3{padding-left:20px;font-size:13px}
 @media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
 
+
+.toc-part{font-weight:bold;font-size:15px;padding:6px 0 2px;border-bottom:1px solid #E8D5C0;margin-top:8px}
+.toc-part a{font-weight:bold;color:#8B4513!important;font-size:15px}
+.toc-section{padding-left:24px;font-size:13px}
+.toc-section a{font-size:13px;color:#6D4C41}
 </style>
 </head>
 <body>
@@ -51,7 +56,53 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>大国医脾胃调和百病消</h1>
   <div class="meta">学术著作 / 其他路氏出版书籍著作 | 73,546 字</div>
-<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+<div class="toc" id="article-toc">
+<div class="toc-title" onclick="toggleToc()" style="cursor:pointer">
+📑 目录 <span class="toc-toggle" id="toc-toggle">收起 ▲</span>
+</div>
+<ul class="toc-list" id="toc-list">
+<li class="toc-item"><a href="#第一章-养脾强身-修德增寿-2">第一章 养脾强身，修德增寿</a></li>
+<li class="toc-item toc-section"><a href="#第一节--97岁的老人-40岁的心态-3">第一节  97岁的老人，40岁的心态</a></li>
+<li class="toc-item toc-section"><a href="#第二节--上善若水-惟仁者寿-6">第二节  上善若水，惟仁者寿</a></li>
+<li class="toc-item toc-section"><a href="#第三节--重视脾胃-脾胃不和百病生-9">第三节  重视脾胃，脾胃不和百病生</a></li>
+<li class="toc-item toc-section"><a href="#第四节--脾虚也分阴阳-找准平衡是关键-12">第四节  脾虚也分阴阳，找准平衡是关键</a></li>
+<li class="toc-item toc-section"><a href="#第五节--行医八十年换来的健脾十八字-14">第五节  行医八十年换来的健脾十八字</a></li>
+<li class="toc-item"><a href="#第二章-脾胃一和百病消-17">第二章 脾胃一和百病消</a></li>
+<li class="toc-item toc-section"><a href="#第一节--脾胃有湿是现代人的通病-18">第一节  脾胃有湿是现代人的通病</a></li>
+<li class="toc-item toc-section"><a href="#第二节--顾好脾胃-让你的面容年轻十岁-22">第二节  顾好脾胃，让你的面容年轻十岁</a></li>
+<li class="toc-item toc-section"><a href="#第三节--脾虚信号早知道-25">第三节  脾虚信号早知道</a></li>
+<li class="toc-item toc-section"><a href="#第四节--好脾胃-让你的五官慢点老-30">第四节  好脾胃，让你的五官慢点老</a></li>
+<li class="toc-item toc-section"><a href="#第五节--养胃不养脾-纯属无用功-33">第五节  养胃不养脾，纯属无用功</a></li>
+<li class="toc-item toc-section"><a href="#第六节--三蒸大枣让脾胃充盈-36">第六节  三蒸大枣让脾胃充盈</a></li>
+<li class="toc-item"><a href="#第三章-老国医不传茶饮方-38">第三章 老国医不传茶饮方</a></li>
+<li class="toc-item toc-section"><a href="#第一节--贪嘴时这个药必不可少-39">第一节  贪嘴时这个药必不可少</a></li>
+<li class="toc-item toc-section"><a href="#第二节--宣肺通窍-一杯茶呼吸畅通-43">第二节  宣肺通窍，一杯茶呼吸畅通</a></li>
+<li class="toc-item toc-section"><a href="#第三节--茶饮妙方-有效治疗失眠-47">第三节  茶饮妙方，有效治疗失眠</a></li>
+<li class="toc-item toc-section"><a href="#第四节--乏力疼痛又肥胖-首当祛湿茶-52">第四节  乏力疼痛又肥胖，首当祛湿茶</a></li>
+<li class="toc-item"><a href="#第四章-从早到晚-老国医一日养生法-57">第四章 从早到晚，老国医一日养生法</a></li>
+<li class="toc-item toc-section"><a href="#第一节--梳出来的好容颜-58">第一节  梳出来的好容颜</a></li>
+<li class="toc-item toc-section"><a href="#第二节--一日三杯茶-提升脾动力-60">第二节  一日三杯茶，提升脾动力</a></li>
+<li class="toc-item toc-section"><a href="#第三节--六字诀-呼吸吐纳防百病-63">第三节  六字诀，呼吸吐纳防百病</a></li>
+<li class="toc-item toc-section"><a href="#第四节--泡脚加点料-一年病不找-66">第四节  泡脚加点料，一年病不找</a></li>
+<li class="toc-item"><a href="#第五章-能吃是脾胃的福分-69">第五章 能吃是脾胃的福分</a></li>
+<li class="toc-item toc-section"><a href="#第一节--轻饮食-七八分饱最满足-70">第一节  轻饮食，七八分饱最满足</a></li>
+<li class="toc-item toc-section"><a href="#第二节--胃口要常好-山药不可少-74">第二节  胃口要常好，山药不可少</a></li>
+<li class="toc-item toc-section"><a href="#第三节--三个食疗方-吃出好-脾气-77">第三节  三个食疗方，吃出好 脾气</a></li>
+<li class="toc-item toc-section"><a href="#第四节--吃对五谷杂粮的智慧-80">第四节  吃对五谷杂粮的智慧</a></li>
+<li class="toc-item"><a href="#第六章-寿者的养生心得-84">第六章 寿者的养生心得</a></li>
+<li class="toc-item toc-section"><a href="#第一节--养生有三忌-切莫走弯路-85">第一节  养生有三忌，切莫走弯路</a></li>
+<li class="toc-item toc-section"><a href="#第二节--我的健康从-姜-来-88">第二节  我的健康从“姜”来</a></li>
+<li class="toc-item toc-section"><a href="#第三节--笑一笑-脾胃和-十年少-90">第三节  笑一笑，脾胃和，十年少</a></li>
+<li class="toc-item toc-section"><a href="#第四节--顺时养生-护卫正气-94">第四节  顺时养生，护卫正气</a></li>
+<li class="toc-item toc-section"><a href="#第五节--常运动胜过吃补药-97">第五节  常运动胜过吃补药</a></li>
+<li class="toc-item"><a href="#第一章--养脾强身-修德增寿">第一章  养脾强身，修德增寿</a></li>
+<li class="toc-item"><a href="#第二章--脾胃一和百病消">第二章  脾胃一和百病消</a></li>
+<li class="toc-item"><a href="#第三章--老国医不传茶饮方">第三章  老国医不传茶饮方</a></li>
+<li class="toc-item"><a href="#第四章--从早到晚-老国医一日养生法">第四章  从早到晚，老国医一日养生法</a></li>
+<li class="toc-item"><a href="#第五章--能吃是脾胃的福分">第五章  能吃是脾胃的福分</a></li>
+<li class="toc-item"><a href="#第六章--寿者的养生心得">第六章  寿者的养生心得</a></li>
+</ul>
+</div>
   <h2 id="大国医">大国医</h2>
   <h2 id="脾胃调和百病消">脾胃调和百病消</h2>
   <h2 id="路志正--路京华--著--97岁国医大师教您如何养脾胃">路志正  路京华  著  97岁国医大师教您如何养脾胃</h2>
@@ -728,50 +779,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>“养心性，顺自然”是养生学的两大原则，是中医“天人相应”的整体观和“内因是决定因素”的病理观的具体体现。围绕这两个原则的具体养生方法很多，但奈何篇幅有限，遂不一一列出。希望阅读本书的朋友，能够学以致用，踏实稳健地走在养生长寿的道路上。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
-
-// 目录功能
-(function(){
-  // 为所有h2添加锚点ID
-  var h2s=document.querySelectorAll(".content h2");
-  h2s.forEach(function(h,i){
-    if(!h.id) h.id="section-"+i;
-  });
-  
-  // 生成目录
-  var toc=document.getElementById("toc-list");
-  if(!toc) return;
-  h2s.forEach(function(h,i){
-    var li=document.createElement("li");
-    var a=document.createElement("a");
-    a.href="#"+h.id;
-    a.textContent=h.textContent.trim().substring(0,40);
-    a.addEventListener("click",function(e){
-      e.preventDefault();
-      h.scrollIntoView({behavior:"smooth",block:"start"});
-      // 更新高亮
-      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-      a.classList.add("active");
-    });
-    li.appendChild(a);
-    toc.appendChild(li);
-  });
-  
-  // Scroll Spy
-  function updateToc(){
-    var scrollY=window.scrollY+120;
-    h2s.forEach(function(h){
-      var top=h.offsetTop;
-      var h2h=h.offsetHeight;
-      if(scrollY>=top&&scrollY<top+h2h){
-        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-        var link=toc.querySelector('a[href="#'+h.id+'"]');
-        if(link) link.classList.add("active");
-      }
-    });
-  }
-  window.addEventListener("scroll",updateToc);
-  updateToc();
-})();
+<script>
 
 function toggleToc(){
   var list=document.getElementById("toc-list");
@@ -779,6 +787,8 @@ function toggleToc(){
   list.classList.toggle("collapsed");
   btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
 }
+</script>
+
 
 </body>
 </html>

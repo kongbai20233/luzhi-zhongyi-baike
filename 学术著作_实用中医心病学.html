@@ -29,7 +29,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-title::before{content:"📑";font-size:18px}
 .toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
 .toc-toggle:hover{color:#8B4513}
-.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list{list-style:none;max-height:400px;overflow-y:auto;transition:max-height 0.3s}
 .toc-list.collapsed{max-height:0;overflow:hidden}
 .toc-list li{margin:4px 0}
 .toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
@@ -38,6 +38,11 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-list .toc-h3{padding-left:20px;font-size:13px}
 @media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
 
+
+.toc-part{font-weight:bold;font-size:15px;padding:6px 0 2px;border-bottom:1px solid #E8D5C0;margin-top:8px}
+.toc-part a{font-weight:bold;color:#8B4513!important;font-size:15px}
+.toc-section{padding-left:24px;font-size:13px}
+.toc-section a{font-size:13px;color:#6D4C41}
 </style>
 </head>
 <body>
@@ -51,7 +56,101 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>实用中医心病学</h1>
   <div class="meta">学术著作 / 其他路氏出版书籍著作 | 617,671 字</div>
-<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+<div class="toc" id="article-toc">
+<div class="toc-title" onclick="toggleToc()" style="cursor:pointer">
+📑 目录 <span class="toc-toggle" id="toc-toggle">收起 ▲</span>
+</div>
+<ul class="toc-list" id="toc-list">
+<li class="toc-item toc-section"><a href="#第一节心的生理学概要-6">第一节心的生理学概要</a></li>
+<li class="toc-item toc-section"><a href="#第二节心病发生学概要--10">第二节心病发生学概要</a></li>
+<li class="toc-item toc-section"><a href="#第三节心病症状学概要-21">第三节心病症状学概要</a></li>
+<li class="toc-item toc-section"><a href="#第四节心病证候学概要-28">第四节心病证候学概要</a></li>
+<li class="toc-item toc-section"><a href="#第五节心病治疗学概要-46">第五节心病治疗学概要</a></li>
+<li class="toc-item toc-section"><a href="#第六节心病的预防调护-87">第六节心病的预防调护</a></li>
+<li class="toc-item toc-section"><a href="#第一节胸痹心痛-95">第一节胸痹心痛</a></li>
+<li class="toc-item toc-section"><a href="#第二节-心痹-113">第二节</a></li>
+<li class="toc-item toc-section"><a href="#第三节心悸-129">第三节心悸</a></li>
+<li class="toc-item toc-section"><a href="#第四节怔忡-146">第四节怔忡</a></li>
+<li class="toc-item toc-section"><a href="#第五节卑慄-157">第五节卑慄</a></li>
+<li class="toc-item toc-section"><a href="#第六节-心衰-164">第六节</a></li>
+<li class="toc-item toc-section"><a href="#第七节脉痹-172">第七节脉痹</a></li>
+<li class="toc-item toc-section"><a href="#第八节血痹-189">第八节血痹</a></li>
+<li class="toc-item toc-section"><a href="#第九节血虚-198">第九节血虚</a></li>
+<li class="toc-item toc-section"><a href="#第十节心病瘀血证-207">第十节心病瘀血证</a></li>
+<li class="toc-item toc-section"><a href="#第十一节汗证-223">第十一节汗证</a></li>
+<li class="toc-item toc-section"><a href="#第十二节发病-232">第十二节发病</a></li>
+<li class="toc-item toc-section"><a href="#第十三节伏梁-243">第十三节伏梁</a></li>
+<li class="toc-item toc-section"><a href="#第十四节脉象不整-247">第十四节脉象不整</a></li>
+<li class="toc-item toc-section"><a href="#第一节健忘-265">第一节健忘</a></li>
+<li class="toc-item toc-section"><a href="#第二节不寐-275">第二节不寐</a></li>
+<li class="toc-item toc-section"><a href="#第三节多寐-287">第三节多寐</a></li>
+<li class="toc-item toc-section"><a href="#第四节多梦-299">第四节多梦</a></li>
+<li class="toc-item toc-section"><a href="#第五节梦遗-311">第五节梦遗</a></li>
+<li class="toc-item toc-section"><a href="#第六节梦游-320">第六节梦游</a></li>
+<li class="toc-item toc-section"><a href="#第七节脏躁-330">第七节脏躁</a></li>
+<li class="toc-item toc-section"><a href="#第八节-百合病----343">第八节</a></li>
+<li class="toc-item toc-section"><a href="#第九节癫病-355">第九节癫病</a></li>
+<li class="toc-item toc-section"><a href="#第十节狂病-367">第十节狂病</a></li>
+<li class="toc-item toc-section"><a href="#第十二节痴呆-39--">第十二节痴呆</a></li>
+<li class="toc-item toc-section"><a href="#第十三节-善喜-401">第十三节 善喜</a></li>
+<li class="toc-item toc-section"><a href="#第二节肝心痛-422">第二节肝心痛</a></li>
+<li class="toc-item toc-section"><a href="#第三节-脾心痛与胃心痛-432">第三节</a></li>
+<li class="toc-item toc-section"><a href="#第四节肾心痛-443">第四节肾心痛</a></li>
+<li class="toc-item toc-section"><a href="#第五节肺心病-451">第五节肺心病</a></li>
+<li class="toc-item toc-section"><a href="#第六节眩晕---471">第六节眩晕</a></li>
+<li class="toc-item toc-section"><a href="#第七节中风-483">第七节中风</a></li>
+<li class="toc-item toc-section"><a href="#第八节郁证-504">第八节郁证</a></li>
+<li class="toc-item toc-section"><a href="#第九节疮疡-517">第九节疮疡</a></li>
+<li class="toc-item toc-section"><a href="#第十节弄舌-527">第十节弄舌</a></li>
+<li class="toc-item toc-section"><a href="#第一节真心痛-535">第一节真心痛</a></li>
+<li class="toc-item toc-section"><a href="#第二节昏迷-541">第二节昏迷</a></li>
+<li class="toc-item toc-section"><a href="#第三节厥脱-551">第三节厥脱</a></li>
+<li class="toc-item toc-section"><a href="#第二节心痹-573">第二节心痹</a></li>
+<li class="toc-item toc-section"><a href="#第四节心悸-586">第四节心悸</a></li>
+<li class="toc-item toc-section"><a href="#第五节脉痹-590">第五节脉痹</a></li>
+<li class="toc-item toc-section"><a href="#第六节汗证-592">第六节汗证</a></li>
+<li class="toc-item toc-section"><a href="#第二节心病发生学極要">第二节心病发生学極要</a></li>
+<li class="toc-item toc-section"><a href="#第三节-心病症状学極要">第三节 心病症状学極要</a></li>
+<li class="toc-item toc-section"><a href="#第二节心-痹">第二节心 痹</a></li>
+<li class="toc-item toc-section"><a href="#第三节心-悸">第三节心 悸</a></li>
+<li class="toc-item toc-section"><a href="#第四节怔-忡">第四节怔 忡</a></li>
+<li class="toc-item toc-section"><a href="#第五节卑-標">第五节卑 標</a></li>
+<li class="toc-item toc-section"><a href="#第六节心-衰">第六节心 衰</a></li>
+<li class="toc-item toc-section"><a href="#第七节脉-疥">第七节脉 疥</a></li>
+<li class="toc-item toc-section"><a href="#第八节血-瑋">第八节血 瑋</a></li>
+<li class="toc-item toc-section"><a href="#第九节血-虚">第九节血 虚</a></li>
+<li class="toc-item toc-section"><a href="#第十节心病瘀血诳">第十节心病瘀血诳</a></li>
+<li class="toc-item toc-section"><a href="#第十一节-汗">第十一节 汗</a></li>
+<li class="toc-item toc-section"><a href="#第十二节发-疡">第十二节发 疡</a></li>
+<li class="toc-item toc-section"><a href="#第十三节伏-梁">第十三节伏 梁</a></li>
+<li class="toc-item toc-section"><a href="#第一节健-忘">第一节健 忘</a></li>
+<li class="toc-item toc-section"><a href="#第二节不-彖">第二节不 彖</a></li>
+<li class="toc-item toc-section"><a href="#第三节多-彖">第三节多 彖</a></li>
+<li class="toc-item toc-section"><a href="#第四节多-梦">第四节多 梦</a></li>
+<li class="toc-item toc-section"><a href="#第五节梦">第五节梦</a></li>
+<li class="toc-item toc-section"><a href="#第六节梦-游">第六节梦 游</a></li>
+<li class="toc-item toc-section"><a href="#第七节脏-環">第七节脏 環</a></li>
+<li class="toc-item toc-section"><a href="#第八节百合病">第八节百合病</a></li>
+<li class="toc-item toc-section"><a href="#第九节癲-病">第九节癲 病</a></li>
+<li class="toc-item toc-section"><a href="#第十节技-病">第十节技 病</a></li>
+<li class="toc-item toc-section"><a href="#第十三节奪-喜">第十三节奪 喜</a></li>
+<li class="toc-item toc-section"><a href="#第一节淋">第一节淋</a></li>
+<li class="toc-item toc-section"><a href="#第三节脾心痛与胃心痛">第三节脾心痛与胃心痛</a></li>
+<li class="toc-item toc-section"><a href="#第六节贱-睪">第六节贱 睪</a></li>
+<li class="toc-item toc-section"><a href="#第七节中-风">第七节中 风</a></li>
+<li class="toc-item toc-section"><a href="#第八节邳-证">第八节邳 证</a></li>
+<li class="toc-item toc-section"><a href="#第九节疮-疡">第九节疮 疡</a></li>
+<li class="toc-item toc-section"><a href="#第十节弄-舌">第十节弄 舌</a></li>
+<li class="toc-item toc-section"><a href="#第二节希-迷">第二节希 迷</a></li>
+<li class="toc-item toc-section"><a href="#第三节厥-脱">第三节厥 脱</a></li>
+<li class="toc-item toc-section"><a href="#第一节胸-4">第一节胸</a></li>
+<li class="toc-item toc-section"><a href="#第二节心-瘵">第二节心 瘵</a></li>
+<li class="toc-item toc-section"><a href="#第三节心-衰">第三节心 衰</a></li>
+<li class="toc-item toc-section"><a href="#第四节心-悸">第四节心 悸</a></li>
+<li class="toc-item toc-section"><a href="#第五节">第五节</a></li>
+<li class="toc-item toc-section"><a href="#第六节汗-证">第六节汗 证</a></li>
+</ul>
+</div>
   <h2>实用</h2>
   <h2 id="中医心病学">中医心病学</h2>
   <h2 id="主编单位">主编单位</h2>
@@ -10090,50 +10189,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <h2 id="SS号-10423858">SS号=10423858</h2>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
-
-// 目录功能
-(function(){
-  // 为所有h2添加锚点ID
-  var h2s=document.querySelectorAll(".content h2");
-  h2s.forEach(function(h,i){
-    if(!h.id) h.id="section-"+i;
-  });
-  
-  // 生成目录
-  var toc=document.getElementById("toc-list");
-  if(!toc) return;
-  h2s.forEach(function(h,i){
-    var li=document.createElement("li");
-    var a=document.createElement("a");
-    a.href="#"+h.id;
-    a.textContent=h.textContent.trim().substring(0,40);
-    a.addEventListener("click",function(e){
-      e.preventDefault();
-      h.scrollIntoView({behavior:"smooth",block:"start"});
-      // 更新高亮
-      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-      a.classList.add("active");
-    });
-    li.appendChild(a);
-    toc.appendChild(li);
-  });
-  
-  // Scroll Spy
-  function updateToc(){
-    var scrollY=window.scrollY+120;
-    h2s.forEach(function(h){
-      var top=h.offsetTop;
-      var h2h=h.offsetHeight;
-      if(scrollY>=top&&scrollY<top+h2h){
-        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-        var link=toc.querySelector('a[href="#'+h.id+'"]');
-        if(link) link.classList.add("active");
-      }
-    });
-  }
-  window.addEventListener("scroll",updateToc);
-  updateToc();
-})();
+<script>
 
 function toggleToc(){
   var list=document.getElementById("toc-list");
@@ -10141,6 +10197,8 @@ function toggleToc(){
   list.classList.toggle("collapsed");
   btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
 }
+</script>
+
 
 </body>
 </html>

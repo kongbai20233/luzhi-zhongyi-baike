@@ -29,7 +29,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-title::before{content:"📑";font-size:18px}
 .toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
 .toc-toggle:hover{color:#8B4513}
-.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list{list-style:none;max-height:400px;overflow-y:auto;transition:max-height 0.3s}
 .toc-list.collapsed{max-height:0;overflow:hidden}
 .toc-list li{margin:4px 0}
 .toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
@@ -38,6 +38,11 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-list .toc-h3{padding-left:20px;font-size:13px}
 @media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
 
+
+.toc-part{font-weight:bold;font-size:15px;padding:6px 0 2px;border-bottom:1px solid #E8D5C0;margin-top:8px}
+.toc-part a{font-weight:bold;color:#8B4513!important;font-size:15px}
+.toc-section{padding-left:24px;font-size:13px}
+.toc-section a{font-size:13px;color:#6D4C41}
 </style>
 </head>
 <body>
@@ -51,7 +56,30 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>路志正 中国中医科学院著名中医药专家学术经验传承实录</h1>
   <div class="meta">学术著作 / 其他路氏出版书籍著作 | 186,425 字</div>
-<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+<div class="toc" id="article-toc">
+<div class="toc-title" onclick="toggleToc()" style="cursor:pointer">
+📑 目录 <span class="toc-toggle" id="toc-toggle">收起 ▲</span>
+</div>
+<ul class="toc-list" id="toc-list">
+<li class="toc-item"><a href="#第一章成才之路">第一章成才之路</a></li>
+<li class="toc-item"><a href="#第二章学术思想">第二章学术思想</a></li>
+<li class="toc-item"><a href="#第三章临床特色">第三章临床特色</a></li>
+<li class="toc-item"><a href="#第四章经典验案">第四章经典验案</a></li>
+<li class="toc-item"><a href="#第五章师徒对话实录">第五章师徒对话实录</a></li>
+<li class="toc-item"><a href="#第一章">第一章</a></li>
+<li class="toc-item"><a href="#第二章">第二章</a></li>
+<li class="toc-item"><a href="#第三章">第三章</a></li>
+<li class="toc-item"><a href="#第三章临席特色一-----1二-">第三章临席特色一 •</a></li>
+<li class="toc-item"><a href="#第三章临麻特色-">第三章临麻特色</a></li>
+<li class="toc-item"><a href="#第三章临幣色丿">第三章临幣色丿</a></li>
+<li class="toc-item"><a href="#第四章经與验案二---童一--">第四章经與验案二 .</a></li>
+<li class="toc-item"><a href="#第四章经興验案二">第四章经興验案二</a></li>
+<li class="toc-item"><a href="#第五章">第五章</a></li>
+<li class="toc-item"><a href="#第五章师徒对缨录M-题-您对传统的中医药科研有哪些认识呢-">第五章师徒对缨录M 题，您对传统的中医药科研有哪些认识呢？</a></li>
+<li class="toc-item"><a href="#第五章师徒对话实录一4-----st">第五章师徒对话实录一4 •</a></li>
+<li class="toc-item"><a href="#第六章">第六章</a></li>
+</ul>
+</div>
   <h2 id="中国中医科学院">中国中医科学院</h2>
   <h2 id="著名中医药专家">著名中医药专家</h2>
   <h2 id="中国医药科技出版社">中国医药科技出版社</h2>
@@ -1632,50 +1660,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <h2 id="五--关于和法治疗血液病">五、	关于和法治疗血液病</h2>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
-
-// 目录功能
-(function(){
-  // 为所有h2添加锚点ID
-  var h2s=document.querySelectorAll(".content h2");
-  h2s.forEach(function(h,i){
-    if(!h.id) h.id="section-"+i;
-  });
-  
-  // 生成目录
-  var toc=document.getElementById("toc-list");
-  if(!toc) return;
-  h2s.forEach(function(h,i){
-    var li=document.createElement("li");
-    var a=document.createElement("a");
-    a.href="#"+h.id;
-    a.textContent=h.textContent.trim().substring(0,40);
-    a.addEventListener("click",function(e){
-      e.preventDefault();
-      h.scrollIntoView({behavior:"smooth",block:"start"});
-      // 更新高亮
-      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-      a.classList.add("active");
-    });
-    li.appendChild(a);
-    toc.appendChild(li);
-  });
-  
-  // Scroll Spy
-  function updateToc(){
-    var scrollY=window.scrollY+120;
-    h2s.forEach(function(h){
-      var top=h.offsetTop;
-      var h2h=h.offsetHeight;
-      if(scrollY>=top&&scrollY<top+h2h){
-        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-        var link=toc.querySelector('a[href="#'+h.id+'"]');
-        if(link) link.classList.add("active");
-      }
-    });
-  }
-  window.addEventListener("scroll",updateToc);
-  updateToc();
-})();
+<script>
 
 function toggleToc(){
   var list=document.getElementById("toc-list");
@@ -1683,6 +1668,8 @@ function toggleToc(){
   list.classList.toggle("collapsed");
   btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
 }
+</script>
+
 
 </body>
 </html>

@@ -29,7 +29,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-title::before{content:"📑";font-size:18px}
 .toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
 .toc-toggle:hover{color:#8B4513}
-.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list{list-style:none;max-height:400px;overflow-y:auto;transition:max-height 0.3s}
 .toc-list.collapsed{max-height:0;overflow:hidden}
 .toc-list li{margin:4px 0}
 .toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
@@ -38,6 +38,11 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .toc-list .toc-h3{padding-left:20px;font-size:13px}
 @media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
 
+
+.toc-part{font-weight:bold;font-size:15px;padding:6px 0 2px;border-bottom:1px solid #E8D5C0;margin-top:8px}
+.toc-part a{font-weight:bold;color:#8B4513!important;font-size:15px}
+.toc-section{padding-left:24px;font-size:13px}
+.toc-section a{font-size:13px;color:#6D4C41}
 </style>
 </head>
 <body>
@@ -51,7 +56,197 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>中医湿病证治学</h1>
   <div class="meta">学术著作 / 其他路氏出版书籍著作 | 583,176 字</div>
-<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+<div class="toc" id="article-toc">
+<div class="toc-title" onclick="toggleToc()" style="cursor:pointer">
+📑 目录 <span class="toc-toggle" id="toc-toggle">收起 ▲</span>
+</div>
+<ul class="toc-list" id="toc-list">
+<li class="toc-item"><a href="#内容简介">内容简介</a></li>
+<li class="toc-item"><a href="#第3版弁言">第3版弁言</a></li>
+<li class="toc-item"><a href="#编写说明">编写说明</a></li>
+<li class="toc-item toc-part"><a href="#上篇湿病总论">上篇湿病总论</a></li>
+<li class="toc-item toc-part"><a href="#中篇常见湿病证治">中篇常见湿病证治</a></li>
+<li class="toc-item"><a href="#第八章外感湿病-103-第二节湿郁发热">第八章外感湿病</a></li>
+<li class="toc-item toc-section"><a href="#第一节伤湿感冒-暑湿感冒--103-第三节瘴气">第一节伤湿感冒（暑湿感冒）…103 第三节瘴气</a></li>
+<li class="toc-item"><a href="#129第十四章气血津液湿病-242-131-第一节汗证-24">第十四章气血津液湿病</a></li>
+<li class="toc-item"><a href="#144第十五章经络肢体湿病-251-146-第一节头痛-25">第十五章经络肢体湿病</a></li>
+<li class="toc-item"><a href="#166第十六章妇科经带湿病-272-166-第一节月经先期-">第十六章妇科经带湿病</a></li>
+<li class="toc-item"><a href="#206第十七章妇科胎产及其他湿病-303-210-第一节妊娠">第十七章妇科胎产及其他湿病</a></li>
+<li class="toc-item"><a href="#226第十八章儿科湿病-322-226-第一节胎黄-322">第十八章儿科湿病</a></li>
+<li class="toc-item toc-part"><a href="#下篇名家论湿精粹">下篇名家论湿精粹</a></li>
+<li class="toc-item"><a href="#第二十二章著名中医专家诊治湿病的">第二十二章著名中医专家诊治湿病的</a></li>
+<li class="toc-item toc-section"><a href="#第一节干祖望耳鼻喉口腔疾病的湿证">第一节干祖望耳鼻喉口腔疾病的湿证</a></li>
+<li class="toc-item toc-section"><a href="#第二节邓铁涛从湿治暑湿-乙型">第二节邓铁涛从湿治暑湿（乙型</a></li>
+<li class="toc-item toc-section"><a href="#第三节朱良春风湿病从湿论治--397">第三节朱良春风湿病从湿论治</a></li>
+<li class="toc-item toc-section"><a href="#第四节颜德馨治湿十法-399">第四节颜德馨治湿十法</a></li>
+<li class="toc-item toc-section"><a href="#第五节颜德馨谈挂夏的防治-401">第五节颜德馨谈挂夏的防治</a></li>
+<li class="toc-item toc-section"><a href="#第六节何任湿温证治述要-403">第六节何任湿温证治述要</a></li>
+<li class="toc-item toc-section"><a href="#第七节张琪肾病与湿邪关系-406">第七节张琪肾病与湿邪关系</a></li>
+<li class="toc-item toc-section"><a href="#第八节李今庸外湿证治-407">第八节李今庸外湿证治</a></li>
+<li class="toc-item toc-section"><a href="#第九节萧熙闽垣常见之湿与湿病">第九节萧熙闽垣常见之湿与湿病</a></li>
+<li class="toc-item toc-section"><a href="#第十节康良石谈湿气与肝病发生">第十节康良石谈湿气与肝病发生</a></li>
+<li class="toc-item toc-section"><a href="#第十一节杨春波脾胃湿热证的临床">第十一节杨春波脾胃湿热证的临床</a></li>
+<li class="toc-item"><a href="#第二十三章路志正治疗湿病的学术">第二十三章路志正治疗湿病的学术</a></li>
+<li class="toc-item toc-section"><a href="#第一节北方亦多湿续论-417">第一节北方亦多湿续论</a></li>
+<li class="toc-item toc-section"><a href="#第二节湿病的辨治-421">第二节湿病的辨治</a></li>
+<li class="toc-item toc-section"><a href="#第三节湿病常见证候和治疗-426">第三节湿病常见证候和治疗</a></li>
+<li class="toc-item toc-section"><a href="#第四节治疗湿病的宜忌和体会--431-第五节路志正湿病病案-">第四节治疗湿病的宜忌和体会……431 第五节路志正湿病病案</a></li>
+<li class="toc-item toc-section"><a href="#第六节路志正重视湿阻学术思想">第六节路志正重视湿阻学术思想</a></li>
+<li class="toc-item toc-section"><a href="#第七节路志正湿邪证治-438">第七节路志正湿邪证治</a></li>
+<li class="toc-item toc-section"><a href="#第八节辨治风湿病经验-441">第八节辨治风湿病经验</a></li>
+<li class="toc-item toc-section"><a href="#第十节风湿病医案数则-445">第十节风湿病医案数则</a></li>
+<li class="toc-item toc-section"><a href="#第十一节湿晕的辨证论治-454">第十一节湿晕的辨证论治</a></li>
+<li class="toc-item toc-section"><a href="#第十二节湿病医话---463">第十二节湿病医话</a></li>
+<li class="toc-item toc-section"><a href="#第一节芳香化湿药-473">第一节芳香化湿药</a></li>
+<li class="toc-item toc-section"><a href="#第二节苦温燥湿药-477">第二节苦温燥湿药</a></li>
+<li class="toc-item toc-section"><a href="#第三节苦寒燥湿药-480">第三节苦寒燥湿药</a></li>
+<li class="toc-item toc-section"><a href="#第四节清热利湿药-485">第四节清热利湿药</a></li>
+<li class="toc-item toc-section"><a href="#第五节淡渗利湿药-490">第五节淡渗利湿药</a></li>
+<li class="toc-item toc-section"><a href="#第六节温阳化湿药-496">第六节温阳化湿药</a></li>
+<li class="toc-item toc-section"><a href="#第七节祛风除湿药-501">第七节祛风除湿药</a></li>
+<li class="toc-item toc-section"><a href="#第八节解表祛湿药-511">第八节解表祛湿药</a></li>
+<li class="toc-item toc-section"><a href="#第九节-化痰祛湿药-516">第九节</a></li>
+<li class="toc-item toc-section"><a href="#第十节导滞除湿药-520">第十节导滞除湿药</a></li>
+<li class="toc-item toc-section"><a href="#第一节湿病常用中成药概览-522">第一节湿病常用中成药概览</a></li>
+<li class="toc-item toc-section"><a href="#第二节湿病常用中成药详解-523">第二节湿病常用中成药详解</a></li>
+<li class="toc-item"><a href="#第一章湿病概述">第一章湿病概述</a></li>
+<li class="toc-item toc-section"><a href="#第一节人体的水液代谢">第一节人体的水液代谢</a></li>
+<li class="toc-item toc-section"><a href="#第二节湿病的概念">第二节湿病的概念</a></li>
+<li class="toc-item toc-section"><a href="#第三节湿病的源流">第三节湿病的源流</a></li>
+<li class="toc-item toc-section"><a href="#第四节湿病的临床表现">第四节湿病的临床表现</a></li>
+<li class="toc-item toc-section"><a href="#第五节湿病的范围">第五节湿病的范围</a></li>
+<li class="toc-item toc-section"><a href="#第六节湿病的特点">第六节湿病的特点</a></li>
+<li class="toc-item"><a href="#第二章湿病的病因病机">第二章湿病的病因病机</a></li>
+<li class="toc-item toc-section"><a href="#第一节湿病的病因">第一节湿病的病因</a></li>
+<li class="toc-item toc-section"><a href="#第二节湿病的病机">第二节湿病的病机</a></li>
+<li class="toc-item"><a href="#第三章湿病的诊断">第三章湿病的诊断</a></li>
+<li class="toc-item toc-section"><a href="#第一节-湿病-的临床和时空特点">第一节 湿病.的临床和时空特点</a></li>
+<li class="toc-item toc-section"><a href="#第二节湿病的四诊">第二节湿病的四诊</a></li>
+<li class="toc-item"><a href="#第四章湿病的常见证候">第四章湿病的常见证候</a></li>
+<li class="toc-item toc-section"><a href="#第一节湿-证">第一节湿 证</a></li>
+<li class="toc-item toc-section"><a href="#第二节风湿证">第二节风湿证</a></li>
+<li class="toc-item toc-section"><a href="#第三节寒湿证">第三节寒湿证</a></li>
+<li class="toc-item toc-section"><a href="#第四节暑湿证">第四节暑湿证</a></li>
+<li class="toc-item toc-section"><a href="#第五节湿热证">第五节湿热证</a></li>
+<li class="toc-item toc-section"><a href="#第六节痰湿证">第六节痰湿证</a></li>
+<li class="toc-item"><a href="#第五章湿病的治疗">第五章湿病的治疗</a></li>
+<li class="toc-item toc-section"><a href="#第一节湿病的基本治法">第一节湿病的基本治法</a></li>
+<li class="toc-item toc-section"><a href="#第二节湿病的辅助疗法">第二节湿病的辅助疗法</a></li>
+<li class="toc-item toc-section"><a href="#第一节环境湿-度对人体健康的影响">第一节环境湿.度对人体健康的影响</a></li>
+<li class="toc-item toc-section"><a href="#第二节中医湿病的临床研究">第二节中医湿病的临床研究</a></li>
+<li class="toc-item toc-section"><a href="#第三节中医湿病的实验研究">第三节中医湿病的实验研究</a></li>
+<li class="toc-item"><a href="#第七章湿病的预防与护理">第七章湿病的预防与护理</a></li>
+<li class="toc-item toc-section"><a href="#第一节湿病的预防">第一节湿病的预防</a></li>
+<li class="toc-item toc-section"><a href="#第二节湿病的护理">第二节湿病的护理</a></li>
+<li class="toc-item toc-section"><a href="#第二节湿郁发热--">第二节湿郁发热</a></li>
+<li class="toc-item toc-section"><a href="#第三节瘴-气">第三节瘴 气</a></li>
+<li class="toc-item toc-section"><a href="#第四节暑-温">第四节暑-温</a></li>
+<li class="toc-item toc-section"><a href="#第五节湿-温">第五节湿 温</a></li>
+<li class="toc-item toc-section"><a href="#第六节湿-阻">第六节湿 阻</a></li>
+<li class="toc-item toc-section"><a href="#第七节暑-湿">第七节暑 湿</a></li>
+<li class="toc-item toc-section"><a href="#第八节--夏">第八节&amp; 夏</a></li>
+<li class="toc-item toc-section"><a href="#第九节非典型肺炎">第九节非典型肺炎</a></li>
+<li class="toc-item toc-section"><a href="#第十节艾滋病">第十节艾滋病</a></li>
+<li class="toc-item toc-section"><a href="#第十一节湿霍乱">第十一节湿霍乱</a></li>
+<li class="toc-item"><a href="#第九章肺系湿病">第九章肺系湿病</a></li>
+<li class="toc-item toc-section"><a href="#第一节咳-嗽">第一节咳 嗽</a></li>
+<li class="toc-item toc-section"><a href="#第四节哮-病">第四节哮 病</a></li>
+<li class="toc-item toc-section"><a href="#第五节喘-证">第五节喘 证</a></li>
+<li class="toc-item toc-section"><a href="#第六节肺-胀">第六节肺 胀</a></li>
+<li class="toc-item"><a href="#第十章心脑湿病">第十章心脑湿病</a></li>
+<li class="toc-item toc-section"><a href="#第一节眩-晕">第一节眩 晕</a></li>
+<li class="toc-item toc-section"><a href="#第二节中-风">第二节中 风</a></li>
+<li class="toc-item toc-section"><a href="#第三节失-眠">第三节失 眠</a></li>
+<li class="toc-item toc-section"><a href="#第四节心-悸">第四节心 悸</a></li>
+<li class="toc-item toc-section"><a href="#第五节胸痹心痛">第五节胸痹心痛</a></li>
+<li class="toc-item toc-section"><a href="#第一节胃-痛">第一节胃 痛</a></li>
+<li class="toc-item toc-section"><a href="#第二节腹-痛">第二节腹 痛</a></li>
+<li class="toc-item toc-section"><a href="#第三节便-秘">第三节便 秘</a></li>
+<li class="toc-item toc-section"><a href="#第四节呕-吐">第四节呕 吐</a></li>
+<li class="toc-item toc-section"><a href="#第五节泄-泻">第五节泄 泻</a></li>
+<li class="toc-item toc-section"><a href="#第六节痢-疾">第六节痢 疾</a></li>
+<li class="toc-item toc-section"><a href="#第七节便-血">第七节便 血</a></li>
+<li class="toc-item toc-section"><a href="#第八节狐惑病">第八节狐惑病</a></li>
+<li class="toc-item"><a href="#第十二章肝胆湿病">第十二章肝胆湿病</a></li>
+<li class="toc-item toc-section"><a href="#第一节黄-疸">第一节黄 疸</a></li>
+<li class="toc-item toc-section"><a href="#第二节胁-痛">第二节胁 痛</a></li>
+<li class="toc-item toc-section"><a href="#第三节胆-胀">第三节胆 胀</a></li>
+<li class="toc-item toc-section"><a href="#第四节鼓-胀">第四节鼓 胀</a></li>
+<li class="toc-item toc-section"><a href="#第五节乙型肝炎">第五节乙型肝炎</a></li>
+<li class="toc-item toc-section"><a href="#第六节结-石">第六节结 石</a></li>
+<li class="toc-item"><a href="#第十三章肾膀胱湿病证">第十三章肾膀胱湿病证</a></li>
+<li class="toc-item toc-section"><a href="#第一节水-肿">第一节水 肿</a></li>
+<li class="toc-item toc-section"><a href="#第二节淋-证">第二节淋 证</a></li>
+<li class="toc-item toc-section"><a href="#第三节瘾-闭">第三节瘾 闭</a></li>
+<li class="toc-item toc-section"><a href="#第四节关-格">第四节关 格</a></li>
+<li class="toc-item toc-section"><a href="#第五节遗-精">第五节遗 精</a></li>
+<li class="toc-item toc-section"><a href="#第六节阳-痿--">第六节阳 痿</a></li>
+<li class="toc-item toc-section"><a href="#第一节汗-证">第一节汗 证</a></li>
+<li class="toc-item toc-section"><a href="#第二节消渴病">第二节消渴病</a></li>
+<li class="toc-item toc-section"><a href="#第三节厥-证">第三节厥 证</a></li>
+<li class="toc-item toc-section"><a href="#第四节输液引起的湿病">第四节输液引起的湿病</a></li>
+<li class="toc-item toc-section"><a href="#第一节头-痛">第一节头 痛</a></li>
+<li class="toc-item toc-section"><a href="#第二节痹-病">第二节痹 病</a></li>
+<li class="toc-item toc-section"><a href="#第三节湿-痉">第三节湿 痉</a></li>
+<li class="toc-item toc-section"><a href="#第四节痛-风--">第四节痛 风</a></li>
+<li class="toc-item toc-section"><a href="#第五节痿-证">第五节痿 证</a></li>
+<li class="toc-item toc-section"><a href="#第一节月经先期">第一节月经先期</a></li>
+<li class="toc-item toc-section"><a href="#第二节月经后期">第二节月经后期</a></li>
+<li class="toc-item toc-section"><a href="#第三节月经先后不定期">第三节月经先后不定期</a></li>
+<li class="toc-item toc-section"><a href="#第四节经期延长">第四节经期延长</a></li>
+<li class="toc-item toc-section"><a href="#第五节月经过多">第五节月经过多</a></li>
+<li class="toc-item toc-section"><a href="#第六节月经过少">第六节月经过少</a></li>
+<li class="toc-item toc-section"><a href="#第七节痛-经">第七节痛 经</a></li>
+<li class="toc-item toc-section"><a href="#第八节崩-漏">第八节崩 漏</a></li>
+<li class="toc-item toc-section"><a href="#第九节闭-经">第九节闭 经</a></li>
+<li class="toc-item toc-section"><a href="#第十节经行头痛">第十节经行头痛</a></li>
+<li class="toc-item toc-section"><a href="#第十一节经行泄泻">第十一节经行泄泻</a></li>
+<li class="toc-item toc-section"><a href="#第十二节绝经前后诸症">第十二节绝经前后诸症</a></li>
+<li class="toc-item toc-section"><a href="#第十三节带下病">第十三节带下病</a></li>
+<li class="toc-item toc-section"><a href="#第一节妊娠恶阻">第一节妊娠恶阻</a></li>
+<li class="toc-item toc-section"><a href="#第二节子-淋">第二节子 淋</a></li>
+<li class="toc-item toc-section"><a href="#第三节子-肿">第三节子 肿</a></li>
+<li class="toc-item toc-section"><a href="#第四节产后痹">第四节产后痹</a></li>
+<li class="toc-item toc-section"><a href="#第五节阴-挺">第五节阴 挺</a></li>
+<li class="toc-item toc-section"><a href="#第六节阴-痒">第六节阴 痒</a></li>
+<li class="toc-item toc-section"><a href="#第七节阴-疮">第七节阴 疮</a></li>
+<li class="toc-item toc-section"><a href="#第一节胎-黄">第一节胎 黄</a></li>
+<li class="toc-item toc-section"><a href="#第二节惊-风">第二节惊 风</a></li>
+<li class="toc-item toc-section"><a href="#第三节解-颅">第三节解 颅</a></li>
+<li class="toc-item toc-section"><a href="#第四节水-痘">第四节水 痘</a></li>
+<li class="toc-item toc-section"><a href="#第五节厌-食">第五节厌 食</a></li>
+<li class="toc-item toc-section"><a href="#第六节鹅口疮">第六节鹅口疮</a></li>
+<li class="toc-item toc-section"><a href="#第七节小儿麻痹症">第七节小儿麻痹症</a></li>
+<li class="toc-item toc-section"><a href="#第一节疳">第一节疳</a></li>
+<li class="toc-item toc-section"><a href="#第二节足底疔">第二节足底疔</a></li>
+<li class="toc-item toc-section"><a href="#第三节烂-疔">第三节烂 疔</a></li>
+<li class="toc-item toc-section"><a href="#第四节痈">第四节痈</a></li>
+<li class="toc-item toc-section"><a href="#第五节暑湿流注">第五节暑湿流注</a></li>
+<li class="toc-item"><a href="#第二十章皮科湿病">第二十章皮科湿病</a></li>
+<li class="toc-item toc-section"><a href="#第一节丹-毒">第一节丹 毒</a></li>
+<li class="toc-item toc-section"><a href="#第一节胞生痰核">第一节胞生痰核</a></li>
+<li class="toc-item toc-section"><a href="#第二节睑弦赤烂">第二节睑弦赤烂</a></li>
+<li class="toc-item toc-section"><a href="#第三节风赤疮痍">第三节风赤疮痍</a></li>
+<li class="toc-item toc-section"><a href="#第四节胞虚如球">第四节胞虚如球</a></li>
+<li class="toc-item toc-section"><a href="#第五节粟-疮">第五节粟 疮</a></li>
+<li class="toc-item toc-section"><a href="#第六节漏-睛">第六节漏 睛</a></li>
+<li class="toc-item toc-section"><a href="#第七节聚星障">第七节聚星障</a></li>
+<li class="toc-item toc-section"><a href="#第八节混睛障">第八节混睛障</a></li>
+<li class="toc-item toc-section"><a href="#第九节疳积上目">第九节疳积上目</a></li>
+<li class="toc-item toc-section"><a href="#第十节瞳神紧小">第十节瞳神紧小</a></li>
+<li class="toc-item toc-section"><a href="#第十一节云雾移睛">第十一节云雾移睛</a></li>
+<li class="toc-item"><a href="#第二十二章著名中医专家诊治湿病的经验">第二十二章著名中医专家诊治湿病的经验</a></li>
+<li class="toc-item toc-section"><a href="#第一节-干祖望耳鼻喉口腔疾病的湿证和治验">第一节 干祖望耳鼻喉口腔疾病的湿证和治验</a></li>
+<li class="toc-item toc-section"><a href="#第二节-邓铁涛从湿治暑湿-乙型脑炎-验案">第二节 邓铁涛从湿治暑湿（乙型脑炎）验案</a></li>
+<li class="toc-item toc-section"><a href="#第十节康良石谈湿气与肝病发生发展的关系">第十节康良石谈湿气与肝病发生发展的关系</a></li>
+<li class="toc-item toc-section"><a href="#第十一节-杨春波脾胃湿热证的临床研究">第十一节 杨春波脾胃湿热证的临床研究</a></li>
+<li class="toc-item"><a href="#第二十三章路志正治疗湿病的学术思想和临床经验">第二十三章路志正治疗湿病的学术思想和临床经验</a></li>
+<li class="toc-item toc-section"><a href="#第四节治疗湿病的宜忌和体会">第四节治疗湿病的宜忌和体会</a></li>
+<li class="toc-item toc-section"><a href="#第五节路志正湿病病案">第五节路志正湿病病案</a></li>
+<li class="toc-item toc-section"><a href="#第九节治痹病应注意的问题">第九节治痹病应注意的问题</a></li>
+<li class="toc-item toc-section"><a href="#第九节化痰祛湿药">第九节化痰祛湿药</a></li>
+</ul>
+</div>
   <h2>(R-5290.01)</h2>
   <h2 id="责任编辑-鲍燕曹丽英-封面设计-黄华斌陈敬">责任编辑：鲍燕曹丽英 封面设计：黄华斌陈敬</h2>
   <p>《中医湿病证治学》是凝聚了国医大师路志正敎授及其编委舍近 20苇心血的我国第一部中医湿病专著。2013半該 届中国出版政府奖图书奖提名奖，第3版也在广 应运而生。全书分上、中、下篇和附篇。上篇全面丿</p>
@@ -9768,50 +9963,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>蟾酥合剂（经验方）酒化蟾酥腰黄铜绿炒绿矶轻粉乳香没药枯矶干蜗牛麝香 血竭朱砂爐炉甘石爛寒水石硼砂灯草灰</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
-
-// 目录功能
-(function(){
-  // 为所有h2添加锚点ID
-  var h2s=document.querySelectorAll(".content h2");
-  h2s.forEach(function(h,i){
-    if(!h.id) h.id="section-"+i;
-  });
-  
-  // 生成目录
-  var toc=document.getElementById("toc-list");
-  if(!toc) return;
-  h2s.forEach(function(h,i){
-    var li=document.createElement("li");
-    var a=document.createElement("a");
-    a.href="#"+h.id;
-    a.textContent=h.textContent.trim().substring(0,40);
-    a.addEventListener("click",function(e){
-      e.preventDefault();
-      h.scrollIntoView({behavior:"smooth",block:"start"});
-      // 更新高亮
-      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-      a.classList.add("active");
-    });
-    li.appendChild(a);
-    toc.appendChild(li);
-  });
-  
-  // Scroll Spy
-  function updateToc(){
-    var scrollY=window.scrollY+120;
-    h2s.forEach(function(h){
-      var top=h.offsetTop;
-      var h2h=h.offsetHeight;
-      if(scrollY>=top&&scrollY<top+h2h){
-        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
-        var link=toc.querySelector('a[href="#'+h.id+'"]');
-        if(link) link.classList.add("active");
-      }
-    });
-  }
-  window.addEventListener("scroll",updateToc);
-  updateToc();
-})();
+<script>
 
 function toggleToc(){
   var list=document.getElementById("toc-list");
@@ -9819,6 +9971,8 @@ function toggleToc(){
   list.classList.toggle("collapsed");
   btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
 }
+</script>
+
 
 </body>
 </html>
