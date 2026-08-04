@@ -354,8 +354,7 @@ footer a { color: var(--gold); text-decoration: none; }
 
 
 img{background:#f5f0eb}
-img[loading="lazy"]{opacity:0;transition:opacity 0.3s}
-img[loading="lazy"].loaded{opacity:1}
+
 
 
 .lb-rotate{position:absolute;top:16px;right:70px;font-size:28px;color:rgba(255,255,255,0.8);cursor:pointer;z-index:2001;padding:8px;border-radius:50%;transition:color 0.2s;line-height:1}
@@ -1803,10 +1802,7 @@ function goSearch(e) {
 }
 </script>
 
-document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
-  if(img.complete){img.classList.add("loaded")}
-  else{img.addEventListener("load",function(){this.classList.add("loaded")})}
-});
+
 
 </body>
 </html>
