@@ -119,6 +119,10 @@ r.innerHTML=h;document.getElementById("tc").textContent=AI.length
 function tc(el){var b=el.nextElementSibling;b.style.display=b.style.display==="none"?"block":"none"}
 document.getElementById("si").addEventListener("input",ds);
 rb();
+// URL参数自动搜索
+var params=new URLSearchParams(window.location.search);
+var q=params.get('q');
+if(q){document.getElementById('si').value=q;ds()}
 </script>
 </body>
 </html>
