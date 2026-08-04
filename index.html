@@ -357,6 +357,11 @@ img{background:#f5f0eb}
 img[loading="lazy"]{opacity:0;transition:opacity 0.3s}
 img[loading="lazy"].loaded{opacity:1}
 
+
+.lb-rotate{position:absolute;top:16px;right:70px;font-size:28px;color:rgba(255,255,255,0.8);cursor:pointer;z-index:2001;padding:8px;border-radius:50%;transition:color 0.2s;line-height:1}
+.lb-rotate:hover{color:#FFD54F}
+#lb-img{transition:transform 0.3s}
+
 </style>
 </head>
 <body>
@@ -1728,12 +1733,13 @@ img[loading="lazy"].loaded{opacity:1}
   <span class="lightbox-close" onclick="closeLB()">&times;</span>
   <span class="lb-prev" onclick="lbPrev()">&#10094;</span>
   <span class="lb-next" onclick="lbNext()">&#10095;</span>
+  <span class="lb-rotate" onclick="lbRotate()" title="旋转90°">&#8635;</span>
   <img id="lb-img" src="" alt="放大查看" onclick="event.stopPropagation()">
   <div class="lb-counter" id="lb-counter"></div>
 </div>
 
 <script>
-var lbImages=[],lbIdx=0;
+var lbImages=[],lbIdx=0,lbRotations={};
 function openLB(src){
   lbImages=[];
   document.querySelectorAll("[onclick*=\"openLB\"]").forEach(function(el){
@@ -1745,7 +1751,10 @@ function openLB(src){
   showLB();
 }
 function showLB(){
-  document.getElementById("lb-img").src=lbImages[lbIdx];
+  var img=document.getElementById("lb-img");
+  img.src=lbImages[lbIdx];
+  var rot=lbRotations[lbIdx]||0;
+  img.style.transform="rotate("+rot+"deg)";
   document.getElementById("lightbox").classList.add("active");
   document.body.style.overflow="hidden";
   document.getElementById("lb-counter").textContent=(lbIdx+1)+" / "+lbImages.length;
@@ -1756,10 +1765,16 @@ function closeLB(){
 }
 function lbNext(){lbIdx=(lbIdx+1)%lbImages.length;showLB()}
 function lbPrev(){lbIdx=(lbIdx-1+lbImages.length)%lbImages.length;showLB()}
+function lbRotate(){
+  lbRotations[lbIdx]=((lbRotations[lbIdx]||0)+90)%360;
+  document.getElementById("lb-img").style.transform="rotate("+lbRotations[lbIdx]+"deg)";
+}
+document.addEventListener("keydown",function(e){
 document.addEventListener("keydown",function(e){
   if(e.key==="Escape")closeLB();
   if(e.key==="ArrowRight")lbNext();
   if(e.key==="ArrowLeft")lbPrev();
+  if(e.key==="r"||e.key==="R")lbRotate();
 });
 document.getElementById("lightbox").addEventListener("click",function(e){
   if(e.target===this)closeLB();
