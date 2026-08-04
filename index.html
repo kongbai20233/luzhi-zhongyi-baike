@@ -230,6 +230,8 @@ details .detail-body { padding: 0 20px 20px; }
   aspect-ratio: 1;
   object-fit: cover;
   display: block;
+  background: #f5f0eb;
+  border-radius: 4px;
   transition: transform 0.3s;
 }
 .gallery-item:hover img { transform: scale(1.05); }
@@ -268,7 +270,11 @@ details .detail-body { padding: 0 20px 20px; }
 }
 .cert-item img {
   width: 100%;
+  height: auto;
   display: block;
+  object-fit: contain;
+  background: #f5f0eb;
+  border-radius: 4px;
 }
 
 /* Quote */
@@ -342,7 +348,7 @@ footer a { color: var(--gold); text-decoration: none; }
 /* Lightbox */
 .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:2000;justify-content:center;align-items:center}
 .lightbox.active{display:flex}
-.lightbox .lightbox img{max-width:90%;max-height:85vh;object-fit:contain;border-radius:4px;cursor:default}
+.lightbox img{max-width:90%;max-height:85vh;object-fit:contain;border-radius:4px;cursor:default}
 .lightbox-close{position:absolute;top:16px;right:24px;font-size:36px;color:#fff;cursor:pointer;z-index:2001;line-height:1}
 .lightbox-close:hover{color:#FFD54F}
 .lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);font-size:42px;color:rgba(255,255,255,0.8);cursor:pointer;z-index:2001;padding:16px 12px;user-select:none;transition:color 0.2s}
@@ -353,7 +359,7 @@ footer a { color: var(--gold); text-decoration: none; }
 @media(max-width:600px){.lb-prev,.lb-next{font-size:28px;padding:12px 8px}.lb-prev{left:4px}.lb-next{right:4px}}
 
 
-img{background:#f5f0eb}
+
 
 
 
@@ -362,7 +368,7 @@ img{background:#f5f0eb}
 #lb-img{transition:transform 0.3s}
 
 
-.cert-item img,.gallery-item img{width:100%;height:auto;display:block;object-fit:cover}
+
 
 </style>
 </head>
