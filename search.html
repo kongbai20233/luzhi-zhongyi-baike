@@ -33,6 +33,13 @@ body{font-family:"PingFang SC","Microsoft YaHei",serif;background:#FFF8F0;color:
 .tg{display:inline-block;padding:2px 8px;margin:2px;font-size:12px;border-radius:4px;background:#FFF3E0;color:#8B4513;border:1px solid #D7CCC8;cursor:pointer}
 .tg:hover{background:#8B4513;color:#FFF8F0}
 .tg-box{text-align:center;margin:16px 0}
+
+/* 手机端快捷导航 */
+.mobile-nav{display:none;position:fixed;right:8px;top:50%;transform:translateY(-50%);z-index:100;background:rgba(139,69,19,0.9);border-radius:12px;padding:8px 4px;flex-direction:column;align-items:center;gap:2px;box-shadow:0 2px 12px rgba(0,0,0,0.2)}
+.mobile-nav a{display:block;width:36px;height:36px;line-height:36px;text-align:center;color:#FFF8F0;text-decoration:none;font-size:11px;border-radius:8px;transition:background 0.2s}
+.mobile-nav a:hover{background:rgba(255,213,79,0.3)}
+@media(max-width:768px){.mobile-nav{display:flex}}
+
 </style>
 </head>
 <body>
@@ -124,5 +131,11 @@ var params=new URLSearchParams(window.location.search);
 var q=params.get('q');
 if(q){document.getElementById('si').value=q;ds()}
 </script>
+
+function scrollToCat(cat){
+  var el=document.querySelector('[id="cat-'+cat+'"]');
+  if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
 </body>
 </html>
