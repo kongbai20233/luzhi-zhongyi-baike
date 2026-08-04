@@ -25,11 +25,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-  font-family: "SimSun", "宋体", "Noto Serif SC", serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.8;
+body {line-height: 1.8;scroll-padding-top:80px;
   font-size: 16px;
 }
 
@@ -386,10 +382,10 @@ nav a.active{background:rgba(255,213,79,0.35)!important;color:#FFD54F!important;
 .timeline details summary:hover{background:rgba(139,69,19,0.15)}
 .timeline-era{display:none}
 /* 手机端快捷导航 */
-.mobile-nav{display:none;position:fixed;right:8px;top:50%;transform:translateY(-50%);z-index:100;background:rgba(139,69,19,0.9);border-radius:12px;padding:8px 4px;flex-direction:column;align-items:center;gap:2px;box-shadow:0 2px 12px rgba(0,0,0,0.2)}
-.mobile-nav a{display:block;width:36px;height:36px;line-height:36px;text-align:center;color:#FFF8F0;text-decoration:none;font-size:11px;border-radius:8px;transition:background 0.2s}
-.mobile-nav a:hover,.mobile-nav a.active{background:rgba(255,213,79,0.3)}
-@media(max-width:768px){.mobile-nav{display:none}}
+
+
+
+
 
 </style>
 </head>
@@ -478,13 +474,7 @@ nav a.active{background:rgba(255,213,79,0.35)!important;color:#FFD54F!important;
   <p class="section-subtitle">跨越百年的中医传奇</p>
   
   <div class="timeline">
-<nav class="mobile-nav" id="mobileNav">
-  <a href="#era-0" onclick="scrollToEra(0)">1920</a>
-  <a href="#era-1" onclick="scrollToEra(1)">1950</a>
-  <a href="#era-2" onclick="scrollToEra(2)">1973</a>
-  <a href="#era-3" onclick="scrollToEra(3)">1990</a>
-  <a href="#era-4" onclick="scrollToEra(4)">2000</a>
-</nav>
+
     <details open id="era-0"><summary>1920年 — 1949年 · 少年求学，悬壶乡里</summary>
     <div class="timeline-item">
       <div class="timeline-year">1920年</div>
@@ -1840,36 +1830,37 @@ function goSearch(e){
   if(q){window.location.href="search.html?q="+encodeURIComponent(q)}
   else{window.location.href="search.html"}
 }
-function scrollToEra(idx){
-  var el=document.getElementById('era-'+idx);
-  if(el){
-    var nav=document.getElementById('mobileNav');
-    var navH=nav?nav.offsetHeight:0;
-    var y=el.getBoundingClientRect().top+window.pageYOffset-navH-10;
-    window.scrollTo({top:y,behavior:'smooth'});
+);
   }
 }
 
-// Scroll Spy for mobile-nav
-window.addEventListener('scroll',function(){
-  var nav=document.getElementById('mobileNav');
-  if(!nav) return;
-  var links=nav.querySelectorAll('a');
-  var activeIdx=0;
-  for(var i=links.length-1;i>=0;i--){
-    var el=document.getElementById('era-'+i);
-    if(el){
-      var rect=el.getBoundingClientRect();
-      if(rect.top<=window.innerHeight/2){
-        activeIdx=i;
-        break;
+// Scroll Spy for top nav
+(function(){
+  var sections=['intro','lzz','timeline','academy','lujie','certs','calligraphy','gallery'];
+  var header=document.querySelector('header');
+  window.addEventListener('scroll',function(){
+    var headerH=header?header.offsetHeight:80;
+    var scrollY=window.pageYOffset||document.documentElement.scrollTop;
+    // Top nav scroll spy
+    var topNav=document.querySelector('header nav');
+    if(topNav){
+      var topLinks=topNav.querySelectorAll('a[href^="#"]');
+      var activeId='';
+      for(var i=sections.length-1;i>=0;i--){
+        var el=document.getElementById(sections[i]);
+        if(el&&scrollY>=el.offsetTop-headerH-20){activeId=sections[i];break;}
       }
+      topLinks.forEach(function(a){
+        var href=a.getAttribute('href');
+        if(href&&href.charAt(0)==='#'){
+          var id=href.substring(1);
+          a.classList.toggle('active',id===activeId);
+        }
+      });
     }
-  }
-  links.forEach(function(a,idx){
-    a.classList.toggle('active',idx===activeIdx);
+
   });
-});
+})();
 </script>
 
 </body>
