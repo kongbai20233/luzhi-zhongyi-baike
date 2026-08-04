@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>吃饭没胃口，首先考虑脾胃不和</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\脾胃相关 | 1,979 字</div>
-  <h2>吃饭没胃口，首先考虑脾胃不和</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="吃饭没胃口-首先考虑脾胃不和">吃饭没胃口，首先考虑脾胃不和</h2>
   <p>脾为中土，处中央而灌溉四旁。而中土是什么意思呢？就相当于咱们国家的黄河以南、中原一带。中原一带沟通南北，合天下之全势，是四方联系的枢纽，由中原到四边或者由四边到中原都很便捷。所以中原有事，必影响四方；四方有事，必波及中原。脾胃在五脏中就处于这样一个“中原”的位置。它沟通上下，灌溉其他四脏。一旦脾胃出现了问题，就会上边胃脘痞满，下边大小便不通畅，上下升降运动停滞。其他四脏也会相继出现问题。</p>
   <p>脾胃互为表里，一起司掌人体的消化吸收功能，同为气血生化之源。胃主受纳，把食物搅拌腐熟；脾主运化，把营养精微物质输送到周身其他腑脏。同时，脾和胃在性质和功能上又正好相反，两者一起形成一个矛盾统一体。在阴阳五行中，脾属阴，胃属阳；在喜好上，脾喜刚燥，胃喜柔润；在功能上，脾主升清，胃主降浊。就是这样两个互相对立的器官，一起相互合作完成人体的消化吸收功能，成为后天之本。</p>
   <p>它们体性相反，作用合一。如果二者不能齐心合力、相互协调地共同发挥相辅相成作用，就是脾胃不和了。</p>
@@ -59,5 +76,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>先用适量凉开水调50克葛根粉，再用沸水将其冲化，使之成晶莹透明状，再加入桂花糖5克，调拌均匀即成。此羹甘甜润口，气味芬芳，有醒脾和胃的功效，对食欲不振、便软不调等症状有较好的辅助作用</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>秋季如何防“秋愁”？</h1>
   <div class="meta">学术著作 / 养生\秋 | 1,008 字</div>
-  <h2>秋季如何防“秋愁”？</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="秋季如何防-秋愁--">秋季如何防“秋愁”？</h2>
   <p>进入到秋天，天气转凉，秋天凉爽宜人的天气使不少人感到很舒适，但秋天气候干燥，气温变化不定也容易给人的心理及生理带来一定影响。中医学认为，秋应于肺，肺可引起人悲忧的情绪变化，这个时期也是抑郁症的高发期。因为从夏天进入秋天，阳光照射逐渐减少，研究证明大脑内的松果体内含有丰富的5-羟色胺，它在特殊酶的作用下转变为褪黑激素。褪黑激素的分泌受到光照的制约。当强光照射时，褪黑激素分泌减少，在暗光下褪黑激素分泌增加。人体内褪黑激素多时会心情压抑，反之，人的心情则愉悦。由于光照对褪黑素的影响会使人情绪及精神状态受到影响，而产生秋愁的病理变化。</p>
   <p>秋季的一天，一位患者求诊于路老。患者为28岁女性，入秋以来，出现睡眠不踏实，易惊早醒，心情不佳，总也高兴不起来，焦虑，白天困倦，懒得动，活动后气短，食欲不振，最近月经也不正常了。路老看过病人，写道：秋应于肺，肺伤则情绪悲观，神魄失守，心神不宁，故睡眠障碍，情绪不佳，治以补肺健脾养血安神。用了清代名医喻嘉言养肺阴的方子“清燥救肺汤”加减，一周后患者症状即明显改善，睡眠和情绪均有好转，如法调理两周后，患者就痊愈了。这个例子就是路老根据季节的变化，因人，因时，又分析病在何脏，辨证施治，因此收到很好的效果。</p>
   <p>那普通人如何在秋季调整好心情，防止疾病的发生呢？路老提醒我们注意以下几点：</p>
@@ -45,5 +62,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>4.保持良好的睡眠，白天要缓解压力，晚上不要加班，晚饭后可到公园散步，跳跳集体舞，以放松心情，还可睡觉前泡泡脚，做一做头部的按摩，对睡眠都有帮助。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

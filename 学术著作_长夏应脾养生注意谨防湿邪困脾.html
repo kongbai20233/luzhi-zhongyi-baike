@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>长夏应脾，养生注意谨防湿邪困脾</h1>
   <div class="meta">学术著作 / 养生\夏 | 1,396 字</div>
-  <h2>长夏应脾，养生注意谨防湿邪困脾</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="长夏应脾-养生注意谨防湿邪困脾">长夏应脾，养生注意谨防湿邪困脾</h2>
   <p>中国传统文化中，除了春夏秋冬四季外，还有一个特殊的季节，就是长夏。长夏就是阳历的七八月份，阴历的六月份。前面讲过，中医学认为春、夏、秋、冬内应于肝、心、肺、肾，长夏与脾相应，也就是说，这段节气与人体脾的关系最密切，此时最宜养脾。</p>
   <p>为什么长夏最宜养脾呢？因为长夏属土，脾也属土，长夏的气候特点是暑湿，暑湿与脾土关系最为密切。土是生养万物的，离不开湿，没有湿，养生无从谈起，但又不能过湿，过湿就会涝，脾的习性就是喜燥恶湿，长夏阴雨连绵、空气潮湿，最容易出现脾虚湿困的现象。</p>
   <p>为什么说脾喜燥恶湿呢？这与其运化水液的生理功能是分不开的。脾主运化水湿，以调节体内水液代谢的平衡，脾虚不运则最易生湿，而湿邪太过就会困脾。《素问·五行运大论》载：“中央生湿，湿生土，土生甘，甘生脾，脾生肉……”意思是，中央应长夏而生湿，湿能生土，土气能产生甘味，甘味能够滋养脾脏，脾脏能使肌肉生长发达……所以，长夏是健脾、养脾、治脾的重要时节。</p>
@@ -51,5 +68,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>肾为先天之本，主管水液代谢、藏精、主命门之火；脾为后天之本，主运化水湿。在正常生理状态下，命火温煦脾土，使脾气健运，水谷精微得以适当传输。夏季暑热当令，耗阴较多，若频行房事，使肾亏于下，命火衰微，不能温煦脾土，使脾失肾养，故应节制房事，养精益肾，使命火旺盛；温煦脾胃，使水湿得以正常运化。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

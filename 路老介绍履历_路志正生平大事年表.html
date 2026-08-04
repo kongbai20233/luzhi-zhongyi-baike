@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,8 +51,9 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>路志正生平大事年表</h1>
   <div class="meta">路老介绍履历 / 大事年表 | 13,244 字</div>
-  <h2>路志正生平大事年表</h2>
-  <h2>1920年-1949年</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="路志正生平大事年表">路志正生平大事年表</h2>
+  <h2 id="1920年-1949年">1920年-1949年</h2>
   <p>1920年12月21日，出生于河北藁城县（现石家庄市藁城区）北洼村，取名路志正，后取字子端，号行健。</p>
   <p>1926年，父亲路永修教路志正读《三字经》《百家姓》《弟子规》《千家诗》。</p>
   <p>1927年，在本村读私塾。</p>
@@ -50,7 +67,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>1939年，开始在本乡独立应诊，养成[白天看病，晚上读书]的习惯，阅读大量医案，如《寓意草》《柳选四家医案》《临症指南医案》等，从前人验案中得到启发，以提高辨证遣方用药能力。</p>
   <p>1948年，在乡里行医，经十年历练，临床经验渐丰，医名传扬乡里，成为当地众口称赞的[小先生]。</p>
   <p>1949年，和伯父路益修一起来到北京开诊行医。</p>
-  <h2>1950年-1966年</h2>
+  <h2 id="1950年-1966年">1950年-1966年</h2>
   <p>1950年，开诊一年多，他们的医术逐渐被人们认可，患者逐渐增多，有时应接不暇。国家下达有关中医执业政策，要求[中医学习西医]取得资格。</p>
   <p>1951年4月，进入北京中医进修学校参加[中医学习西医学习班]为期一年半，学习课程为西医解剖学、生理学、病理学、医学史、药理学、细菌寄生虫学、公共卫生学、传染病学、内科学、外科学、急救学、针灸疗法、组织疗法、社会发展简史、新民主主义论、时事报告等。</p>
   <p>1952年7月，从进修学校毕业。</p>
@@ -77,10 +94,10 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>1964年9月至10月，随时任卫生部长徐运北赴陕西省永寿县，进行[大骨节病]流行情况调查。下乡期间，运用针药并用治疗产后高热一例而痊愈，深受当地赞誉。</p>
   <p>1964年，《中国针灸学概要》中文版由人民卫生出版社出版。</p>
   <p>1966年春，随卫生部调研组赴东北地区了解基层卫生工作，下乡期间救治复苏一例昏迷患儿。</p>
-  <h2>1966年-1973年</h2>
+  <h2 id="1966年-1973年">1966年-1973年</h2>
   <p>1966年，[文化大革命]开始，当年秋路志正被扣上[逃亡富农分子]的帽子，全家被遣返到河北原籍进行监督改造。其间，家中所有藏书被抄，在以后数年里路志正凭着年轻学医时期的记忆，教授五位子女中医理论与临床知识，带教他们诊治患者，日后五位子女皆成为国内外中医药领域的优秀人才。</p>
   <p>1973年，中央开始落实政策，冤案平反，举家返回北京。</p>
-  <h2>1973年-1990年</h2>
+  <h2 id="1973年-1990年">1973年-1990年</h2>
   <p>1973年，调入中医研究院广安门医院从事内科临床工作。</p>
   <p>1978年，国家恢复研究生教育制度，中医研究院招收首届研究生班，作为研究生导师，带教二名硕士研究生。</p>
   <p>1979年5月，参加全国首届中医学术会议审稿委员会，成员还有任应秋、王玉川、董德懋、方药中、耿鉴庭等先生。</p>
@@ -123,7 +140,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>1990年3月，在全国政协会议上，联合王绵之、凌一揆等人，提出[请国务院加速完善中医药管理体制，更好地推动和发展中医药事业]的提案。</p>
   <p>1990年7月，联名邓铁涛、任继学、方药中、何任、焦树德、张琪、步玉如[八老上书]，致信江泽民总书记，随信递交《关于加强国家中医管理局职能的建议》。</p>
   <p>1990年，发表《疑难病辨治杂谈》；指导与合作发表《路志正临床辨治火郁证举隅》《路志正从脾胃论治心痹学术思想概要》等三篇论文。</p>
-  <h2>1990年-2000年</h2>
+  <h2 id="1990年-2000年">1990年-2000年</h2>
   <p>1990年至1999年，担任卫生部国际交流中心理事。</p>
   <p>1991年6月，参加在沈阳召开的[中医药国际学术会议]，提出了[湿邪阻滞是心律失常的一大致病因素]的论点。</p>
   <p>1991年6月，参加卫生部国际交流中心组织的[辨证应用中成药教材编写访日代表团]，赴日交流。</p>
@@ -175,7 +192,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>2000年8月，参加全国名词委中医药学名词审定委员会成立大会。</p>
   <p>2000年9月，参加在泰国举办的[第六届亚细亚中医药学术大会暨国际传统医药新成果博览会]。</p>
   <p>2000年，发表《肾心痛辨治》论文；指导与合作发表《路志正治疗顽咳特色》等两篇。</p>
-  <h2>2001年-2010年</h2>
+  <h2 id="2001年-2010年">2001年-2010年</h2>
   <p>2001年3月，在法国组织与组织举办了[第三届国际中医风湿病学术研讨会]，就国内外中医药防治风湿病的临床研究、实验研究等内容，进行广泛深入的讨论。</p>
   <p>2001年4月，被聘为[广东省中医院继承国家名老中医学术经验指导老师]。</p>
   <p>2001年6月，召开[路志正教授行医六十五周年暨八十华诞学术研讨会]。</p>
@@ -233,7 +250,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>2010年8月，在中国中医科学院中医药发展论坛上，作了[关于中医传承的思考]的演讲。</p>
   <p>2010年，指导与合作发表《路志正脾胃学术思想探微——新时代内伤脾胃的致病因素》等三篇论文。</p>
   <p>2010年，担任世界中医药学会联合会风湿病专业委员会名誉会长。</p>
-  <h2>2011年-</h2>
+  <h2 id="2011年-">2011年-</h2>
   <p>2011年1月9日，获中央保健特殊贡献奖。</p>
   <p>2011年1月，[国医大师路志正从医七十周年学术思想研讨会]在人民大会堂召开。</p>
   <p>2011年4月，[路志正名老中医工作室]获北京中医药薪火传承优秀奖。</p>
@@ -315,5 +332,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>2019年11月16日，路志正学术思想研讨会暨路志正百年华诞庆典召开。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

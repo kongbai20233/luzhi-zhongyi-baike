@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>脾胃为后天之本，一年四季都要养脾胃</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\脾胃相关 | 978 字</div>
-  <h2>脾胃为后天之本，一年四季都要养脾胃</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="脾胃为后天之本-一年四季都要养脾胃">脾胃为后天之本，一年四季都要养脾胃</h2>
   <p>中医把脾胃称为后天之本，为什么是后天之本呢？因为我们要健康地活着，就要吃东西，而吃下去的东西要依靠脾胃的运化才能被人体消化吸收，如果脾胃的运化功能出了问题，就会直接影响到营养物质的吸收，从而对人体的健康产生影响。所以，养生之道应以调养脾胃为先。明代著名中医药学家张介宾（号景岳）在《景岳全书》中就指出：“胃气为养生之王……是以养生家必当以脾胃为先。”</p>
   <p>在一年四季中，春季主阳气升发，内应于肝，春天阳气升发不起来或生发太过，都会对肝造成伤害，而肝病会损伤脾胃，造成脾胃病变。因此，春季养肝的同时也要护脾胃，在饮食上应做到“少酸增甘”，即少吃酸的食物，适当多吃甜食。夏季暑热多雨，长夏应于脾，暑热容易与湿邪相合，侵犯脾胃，导致脾胃湿热，多发肠道疾患。人们在夏季发生腹泻的情况要远远多于别的季节，这其实就是脾胃受到伤害的表现。秋季主燥，内应于肺，肺与脾胃同主气，初秋时节，暑湿尚未散去，脾胃功能尚未恢复，很容易受伤。冬季天气寒冷，内应于肾，寒冷伤肾而累及脾胃。所以，路老认为：四季皆可伤脾胃，一年四季都要养好脾胃，才能保证五脏功能的正常。</p>
   <p>若脾胃功能受损，则运化失常，体内的水分不能正常代谢，停聚而生湿、生痰，影响气血的运行而变生各种疾病。如冠心病、高血压、高脂血症和糖尿病等现代的常见病、多发病，均与脾胃的运化失常有关，路老主张这些疾病均可从调理脾胃入手治疗。</p>
@@ -46,5 +63,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>3.自我按摩一些健脾的穴位，如每天晚上按摩足三里。足三里这个穴位于膝关节犊鼻穴下三寸，这个犊鼻穴，指的是膝关节下方有两个窝，像两个牛鼻孔，犊鼻穴下三寸，胫骨旁开一寸（一寸就相当于你的大拇指横宽），就是足三里。按摩穴位一般以手指或指关节点压、按揉，以有酸、麻、胀的感觉为度。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

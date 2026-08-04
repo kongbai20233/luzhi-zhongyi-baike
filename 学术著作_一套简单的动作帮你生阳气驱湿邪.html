@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,18 +51,71 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>一套简单的动作，帮你生阳气驱湿邪</h1>
   <div class="meta">学术著作 / 养生\体质&食疗 | 900 字</div>
-  <h2>一套简单的动作，帮你生阳气驱湿邪</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="一套简单的动作-帮你生阳气驱湿邪">一套简单的动作，帮你生阳气驱湿邪</h2>
   <p>现代人有个通病就是懒，上班的时候坐在电脑前，出门时坐在车里，回到家中又常常坐在沙发上看电视。整天坐着不动，缺乏运动，身体里的气血都瘀滞了，所以体质偏湿的人很多。可以说，懒是现代人湿病的原因之一。古代农耕社会，人们劳作较多，所以更容易受到外部湿邪的侵入，而现代人的湿邪多是内湿，这种湿只靠药物还不够，最好是克服自己的懒病，动起来。</p>
   <p>为什么要运动呢？因为动能生阳，也就是说运动起来能升发阳气。大家都有这样的体会，冬天天气很冷，手脚都凉，这时候你要是活动一下肢体，围着操场跑两圈，就会觉得全身都暖和了，这就是阳气充实于四肢的表现。</p>
   <p>阳气亏虚，湿邪弥漫，身体就会被各种湿病缠上；反之，你的阳气足了，能通达四肢，水湿就容易运化，身体就会健康。这就像在阴冷潮湿的地方更容易长出青苔，但一旦阳光明媚，青苔就再也无法生存一样。我们通过运动托起了体内的太阳在它的照耀下，体内湿冷的环境也会得到有效改善。</p>
   <p>之所以运动还有一个原因，那就是运动可以出汗。你可能有这样的经验，某天受了风寒发烧了，这时候母亲端来碗热腾腾的姜汤，你喝完马上盖好被子，不一会儿就出了身汗，本来头痛、身紧、怕冷的感觉也消失了。这叫给邪以出路，在中医里这种去邪的方法叫汗法。每天通过适量的运动，可以活络身体器官，让湿邪通过汗水排出体外。</p>
   <p>我有一套已坚持几十年的锻炼方法，受益颇多，在此介绍给大家，希望每个人都能成为健康的长寿者。</p>
-  <h2>起床后干洗脸</h2>
+  <h2 id="起床后干洗脸">起床后干洗脸</h2>
   <p>每天早晨起床后，我会先在床上做个简单的锻炼：干洗脸。说白了其实就是搓脸，几分钟就能做完。</p>
   <p>先把两手搓热，然后两手干洗额头，沿着太阳穴，到眼部。再自上而下反复擦鼻侧25次，这个动作还有预防感冒的作用。接着左手沿着下颌骨斜向上干洗右脸，右手干洗左脸，这个动作做35次就可以。</p>
   <p>做完这些还要搓耳朵，因为耳朵上的穴位很多。先用手掌前后拨拉耳郭；之后用拇指和食指捏着耳郭向下拽，有降血压的作用；最后掌心对着耳朵，手指敲头后枕骨，这个动作叫作“鸣天鼓”，做35次就行，可以恢复脑力，减轻疲劳。</p>
   <p>这套动作我每天早上起床后和晚上睡觉前都会做一次。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,10 +51,11 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>长期嗜辣和饮酒，小心脾阴虚</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\脾胃相关 | 1,148 字</div>
-  <h2>长期嗜辣和饮酒，小心脾阴虚</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="长期嗜辣和饮酒-小心脾阴虚">长期嗜辣和饮酒，小心脾阴虚</h2>
   <p>脾阴就是指营养濡润消化道的物质及各种消化液，如胃液，胰液、肠液，及营血等。我们看一辆车，汽油、润滑液、冷却液这些都是属于阴，如果阴液不足，同样会有食欲不振、消化不良、倦怠乏力这些症状，可其病机有异，其治有别。</p>
   <p>阴虚的人，阴阳失去平衡，往往表现为阴虚生热的症状，所以脾阴虚的人，由于濡润的阴液不足，往往会有燥干、燥热的现象，同时也会表现出皮肤干燥。这类人，往往脸色发黄，但是到了午后，两颧又会泛红。阴液的一个作用就是抑制我们人体阳热，使身体不至过于亢盛。而脾胃阴虚的人，津液亏虚。在上部的表现是口干舌燥，嘴唇经常干裂，唾液分泌减少，消化能力减弱；在下部的表现就是大肠的肠道不够滋润，所以经常便秘。</p>
-  <h2>脾阴虚是怎么造成的呢？</h2>
+  <h2 id="脾阴虚是怎么造成的呢-">脾阴虚是怎么造成的呢？</h2>
   <p>一个原因是饮食偏差。根据中医长期临证体验，询问脾阴虚患者的生活习惯，发现大多有嗜食辛辣和饮酒的历史。辣椒辛烈，酒性属火，尤其是高度的白酒，多易灼伤胃阴，并影响到脾。近些年来，由于饮食习惯的改变，盛行辛辣，一盆菜中2/3是辣椒或辣油，辣味的过食久用，就会过度刺激灼伤咽喉食道、胃、肠黏膜，并化热化燥，伤及这些部位的阴液。再有现在盛行的煎炸食品，也是劫伤津液，灼伤脾胃阴液的凶手。吃得太饱、太油腻，也会如此。</p>
   <p>第二个原因就是熬夜。天地四时运行，万物化生，都有阴阳消长、动静得宜的道理。根据大自然的规律，白天主阳，主动，万物充满勃勃生机，阳气升腾向上；晚上主阴，主静，万物静谧安详，阴气内沉向下。所以日出而作，日落而息，人体的阴阳也与之相应。夜晚是阳入于阴的时候，是我们身体得到修复的最好时段，小孩子也是在夜晚睡觉的时候，身体长得最快。但是现在很多人喜欢熬夜，年轻人熬夜游玩，中年人熬夜工作。熬夜不但让阳气得不到安养，更让阴液得不到滋生，也会造成脾胃阴虚。</p>
   <p>这里也介绍两个食补方：</p>
@@ -48,5 +65,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>用松子仁10克，甘杏仁6克，核桃仁12克，花生仁8克，新鲜竹笋15克，粳米100克，以清水1500毫升、将粳米和其他材料分别放置在两个容器中，浸泡2小时。先以文火煮粳米20分钟，再放入其他材料文火煮30分钟，至粥如糜状，即可分2次食用。此粥妙在开达肺气、润肠通便。与扁豆山药粥交替服用，则有异曲同工之妙。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,12 +51,13 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>用眼过度的“电脑族”更要养肝</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\肝 | 1,246 字</div>
-  <h2>用眼过度的“电脑族”更要养肝</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="用眼过度的-电脑族-更要养肝">用眼过度的“电脑族”更要养肝</h2>
   <p>现代社会，随着电脑的普及，很多人患上了跟电脑相关的疾病。路老曾叹道：现在的很多人啊，都患上“电脑依赖症”了，每天上班要盯着电脑看十来个小时，吃饭都舍不得离开；晚上回家还要用电脑聊天，玩游戏，而且一玩就忘了时间，每天睡得很晚……长期这样下来，对身体的危害非常严重。</p>
   <p>有一次，一个20多岁的女孩来找路老看病，她穿得很干练，画着精致的妆，一看就是白领，但仔细观察发现，她脸上没有年轻人该有的朝气，看起来很疲惫。她跟路老说：毕业两年了，自己在事业上很顺利，现在已经做到部门经理了，但是身体越来越差。这段时间搞一个大项目，每天加班加点，昨天起床的时候感觉眼前一黑，竟然昏倒在床上了，本来想请假休息一天，最后还是坚持去工作，决定忙完这段时间再说。可是白天工作的时候却发现自己的眼睛越来越模糊，几乎看不清电脑屏幕，这才感觉情况严重了，赶快来看一下。说完，她还非常紧张地问：“路老，您说我的眼睛不会有问题吧？”路老很和蔼地告诉她别紧张，然后详细地询问了她的各种基本情况，询问过程中，才知道她的月经也已经有两个多月没来了，只是她一直忙于工作，没放在心上。</p>
   <p>路老说，这个女孩的情况属于典型的“久视伤肝”，而肝主藏血，肝脏受损导致周身气血运行紊乱，加上最近精神紧张，压力大，心脾不足，才引起了月经不调和上述症状。路老给她开了7天的中药，嘱咐吃完后再来复诊，而且平时要注意休息。这样调理了将近3个月，女孩的身体渐渐恢复正常。</p>
   <p>为什么说“久视伤肝”呢？中医认为，人的五官与五脏密切相关：目对肝、舌对心、口对脾、鼻对肺、耳对肾。因此，肝脏是否健康直接影响到眼睛，而且肝主藏血，肝血旺盛，眼睛才能够得到滋养，“目受血而能视”。如果过分用眼的话，就会过度消耗肝血，使肝脏不断地处于紧张的工作中，日积月累，自然会影响肝脏的健康，从而出现眼睛干涩、酸痛、流眼泪、近视、模糊，小腿抽筋、腰膝酸软、手无力、手指不灵活、皮肤出现斑点、情绪不稳定、月经不调等症状。</p>
-  <h2>那么，经常用眼过度的人应该怎样养肝呢？</h2>
+  <h2 id="那么-经常用眼过度的人应该怎样养肝呢-">那么，经常用眼过度的人应该怎样养肝呢？</h2>
   <p>1.最重要的方法就是睡觉。“人卧则血归肝”，夜里11点到凌晨3点是肝发挥其藏血、解毒作用的最佳阶段，所以养肝的第一条就是要在晚上11点前睡觉，最好能在10点半左右就入睡，这样11点时正处于深度睡眠状态，有利于血液回肝解毒。</p>
   <p>2.多吃绿色的食物。青色入肝经，可以起到养肝护肝的作用。</p>
   <p>3.保持良好的情绪。“肝在志为怒”，肝失衡会影响情绪，使人烦躁；反之，情绪烦躁也会影响到肝。</p>
@@ -48,5 +65,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>这里在额外给大家推荐一个养肝明目的肝豆食疗粥。绿豆60克、新鲜猪肝100克、大米100克、食盐、味精少许。豆米同煮，大火煮沸，小火慢熬。粥约八成熟时，将切成片的猪肝掺入粥内同煮，熟后加入调味品。此粥适合脸色蜡黄，视力减退或视力模糊的体弱者，对患慢性肝炎、水肿等病的人，也有显著的疗效。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

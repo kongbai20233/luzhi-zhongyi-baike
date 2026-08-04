@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>肝是人体大将军，春季养肝正当时</h1>
   <div class="meta">学术著作 / 养生\春 | 1,265 字</div>
-  <h2>肝是人体大将军，春季养肝正当时</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="肝是人体大将军-春季养肝正当时">肝是人体大将军，春季养肝正当时</h2>
   <p>《黄帝内经·素问》中提出：“肝者，将军之官，谋虑出焉。”意思是说，肝脏是人体中叱咤风云的大将军，出谋划策的智囊团。正因为如此，肝脏在人体中的地位非常重要，它是我们健康的保护神。我们一定要把肝养好，才能使它充分发挥作用，保卫我们身体的健康。</p>
   <p>肝主要的生理功能是主疏泄，包括两方面的作用，一是调畅气血，二是调畅情志。春天阳气生发，肝气应春，也应该是活跃的，如果肝脏功能失常，肝气郁结，气血的运行就会受到影响，出现气滞血淤的病症，如冠心病、高血压、脑中风等。肝气不舒影响到情绪，就会出现头痛、急躁易怒、鼻子出血等病症。因此，春季最应注重养肝，要保持心情的舒畅，以顺应肝气伸展，调达的个性。</p>
   <p>路老认为，春季养肝首先从饮食做起。中医理论讲酸味入肝，甜味入脾。春季肝气旺盛，如果过食酸味，会使肝气过旺，肝木克脾土，容易损伤脾胃，因此在饮食方面，要适当减少酸味食物，增加甜味食物，保护脾胃功能，以防止过旺之肝气的侵犯。元代丘处机著有《摄生消息论》，其中所言“当春之时，食味宜减酸益甘，以养脾气”说的就是这个道理。</p>
@@ -46,5 +63,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>另外，春季养肝还可以常按太冲穴。太冲穴是肝经非常重要的穴位，有人把它的作用比做菊花，有清肝降火、清利头目的作用。春天是肝气偏旺的季节，按摩太冲可疏肝解郁，起到养生作用。该穴位于脚背上大脚趾和第二个脚趾结合处向后的凹陷处。每天坚持用手指按揉太冲穴2分钟就可以了。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

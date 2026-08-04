@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>冬季进补，就以补阴为主</h1>
   <div class="meta">学术著作 / 养生\冬 | 1,502 字</div>
-  <h2>冬季进补，就以补阴为主</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="冬季进补-就以补阴为主">冬季进补，就以补阴为主</h2>
   <p>中医的进补，应该是符合自然规律的。冬季是一个敛阳藏精的季节，冬季进补就以补阴为主。</p>
   <p>为什么要补阴？因为阴就是物质基础，它是化生阳气和动力的来源。没有这个物质基础，那么到了第二年，要想阳气外散，增加活动量时，就缺少物质基础。所以冬天的藏，是为了来年的生和发。所以江浙一带，叫做“冬令进补，来年打虎”，说的就是冬季闭藏补阴，为来年阳气的升发做好准备。</p>
   <p>一年四季的阴阳消长，春夏两季是发散的，秋冬是收敛的。春夏时，毛孔张开，阳气趋向于皮肤体表。秋冬时毛孔闭合，阳气收敛，就躲到身体里面了，所以秋冬的时候，我们人体是外冷内热。现在很多人在冬天的时候喜欢吃火锅，还喜欢多放辣椒，喝酒以祛寒，时间一长，两阳相加，房间里又有暖气，空气又干燥，又多紧闭窗户以避风，就容易上火。所以中医重视秋冬养阴，就很有道理。</p>
@@ -51,12 +68,64 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>膏滋药中所用糖一般为砂糖、冰糖或蜂蜜，加糖量一般为药量的1/4，所用糖必须炒过，才能入膏。炒时须用小火，使糖逐渐烊化。烊化后的糖会结成不规则的疙瘩状，持续不断地翻炒，稍加些水，使疙瘩状糖块继续烊化，直至呈黄褐色糖液时，趁热用两层纱布过滤。若糖的质量纯净，不过滤也可。过滤后的糖液仍倒入原来的炒糖锅中加热至沸，然后将清膏徐徐加入。</p>
   <h2>收膏</h2>
   <p>收膏时，切不可把清膏一下子全部倒入，应边搅拌边用扇子扇，直至清膏和糖全部和匀，再继续边铲边用文火煎熬。当药液稠到一定程度时，膏滋药即告制成。这样煎成的膏滋药，称为素膏。若再加入一些阿胶、鹿角胶、鳖用胶等，即制成荤膏。此外，还可根据自己的喜好和体质需要，加入一些滋补食品，使膏滋药味道更佳。</p>
-  <h2>膏滋药的储存</h2>
+  <h2 id="膏滋药的储存">膏滋药的储存</h2>
   <p>存放膏滋药，以搪瓷或陶瓷罐为宜，盛器用开水烫过、烘干后方可使用。刚放入膏滋药的盛器不可加盖，以免水蒸气滴入。待稍冷后，上覆消毒纱布过一夜，第二天再加盖。如需要久藏，容器必须加盖密封。若膏滋药出现点点白花，这是受潮发霉所致，需重新回锅加热煎熬，并把容器洗净，用开水烫泡后烘干，才能继续存放或服用。</p>
-  <h2>膏滋药的服用</h2>
+  <h2 id="膏滋药的服用">膏滋药的服用</h2>
   <p>服用膏滋药，最好在清晨空腹时服用。此时肠胃空虚，吸收力强，且不受食物干扰，药物易于发挥作用。一般每次服2~3汤匙，（汤匙用时一定擦干）用开水冲服。药后稍停片刻，随后进早餐。服用膏滋药期间，忌食萝卜、酱菜、浓茶，以免影响药效。</p>
   <p>"</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

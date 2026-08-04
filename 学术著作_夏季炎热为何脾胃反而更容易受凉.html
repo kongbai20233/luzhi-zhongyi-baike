@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>夏季炎热，为何脾胃反而更容易受凉</h1>
   <div class="meta">学术著作 / 养生\夏 | 1,134 字</div>
-  <h2>夏季炎热，为何脾胃反而更容易受凉</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="夏季炎热-为何脾胃反而更容易受凉">夏季炎热，为何脾胃反而更容易受凉</h2>
   <p>《黄帝内经》中讲“春夏养阳”，很多人停了可能就疑惑了，春夏气温高，阳气偏盛，为什么我们还要养阳气呢？因为春夏的时候，我们人体的阳气外泄，形成了一种阳气外盛而内虚的状态。阳气内虚，所以春夏的时候容易着凉感冒。现在很多病人夏天时来找我，说自己中暑了，头晕，拉肚子。其实绝大多数并不是中暑，而是受凉了。他们感到奇怪：“现在天气这么热，怎么会着凉呢？</p>
   <p>其实就是因为阳气内虚。我们的身体在夏天为了调节体温，保持自然界和人体的平衡，要时常排汗，使汗孔处于开放状态。故而调节适应能力下降，这个时候如果突然遇到外界强烈的冷气刺激——空调一吹就容易着凉。所以即使在夏天，晚上睡觉也要用轻薄的毛巾被盖上一点，特别是胃部。夏季体内阳气外泄，内部阳气虚弱，脾胃机能下降，稍有受凉，即会引起腹痛、腹泻。而用被子盖住胃部，这样就不太容易着凉了。</p>
   <p>还有就是夏天要少吃凉东西，少吃冷饮。如果嘴馋，最好也是饭后吃。如果空着肚子吃，对脾胃的运化功能就有影响了。吃完饭以后再吃冷饮，就不会直接伤害到脾胃。</p>
@@ -44,5 +61,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>吃姜还要注意天时。姜的特性是发散、生发，所以早上吃姜最好，让沉睡了一个晚上的阳气重新开始活跃，能让您在接下来的工作和学习中精神焕发，充满活力。一年四季中，则夏天吃姜最好，能够很好地助长阳气。而秋天则不适合吃姜，因为秋天是阳气开始收敛的季节，所以谚语说“一年之内，秋不食姜；一日之内，夜不食姜”。不过也并非绝对如此，例如感冒初起的时候，就可以多吃点姜而不用管季节与时辰。另外要注意，心烦气躁、身体消瘦、高血压，或者经常口干口苦、便秘如球的人应当少吃姜。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

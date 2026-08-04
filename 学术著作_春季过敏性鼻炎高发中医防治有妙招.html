@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>春季过敏性鼻炎高发，中医防治有妙招</h1>
   <div class="meta">学术著作 / 养生\春 | 1,302 字</div>
-  <h2>春季过敏性鼻炎高发，中医防治有妙招</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="春季过敏性鼻炎高发-中医防治有妙招">春季过敏性鼻炎高发，中医防治有妙招</h2>
   <p>鼻炎虽一年四季均可发生，但过敏性鼻炎春季发病率最高。中医认为春天风气主令，风邪侵犯人体，最先犯肺，鼻为肺之外窍，鼻炎患者往往在这一季节加重。特别是春暖花开的时候，尘土、螨、霉菌等的不良刺激增多，出现鼻塞、流清涕或脓性鼻涕、打喷嚏、鼻腔发痒、头痛、头晕、发烧、不闻香臭、说话声音重浊等症状，这是过敏性鼻炎的重要诱因。长期慢性鼻炎还可引发神经衰弱、记忆力减退，患者会感到头昏脑涨，极不舒服。</p>
   <p>有些患者往往认为鼻炎是小病而忽视及时治疗，或长期依赖麻黄素、滴鼻净之类的药物，这些药物虽然能获得短期疗效，但从长期的临床观察来看，常常会给患者带来后遗症。有关资料显示，因鼻炎诱发的鼻癌约占27%。所以，鼻炎患者一定要及时治疗。自己不能确定是否患有过敏性鼻炎时，应到医院确诊。</p>
   <p>一位男性患者，28岁，遇到冷空气及粉尘就要打喷嚏，流鼻涕已10年。后来时常晨起即鼻痒、打喷嚏、流鼻涕，长期使用滴鼻净等，仅缓解一时，平时说话鼻音重，偶有头沉重，从其症状特点看，诊断为过敏性鼻炎，给予宣肺通窍散寒法治疗后，病情基本得到了控制，晨起症状也消失了。</p>
@@ -54,5 +71,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>6.洗面。用双手指像洗脸一样推搓面部（包括鼻、额、颊）。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

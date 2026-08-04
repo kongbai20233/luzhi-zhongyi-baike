@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>炎炎夏季，别让暑热伤了“心”</h1>
   <div class="meta">学术著作 / 养生\夏 | 1,449 字</div>
-  <h2>炎炎夏季，别让暑热伤了“心”</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="炎炎夏季-别让暑热伤了-心-">炎炎夏季，别让暑热伤了“心”</h2>
   <p>“心”就像一头不知疲倦的老牛一样，自始至终为我们的身体工作。我们睡觉了，它却不能睡。随着炎热夏季的到来，心脏的负担加重，它的工作会更加繁忙，所以，夏天养心为重点。</p>
   <p>为什么夏季一定要注意养心呢？这在中医典籍《黄帝内经》中就能找到依据：“心者生之本……为阳中之阳，应于夏气。”也就是说，心为阳中之阳，与夏气相通应，因为夏季以炎热为主，在人体则心为火脏而阳气最盛，同气相求，故夏季与心相应。人体阳气随着自然界的阴阳升降而发生周期性变化。夏天属火，火气通于心，火性为阳，阳主动，再加上心为阳中之阳，属火，两火相逢，势必扰动心神，出现心神不宁、心烦易躁，增加心脏的负担。俗话说冬储夏耗，夏季是消耗的季节，稍不注意就会导致秋冬季节体质下降，影响全年的健康，因此，夏季注意养心，减少消耗，才能保障冬天的能量需要。</p>
   <p>每到夏季，路老就会提醒我们：“天气热，要注意身体。”还嘱托我们，夏季心脏病患者会多一些，要格外细心。一位在路老这里看病的老病人刘某，年60岁，患冠心病已多年，他每到夏天就会病情发作，天气炎热，他就会感到胸闷、发憋，甚至心前区疼痛。而且，夏天多湿、多热的特点造成了人体出汗多，消耗比较大，容易心烦意乱；中医讲“汗为心之液”，夏天出汗多，也会“伤心”。</p>
@@ -55,5 +72,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>方法：可按压、按揉，以酸胀为度，每次3~5分钟。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

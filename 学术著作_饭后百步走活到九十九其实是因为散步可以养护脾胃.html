@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>饭后百步走活到九十九，其实是因为散步可以养护脾胃</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\脾胃相关 | 1,042 字</div>
-  <h2>饭后百步走活到九十九，其实是因为散步可以养护脾胃</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="饭后百步走活到九十九-其实是因为散步可以养护脾胃">饭后百步走活到九十九，其实是因为散步可以养护脾胃</h2>
   <p>老百姓都知道“饭后百步走，活到九十九”。特别是如今很多人的工作就是一天到晚对着电脑，一坐就将近十个小时，对于他们来说，散步就是非常好的运动和养生方式。另外，像从事教师等职业的人，每天站立的时间比较长，经常散步也能促进血液回流。散步还可以让我们疲惫的神经细胞得到充分的休息，从而促进和改善睡眠；散步时，腹部的肌肉随之运动，相当于对胃肠道进行按摩，可促进胃肠的蠕动，增进肠道的消化和吸收，对改善消化不良、便秘等都有不错的效果。</p>
   <p>结束了一天繁忙的工作，晚饭后抽出时间散散步，对身心健康的确非常有益。不过，路老提醒大家，饭后胃正处于充盈状态，由于消化的需要，大部分血液供应集中于胃肠，当胃中的食物还没有完全被消化吸收的时候就散步，一部分血液会转移到四肢运动系统，胃因此血液供应不足，消化液的分泌就会减少，消化能力也大大下降，这就容易诱发功能性消化不良，久之就会导致胃黏膜病变。同时，饭后食物存留胃中，加重了胃的负担，这时如果快走，还会造成胃下垂等疾病。所以，饭后百步走也是有讲究的。</p>
   <p>首先是走的时间，应在饭后半小时至一个小时后再行走，让胃中的食物有充足的消化时间。如患有肝炎、胃下垂的病人，由于消化吸收能力差，食物吸收时间长，最好饭后休息一个小时以上再行走。心脑血管疾病患者则不提倡饭后行走，因为饭后血液供应大多集中到胃部，行走时血液又转移到四肢，心脑血管血液相对减少，这时容易诱发心脑血管疾病。高血压、动脉硬化的病人同样不适合饭后马上运动。晚餐也不要吃得太饱，吃到七八成饱就可以了。</p>
@@ -44,5 +61,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>走路的速度要因人而异。中老年人应由少到多、由慢到快，循序渐进。一般走到稍微出汗，就能达到锻炼和健身的目的。快步走时的心率以不超过每分钟100~110次为宜。尤其是患有心血管疾病的人，更要注意心率的变化，应逐步提高行走的速度，不要强行快走。行走时有身体不适症状，应立即停止。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

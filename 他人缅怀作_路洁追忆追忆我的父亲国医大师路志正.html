@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,19 +51,72 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>路洁追忆：追忆我的父亲国医大师路志正</h1>
   <div class="meta">他人缅怀作 / - | 1,722 字</div>
-  <h2>追忆我的父亲国医大师路志正</h2>
-  <h2>北京路志正中医药研究院  路洁</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="追忆我的父亲国医大师路志正">追忆我的父亲国医大师路志正</h2>
+  <h2 id="北京路志正中医药研究院--路洁">北京路志正中医药研究院  路洁</h2>
   <p>我敬爱的父亲去世一周年了，他的音容笑貌依然历历在目，他的谆谆教导时时铭刻在心。</p>
-  <h2>读万卷书 行万里路</h2>
+  <h2 id="读万卷书-行万里路">读万卷书 行万里路</h2>
   <p>还记得二十世纪六七十年代，我们姊妹随父母在农村老家居住，无论白天下地劳作多么辛苦，每到夜晚，父亲总会给我们讲故事，如“头悬梁锥刺股” “荆轲刺秦王”，或者猜中药谜语，如“举头望明月”-当归，“五月中、糊窗棂”-防风。现在想想，很多中药都是他老人家口传心授记在心里的。那时家里的藏书都没了，父亲就和大姐一起，把熟记在心的《医学三字经》《十二经穴位歌诀》《伤寒论》等中医启蒙书背写下来，让我们背诵。父亲说：“书读百遍其义自见。”夜晚我们围坐在油灯前，父亲要求我们先认生字，再反复读熟，他给每人50个黄豆，我们吟诵一遍，就取一个，从左边放到右边，这样一遍遍地，从磕磕绊绊到流畅背诵，为我日后步入中医的殿堂打下了坚实的基础。</p>
   <p>成年后，父亲常教导我们，学习应该博采众长，兼容并蓄，学习医学，更不能有门户之见。在国医大师颜德馨的大声疾呼下，由国家中医药管理局批准，同济大学率先启动了“中医大师传承人才培养项目”，这是创新中医师承教育模式的一大举措。由颜德馨、邓铁涛、朱良春、张琪、周仲瑛，再加上我父亲，共六位国医大师担任导师，培养高层次中医临床人才。当时父亲第一时间就告诉我：“这个培训班很有特色，不仅开设了国学课，最主要的是几位大师集毕生之学临床带教，你应该争取去学习。”培训班前后共历时三年，每次临行父亲总会叮嘱我：“别惦记家里，这儿有我呢，你妈也挺好的。”而每次回家，父亲总会关切地询问我：“你们都学的什么呀？有什么收获吗？”每每回忆至此，父亲的关爱之情记忆犹新，我都不禁潸然泪下。</p>
-  <h2>精于辨证 勤于临证</h2>
+  <h2 id="精于辨证-勤于临证">精于辨证 勤于临证</h2>
   <p>跟随父亲临证学习，我见证了一个又一个生命的奇迹。父亲非常注重启发式教学，培养我们善学好思的能力。他强调临证不能有固定思维，一定要在四诊的基础上进行思辨，望、闻、问、切只要有一诊不符，就要在心中产生疑问，并琢磨其中的原因，不仅要详细记录病案，更要深入思考病性、病位，就算寒热错杂也要有先后主次之分。侍诊时父亲常会突然发问：“这是什么方子？”接不住就得挨批，但遇到典型的疑难病案，他常启发我们思考辨治和用方思路，或引导我们自己读书寻找答案。有时只一两句点睛之语，我们就顿开茅塞，发现一团乱麻的证候有了次第。临证之初我常感“心中了了，指下难明”，尤其当患者一股脑说出来很多症状或治疗经过，更需要认真倾听、反复琢磨，当把其中的矛盾点解决，就会发现特别清晰。</p>
   <p>父亲熟稔经典，融汇百家，崇尚脾胃学说，把他毕生的经验汇编成书，出版了《医林集腋》《中医湿病证治学》《无病到天年》《大病预防先除湿》等临床和养生专著，形成了“持中央，运四旁，怡情志，调升降，顾润燥，纳化常”的学术思想体系，父亲临床上用药轻巧，注重条畅气机，具有“四两拨千斤”之效。他根据我先药后医、医药结合的学习经历，给予我具体的临证指导，尤其告诫我“以平为期”的要义。在与父亲悉心相伴的日日夜夜中，这些指导不仅使我的临床不断精进，更使我收获了很多人生的道理，每当我在出诊时体会到了平淡见神奇的疗效，父亲总是会心微笑，以表达他最为含蓄的欣慰之情。</p>
-  <h2>万千嘱咐 心系传承</h2>
+  <h2 id="万千嘱咐-心系传承">万千嘱咐 心系传承</h2>
   <p>父亲一生“医政双担”，但他最大的心愿便是将其毕生所学、所悟、所得传承下来，以救治更多患者。2022年，也就是父亲去世的前一年，父亲亲笔修改文稿，出席国医大师路志正学术思想与临床经验学习班开班仪式并致辞，并由我代其主讲了“路志正学术思想及临证应用”的全部课程。在中国中医科学院学部委员传承与传播专项创立之时，父亲亲自整理了6箱读书笔记交予我的儿子昭瀛，并由其牵头进行国医大师路志正临证经验传承与传播研究。岁末之时，更书写了“路氏内科、得我真传”赠送予我，这是对我学医、行医最大的肯定，只是未曾想到，这却也成为父亲留给我的最后一份墨宝。</p>
   <p>父亲一生热爱中医药，作为新中国中医药事业发展的参与者、见证者、执行者和推动者，毕生心系传承，并在发展中不断创新，其临终前反复嘱咐我与昭瀛，一定要将路氏宝贵的临证经验传承下去，让更多的医生和患者受益，而这，也将成为我们不断努力的人生方向。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

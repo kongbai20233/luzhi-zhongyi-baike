@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>养生要先养脾胃，而不是急于补肾</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\脾胃相关 | 1,678 字</div>
-  <h2>养生要先养脾胃，而不是急于补肾</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="养生要先养脾胃-而不是急于补肾">养生要先养脾胃，而不是急于补肾</h2>
   <p>上天有时候似乎是不公平的，有的人天生身体素质好，有的人从小就体弱多病。中医有“肾为先天之本”的说法，认为这些区别是由先天精血遗传所决定的。但上天却又是公平的，因为后天的生活环境与习惯可以弥补先天不足的缺陷。同时中医认为“脾胃为后天之本”，先天不足可以通过调理后天的脾胃来弥补，所以有“以后天补先天”之说。因此我们看一个人30多岁以后的身体差异状况，基本上是由他自己的生活习惯造成的。</p>
   <p>我们的身体禀受父母的精血，出生之后，一个人身体的先天素质就已经决定了。肾为先天之本，就是指受自先天的元精。同时，您的肾中精气是否充足，也会决定孩子的先天素质。但是先天因素只是决定身体素质的条件之一，您身体的实际健康情况，看的还是后天的调养。就像一个水缸，缸的大小决定了能装多少水，这是先天因素；而水缸里实际装了多少水，看的就是后天因素了。后天的生活方式及环境可以改变先天基因的序列，所以中医也讲“补养后天来资助先天”。但如果仗着先天素质好，而不注重后天的调养，那也是不能长寿的。</p>
   <p>就像古代的武状元和现代的运动员，他们魁伟强健、精力充沛，可以说是先天素质比较好的人了，但是他们的平均寿命者偏短。生卒年有史可稽的武状元，平均寿命只有60多岁，比手无缚鸡之力的文状元低很多。而现代运动员的平均寿命更短，甚至已经低于普通人的平均寿命。</p>
@@ -46,5 +63,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>脾胃健旺，自然后天营养充足，体力好，免疫力强，即使生点小病也好得快，这就是“四季脾旺不受邪”的道理。因为脾胃健旺，元气就会充足，病邪就不容易入侵身体。所以说，脾胃是无病到“天年”的关键，也是我们养生的入手之处。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

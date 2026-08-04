@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>冬季雾霾邪气嗓子不适，试试青龙白虎汤</h1>
   <div class="meta">学术著作 / 养生\冬 | 563 字</div>
-  <h2>冬季雾霾邪气嗓子不适，试试青龙白虎汤</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="冬季雾霾邪气嗓子不适-试试青龙白虎汤">冬季雾霾邪气嗓子不适，试试青龙白虎汤</h2>
   <p>冬季雾霾严重，有些人的急性或慢性咽喉炎、扁桃体炎就容易发作，容易出现喉咙干涩、疼痛等不适的症状，这就是外毒侵袭人体的表现了，如果不尽快调理，这种雾霾的邪气会经口鼻发展而入肺，出现更严重的呼吸道症状。如果已经出现了类似的不适，除了加强防护，调整心态外，大家也可以试试服用青龙白虎汤来调理。有的人一看这方名“青龙白虎”，心中不免犯嘀咕：这是什么名贵药，起这么个霸气的名字。其实，里面的材料非常简单，“青龙”指的是青橄榄，“白虎”指的是白萝卜。这个药方是清代医家王孟英的自制方，能够促进肺的宣降功能，加强排浊，缓解嗓子不适。</p>
   <p>【材料】青橄榄5枚，白萝卜120克。</p>
   <p>【做法】二者洗净后，切丝或切片，共煮20分钟。</p>
@@ -44,5 +61,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>青橄榄入肺经、胃经，有清肺利咽、生津止咳、祛瘀解毒作用。《滇南本草》说：“治一切喉火上炎。”《本草纲目》记载：“治咽喉痛，咀嚼咽汁。”白萝卜性味甘润，具有清火解毒的作用。二者煮出来的汤水，既有青橄榄的甘香气息，又有白萝卜的清甜，味道很不错。这个方子对于流行性感冒、上呼吸道感染引起的咽喉不适都有一定的效果。煎煮时也可加入6克的新会陈皮，帮助调理脾胃。另外，如果不方便买到青橄榄，也可在药店购买干橄榄</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

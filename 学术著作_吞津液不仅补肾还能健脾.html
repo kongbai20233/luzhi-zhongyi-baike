@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,16 +51,17 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>吞津液不仅补肾，还能健脾</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\脾胃相关 | 1,166 字</div>
-  <h2>去湿首重健脾/吞津液不仅补肾，还能健脾</h2>
-  <h2>1.现象比喻</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="去湿首重健脾-吞津液不仅补肾-还能健脾">去湿首重健脾/吞津液不仅补肾，还能健脾</h2>
+  <h2 id="1-现象比喻">1.现象比喻</h2>
   <p>当有一天你出门了，回家时发现家里到处都是水，这时你的第一反应是赶紧去看看是否水龙头没关好，或者是不是暖气漏水了，之后再去处理家里的水患。这种道理用在我们人体上也是一样的。</p>
-  <h2>2.原理解读</h2>
+  <h2 id="2-原理解读">2.原理解读</h2>
   <p>我们经常说现代人身体不好的原因是湿气重，而人体自带一个除湿气的脏器，那就是脾。脾运化水湿的功能体现在两方面：一是脾在接受了由胃初步消化的水谷后，通过运输作用，将一部分有用的水液上输于肺；二是脾将运化后的水液下输到肾。脾在水液运化中的作用相当于一个枢纽，上至肺，下至肾。如果脾虚了，不能正常地“运化”，就会令“水湿内停”，而且脾虚的人往往也容易招来外湿的入侵。倘若脾胃运化正常，不管是外湿还是内湿，都不会停滞伤人。</p>
   <p>所以，我们要祛湿的话，就是既要把湿邪赶走，又要找到引起湿邪的源头，只有这样，我们身体这座家园才不会经常被“水患”威胁。</p>
-  <h2>3.调理原则</h2>
-  <h2>如何保养我们的脾呢？</h2>
+  <h2 id="3-调理原则">3.调理原则</h2>
+  <h2 id="如何保养我们的脾呢-">如何保养我们的脾呢？</h2>
   <p>有句古话叫：满招损，谦受益。对于我们的饮食也是如此，我非常提倡“减食增寿”的理念。我们前面讲了，脾主运化，可运化水谷精微。你想要脾胃把食物腐熟得更彻底，就不能给它太多的负担。而是要留有空间，这样你吃进去的食物才能被彻底消化。打个比方，不知道大家见没见过农村所用的柴火灶，烧火时如果把柴火塞得满满的，火势就大不起来，甚至有可能熄灭，只有留点空间，柴火才能燃烧得彻底。我们的脾胃也是如此。尤其是对于那些脾虚的人，运化功能本就不足，如果此时再超负荷工作，脾虚更重，水湿也更加排不出去了。</p>
-  <h2>4.具体方案</h2>
+  <h2 id="4-具体方案">4.具体方案</h2>
   <p>在遵循这个原则的前提下，大家也可配合其他的养脾方法进行调理，比如吞津法。这个方法不但能养脾，还有补肾作用。</p>
   <p>吞津法吞的是人的唾液。现在有的人爱吐唾液，这是个不好的习惯。因为唾液也是人体津液的一种，中医将其称为“金津玉液”，足以见得其重要性。《黄帝内经》里说得很明白：五脏化液，心为汗，肺为涕，肝为泪，脾为涎，肾为唾。”唾液其实包含两种：一种是唾沫，跟肾有关；一种是口水，跟脾有关。如果人的唾液出现了问题，常常要从脾肾上找根源，比如睡觉时总流口水，多半就是脾虚在作怪。与此相应的，如果我们能好好利用唾液，那也就能补养脾肾。</p>
   <p>吞津法做起来非常简单：每天早晚，静坐舌抵上颚，当嘴里的唾液满了以后，随着意念分三次慢慢咽下去。</p>
@@ -52,5 +69,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>中老年朋友尤其是脾胃虚弱者，更应该重视“金津玉液”的滋养，平时不妨多做做吞津法。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

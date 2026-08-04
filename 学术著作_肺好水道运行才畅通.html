@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>肺好，水道运行才畅通</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\肺 | 1,249 字</div>
-  <h2>肺好，水道运行才畅通</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="肺好-水道运行才畅通">肺好，水道运行才畅通</h2>
   <p>中医称肺为华盖，华盖是什么？古代皇帝出行时，辇车上一般都有个伞状的顶盖，这就是华盖。从解剖位置上来看，肺居胸中，在诸脏腑中像华盖一样居于最高处。天上若是降雨，地上的各个角落都能得到灌溉滋养。肺为水之上源，若水分充足，五脏六腑都能受其“恩泽”。</p>
   <p>肺对水湿的调节主要体现在两方面：一是肺在接收脾运化后的水湿后，通过宣发作用，将水湿向上向外输送到全身，最终达到肌肤、皮毛，并把水湿代谢产物转化为汗，排泄出去；二是通过肃降作用，将水湿向下向内输送到其他脏腑，并把浊液，也就是废水下输至肾，最后转化为尿液，排出体外。</p>
   <p>如果肺宣发肃降功能失调，水液就会在人体内滞留，形成痰饮，就可能出现小便不利、水肿、咳嗽等。</p>
@@ -43,7 +60,7 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>比如，秋冬季节，天气转凉，咳嗽的发病率往往会增加，这就是应了《黄帝内经》中讲的，形寒饮冷则伤肺。这话里有两层意思：第一，身体受凉后，容易伤及肺脏；第二，饮食寒凉后，也容易伤肺。孩子出门时，家中老人总不忘叮嘱：别吃太多凉饮瓜果，衣服要穿暖和，别冻着。如果你违背了这一原则，形寒饮冷，导致肺气宣降失常，就容易被感冒、咳嗽、过敏性鼻炎等问题找上门来。我在门诊时遇到的过敏性鼻炎、过敏性哮喘患者，一问，很多人都爱喝冰镇碳酸饮料，这就是“形寒饮冷则伤肺”的典型。</p>
   <p>而且，肺脏的娇气还体现在它受损得病后，需要较长的时间恢复。比如有人感冒了，流鼻涕或是发烧的症状很快就好了，而咳嗽却缠绵持久，一咳就是几周甚至几个月。所以，娇气的肺脏需要我们特别的呵护。就算年轻时你可能正气充足，感冒几次感觉没事，但当你年老时这些寒湿就会秋后算账，赖上你。因此，对于体质较差，容易感冒的人而言，平时既要注意保暖，同时也要尽量避免饮冷过度。</p>
   <p>如果不小心受了寒凉怎么办呢？寒气引起的感冒，最明显的表现是身体发冷，同时伴有流清涕、打喷嚏的症状；如果咳嗽，痰为白痰、易咳出，这就要温养肺气。有咳嗽症状的，可以在药房购买通宣理肺丸，有解表散寒、宣肺止咳的功效，适合风寒感冒的初期。我们也可以在家用葱白、生姜做成简便小方。</p>
-  <h2>葱白生姜汤</h2>
+  <h2 id="葱白生姜汤">葱白生姜汤</h2>
   <p>【材料】葱白连须7根，生姜7片。</p>
   <p>【做法】将生姜片与连须葱白一起放入沸水中煎汤，开锅后煮两三分钟即可。</p>
   <p>【用法】温服，盖上被子取汗。</p>
@@ -52,5 +69,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>葱白、生姜在水里稍微熬一下即可，不会破坏它们本身的有效成分。正如清代名医吴鞠通所说：“香气大出，即取服，勿过煎，肺药取轻清，过煮则味厚入中焦矣。”中医所用解表药一般都不宜久煮。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

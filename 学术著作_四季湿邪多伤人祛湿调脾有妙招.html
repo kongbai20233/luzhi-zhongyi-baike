@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>四季湿邪多伤人，祛湿调脾有妙招</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\脾胃相关 | 1,447 字</div>
-  <h2>四季湿邪多伤人，祛湿调脾有妙招</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="四季湿邪多伤人-祛湿调脾有妙招">四季湿邪多伤人，祛湿调脾有妙招</h2>
   <p>在路老身边侍诊时，见过这样一位男性患者，大概有40多岁，穿着打扮都很讲究，看上去红光满面，神采奕奕，典型的成功人士。开始还以为他是陪别人来看病的呢，因为他的样子看上去没什么问题，但他一进诊室就开始诉苦：“路老，您快给我看看吧。我一直身体都挺好的，可最近这段时间老觉得特别累，爬三四层楼就喘得厉害。动不动还会头晕，早晨睡觉起来就跟一晚上都在工作似的，感觉非常疲惫，全身酸得难受，一点也不愿起床。白天还很容易犯困。我老婆跟我开玩笑说我是更年期，您说我刚四十出头，不至于吧？”</p>
   <p>路老耐心地听他说完，然后微笑着让他坐下，开始把脉。路老问他有没有检查过身体，他说查过，血糖、血脂、尿酸、血压都高，西医开了七八种药，有降糖的、降脂的、降压的、降尿酸的……但吃了都不是很管用。路老又为他看了舌苔，问了二便，然后说：“你吃得挺好吧？”这位老板愣了一下：“是啊，人到中年了，要注意补一下，老婆在家没事，经常给我煲各种滋补汤。不过我在家吃不了几次饭，常有饭局。应酬客户，没办法！”路老接着说：“你这病就是吃出来的，以后记着多吃点清淡的东西。”然后给他开了方子。</p>
   <p>为什么要讲这个患者的故事，因为他很有代表性，经过自己的拼搏，事业有成，但身体却垮了。就像他说的“在家吃不了几次饭，常有饭局”，偶尔在家吃饭，老婆还会给煲滋补汤，这样饮食没有节制，脾胃根本无法承受这些“膏粱厚味”，代谢失常，于是堆积在体内形成了痰湿体质。治疗上就要除掉他体内的痰湿，这样血糖、血脂、血压等各项指标才能降下来。路老给他开的方子旨在健脾祛湿、化浊，并嘱咐他要节制饮食，加强锻炼。三个月后，患者精神清爽，各种症状基本上都消失了。</p>
@@ -49,5 +66,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>上述方法是路老日常养生的妙方，如果症状严重，通过自我调理仍无法缓解，还是应该及时求医治疗。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>初秋湿热交替，别让“秋老虎”伤了你</h1>
   <div class="meta">学术著作 / 养生\秋 | 1,200 字</div>
-  <h2>初秋湿热交替，别让“秋老虎”伤了你</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="初秋湿热交替-别让-秋老虎-伤了你">初秋湿热交替，别让“秋老虎”伤了你</h2>
   <p>秋季，自然界的阴气由疏泄转向收敛、闭藏。但大家都知道，立秋之后天气不会立即就凉快起来，而是早晚凉爽，中午前后还是很闷热。老辈人就用“秋老虎”来形容这种天气的威力。一般在这段时间里，雨水较多，北方常常是白天晴朗，晚间暴雨如注；南方多是阴雨连绵，潮湿闷热。所以，这个季节的气候特点是热和湿，路老提醒大家一定要根据这时的气候的特点来调养自己的身体。</p>
   <p>首先要注意的就是起居。黄帝内经《素问》里提到：“秋三月，早卧早起，与鸡俱兴。”早卧，以顺应阴精的收藏；早起，以顺应阳气的舒长，使肺气得以舒展。此外，据有关专家对脑血栓等缺血性疾病发病时间进行的调查研究发现，此类疾病在秋季的发病率较高，发病时间多在长时间睡眠以后。秋季适当早起，可缩短或减少血栓形成的概率。</p>
   <p>我国自古就有“春捂秋冻”之说，秋天“冻一冻”是为了让身体适应气候转凉，激发人体自身的防御机能。但“秋冻”也要适度，不要太过，特别是进入深秋或气温骤然下降时，仍然要注意保暖。</p>
@@ -46,5 +63,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>秋季易损肺气，因此在天气不断变化的秋季，要好好保护肺气，避免发生感冒、咳嗽等。“肺开窍于鼻”，鼻为肺之门户，所以，时常按摩、洗浴鼻子有助于增强肺脏功能。这里也给大家提供一个养肺的方法，就是常按迎香穴。每天以手指按摩鼻翼两侧的迎香穴15~20次，每天1~2次可有效预防伤风感冒。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

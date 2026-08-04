@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>路志正简介</h1>
   <div class="meta">路老介绍履历 / - | 1,701 字</div>
-  <h2>国医大师路志正简介</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="国医大师路志正简介">国医大师路志正简介</h2>
   <p>1. 基本情况：</p>
   <p>路志正，男，1920年12月生。首届国医大师，“首都国医名师”，中国中医科学院广安门医院主任医师，国家级非物质文化遗产传统医药项目代表性传承人。全国老中医药专家学术经验继承工作指导老师。</p>
   <p>幼继家学，从伯父路益修学中医，并拜山西盐城名医孟正已、王步举先生为师。19岁悬壶乡里，从医近80年，现仍每周出诊。</p>
@@ -51,13 +68,65 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>1962年初，参加卫生部组织的《中国针灸学概要》编写工作，此书主要是为国际友人和海外华侨学习针灸而编，并译成日、俄、英三种外文。</p>
   <p>1975年以后，作为北京、上海、南京“国际针灸培训班”的教材，为世界一百多个国家和地区，培训了大批针灸医生。</p>
   <p>1973年调入中医研究院（现为中国中医科学院）广安门医院内科工作。1981年和赵金铎等组建内科研究室，任副主任，加强中医学术的整理研究，发挥中医特色优势，攻克疑难病症，为中医病房的建设做了大量的工作。1984年以后从事心肺疾病、急症、胸痹心痛、风湿病、中医疑难病的研究工作，一直坚持临床一线工作。</p>
-  <h2>原第2内容 含部分重复</h2>
-  <h2>路 志 正 简 介</h2>
+  <h2 id="原第2内容-含部分重复">原第2内容 含部分重复</h2>
+  <h2 id="路-志-正-简-介">路 志 正 简 介</h2>
   <p>路志正，男，汉族，1920年12月出生，河北藁城人。现任中国中医科学院主任医师、教授、博士、博士后指导老师。曾任全国政治协六、七、八届委员，第一、三、四、六批全国老中医药专家学术经验继承工作指导老师。曾先后荣膺“继承老中医药专家学术经验优秀指导老师”；“国家级非物质文化遗产项目（中医生命与疾病认知方法）代表性传承人”；首届“首都国医名师”；首届“国医大师”；中央保健“先进个人”、“突出贡献”、“优秀专家”以及“全国中医药杰出贡献”、北京中医药大学“岐黄奖”等殊荣。</p>
   <p>路志正幼继家学，12岁入伯父路益修开办的河北中医学校习医，继拜山西蒲州名医孟正已先生为师，1939年考取中医资格，步入杏林，悬壶乡里。1951年，进入北京中医进修学校学习，1952年进入国家卫生部，继在中医司工作近20余年。1973年，进入中国中医科学院广安门医院从事中医临床工作至今，目前尚未退休，仍奋战于临证一线。</p>
   <p>路志正热爱祖国，热爱人民、热爱中医药事业。在任全国政协委员期间，他积极参政议政，曾为国家中医药管理局的成立、巩固、完善，以及当前中医“百千万”人才培养工程的启动等作出过一不少贡献。参加革命工作68年来，无论从医还是从政，他始终以孙真人的“大医精诚”和“博爱之谓仁”为准则，为人谦和，尊重师长，团结同道，奖掖后学，医风淳朴，医德高尚，全心全意为患者服务。</p>
   <p>在学术方面，路志正擅长中医内科、针灸，对妇科、儿科等亦很有很深的造诣。在80年的临证生涯中，他重视中医理论的继承创新，强调用药轻灵活泼，发展了湿病理论、提出“燥痹”学说，形成了“持中央，运四旁，怡情志，调升降，顾润燥，纳化常”的系统调理脾胃学术思想，并主编了《中医内科急症》、《路志正医林集腋》、《痹病论治学》、《实用中医心病学》、《中医湿病证治学》、《路志正医学丛书》（共十册）等多部医籍，极大地促进了中医学术的进步。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

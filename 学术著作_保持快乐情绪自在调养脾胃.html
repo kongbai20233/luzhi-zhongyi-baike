@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>保持快乐情绪，自在调养脾胃</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\脾胃相关 | 1,804 字</div>
-  <h2>保持快乐情绪，自在调养脾胃</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="保持快乐情绪-自在调养脾胃">保持快乐情绪，自在调养脾胃</h2>
   <p>我们经常听到人们说“气得胃疼”或者“气得吃不下饭”，而高兴的时候则会“胃口大开”，可能你会觉得很奇怪，生气或者高兴是心情的问题，跟胃口有什么关系？其实，这是因为情绪会影响我们体内气血的运行和脾胃的受纳、运化功能。当情绪舒畅时，气血冲和，脾胃也能正常工作，我们的消化吸收功能就正常，食欲就好。如果情绪不畅，则气血逆乱，脾胃气滞，运化受到影响，自然就茶不思，饭不想了。所以说，脾胃是最能感知我们情绪的脏器，心情不好，首先影响的就是脾胃，而脾胃不好，也会影响你的心情。</p>
   <p>在路老身边学习，总会接触各种各样的患者，印象比较深的有这样一位女士，之所以印象深刻，是因为她来就诊时，说得最多的话就是“烦死了”。叙述病情的时候，她的声音不大，但语气中透着一种焦灼，而且基本每句话都是以“烦”结尾。比如“昨儿天热得不行，我就吃了一根冰棍，胃就疼了一下午，烦死了”“每天晚上睡不着，好不容易睡着了又总是做梦，早晨起来感觉特别累，烦死了”“我身体不舒服，心情怎么会好啊，同事还说我得了抑郁症，真烦人”“老公也不知道心疼我，还嫌我折腾，您说烦不烦人”……总之就好像她的生活处处都不尽如人意。</p>
   <p>路老很认真地听完了她的叙述，然后为她进行了诊断。通过详细询问她的生活习惯，既往病史等，路老了解到这个患者有萎缩性胃炎，她的一系列症状都是因为脾胃虚弱导致的。脾胃虚弱，运化水谷的能力就会下降，时间长了就会造成气血不足、血不养心、神明失守，出现精神抑郁。所以，她的问题看似是情志上的，其实病根在脾胃，治疗的关键在于调理脾胃功能。因为脾主思，脾胃功能正常，则思维敏捷、思虑专一，反之则思维散乱、精神不安、意志不定。通过调理脾胃就可以稳定情绪、平和心态，起到治疗抑郁、焦虑等精神性疾病的作用。同样，情绪上的波动也会影响脾胃功能的正常发挥，这位女士长期情绪抑郁，也会导致各种症状越来越严重，进入恶性循环。所以，开完药方之后，路老还对这位患者说了一句：“别老心烦，你这病就能好得快点。”这位女士听了这话，不好意思地笑了。</p>
@@ -49,5 +66,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>调理情绪问题，可以试试中医经络疗法中的敲打心包经、膻中穴。心包是心的宫墙。心为君主之官，不能受一点刺激，外邪犯心，首先影响到心包经，所以养心安神护脾胃，要从心包经开始，只有外围坚固，君主才能安宁。另外，中医讲“膻中者，臣使之官，喜乐出焉”，膻中穴是心包募穴，也就是心包能量的募集基地，我们把心包经比做皇帝的近臣，一些与喜乐有关的事情归他管，不顺心的事情也可以找他。心包经走行路线在手臂内侧正中线上，穿过手心（劳宫穴），直达中指末端。当我们感觉心情烦闷时，“捶胸”、“拍手”能得到一定缓解，就是因为这些动作起到了刺激膻中和劳宫穴的作用。每天敲打膻中穴两次，每次50下，可以帮助我们调畅气血。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>心情好了，病就好了一半</h1>
   <div class="meta">学术著作 / 养生\体质&食疗 | 1,551 字</div>
-  <h2>心情好了，病就好了一半</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="心情好了-病就好了一半">心情好了，病就好了一半</h2>
   <p>喜怒哀乐是人之常情，但不可太过，太过了人就要生病了。中医认为，大部分疾病与人的情志有关，中医的经典著作《黄帝内经·素问》中认为，情志是非常重要的致病因素，他这样说：“百病生于气也，怒则气上，喜则气缓，悲则气消，恐则气下，惊则气乱，思则气结。”喜、怒、忧、思、悲、恐、惊是人正常的情志变化，又称做“七情”，是人体对外界刺激或内源性刺激的正常反应。当这种刺激过于强烈、持久，超过人体所能调节的范围时，就会引起脏腑的气血紊乱，导致疾病。</p>
   <p>恼怒也就是我们所说的生气、发火，这种情志变化会直接导致人的内分泌紊乱，免疫功能下降。如人经常生气，会使脑血管的压力增加，血压升高，血管损伤，进而影响全身的血液循环；生气时皮肤循环受到影响，毒素排泄不畅，可出现色斑；女子生气导致内分泌紊乱，甲状腺、乳腺、子宫等受到影响，可发生甲状腺瘤，甲亢，乳腺增生、结节、子宫肌瘤等；长期生气还可发生胃溃疡、冠心病、肝病、肺病等。总之，生气是各种疾病的元凶，也是病情加重的主要因素。</p>
   <p>在临床我们看到，很多疾病与情绪相关。</p>
@@ -48,5 +65,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>总之，精神因素既是致病的原因，又是治病的良药，所以路老对每个病人都反复嘱咐：“一定要心平气和，不要急躁，只要心情好了，病就好了一半了。”这也是路老多年来的临床经验总结，对我们每个人都是一个警示！</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

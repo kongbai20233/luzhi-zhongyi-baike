@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>疑难病，先用调理脾胃的茶饮秘方</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\脾胃相关 | 1,728 字</div>
-  <h2>疑难病，先用调理脾胃的茶饮秘方</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="疑难病-先用调理脾胃的茶饮秘方">疑难病，先用调理脾胃的茶饮秘方</h2>
   <p>脾胃是后天之本，是消化吸收的场所。现在很多人说“缺什么，吃什么”，例如很多人都说自己缺钙，然后吃补钙的药品或食物。可是不能忽视了脾胃纳化的作用。胃主纳，脾主化，人体缺什么的关键，在于您脾胃功能的消化和吸收。若胃不能吸收，你吃再多也无益。就以钙而言，食物中的钙元素是充足的，问题在于脾胃能否很好地吸收利用。</p>
   <p>人体失去了平衡，我们需要通过药物让人体恢复正常，而药物也需要通过脾胃才能进入人体发挥作用。如果脾胃虚弱，不胜药物，那么吃什么都没用。人体对抗疾病，要靠自身的抵抗力和免疫力，如同作战一样，后方要向前方输送各种各样的军需物资，才能帮助前方打胜仗，脾胃向身体各个器官输送各种各样的营养物质，身体的其他机能才能正常运转，为我们的健康发挥效用。</p>
   <p>调理脾胃最关键的是调理脾胃的气机升降。中医认为脾主升，胃主降。升，指经过消化吸收的各种营养物质，通过脾的功能向上，向全身输出，才能使周身各处得到营养的补给，换句话说，又可称之为脾主升清。降，指胃肠由上而下的蠕动作用。通过这种蠕动作用，帮助消化吸收，最终将消化物的残渣作为粪便排出体外，也可称之为降浊。这种向上输送精微向下排出废浊的相辅相成的相反作用，是维持人体生命活动的最基本形式。但是这种基本的上下运动形式，由于长期自身饮食不节，或精神因素，或神经系统的失调，或各种疾病的影响，最容易受到损伤而停滞不动，表现有胃中堵闷，食欲下降，胃中饱满，呃逆，恶心，腹胀，腹痛，排便困难。久而久之就会身体消瘦，疲乏无力，面色萎黄，言语无力。这样的功能性障碍，不仅会使得脾胃脏器受损，还会进一步诱发其他脏腑疾病。</p>
@@ -49,5 +66,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>"</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,21 +51,74 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>王永炎院士缅怀恩师路志正：振兴中医之先驱</h1>
   <div class="meta">他人缅怀作 / - | 2,462 字</div>
-  <h2>王永炎院士缅怀恩师路志正：振兴中医之先驱</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="王永炎院士缅怀恩师路志正-振兴中医之先驱">王永炎院士缅怀恩师路志正：振兴中医之先驱</h2>
   <p>2010年，作者与国医大师路志正（右）在路老家中共同探讨如何“传承精华，守正创新”，提出了“读经典，勤临床，参明师，悟妙道”的传承理念。</p>
   <p>2024年1月20日，系吾敬重之师长路志正先生辞世之期，值其一周年祭。先生系河北藁城人氏，幼承庭训，继受名师亲炙，其人生轨迹以“先医-后政-再医”为缩影。先生乃新中国中医药事业发展之重要见证者、参与者、执行者及推动者。他医政双肩，献策辅政，振兴中医，尽心竭力，毕生奉献，为中医药事业之振兴竭尽全力。</p>
-  <h2>殚精竭虑为中医求生存</h2>
+  <h2 id="殚精竭虑为中医求生存">殚精竭虑为中医求生存</h2>
   <p>新中国成立初期，肇基之始，百事待举。当时卫生部只在医政处下设中医科，中医进修学校不修中医而修西医，中医生存环境日趋恶劣。废止中医思想的回潮，对当时中医政策的制定产生了决定性的影响。1951~1952年，卫生部先后发布了《中医师暂行条例》《中医师暂行条例实施细则》《中医诊所管理暂行条例》《中医诊所管理暂行条例实施细则》等多份文件，与1936年的国民政府为打压中医、取缔中医公布的《中医条例》大体一致，这些文件的实施和推行致使大量的中医药人员失去了工作的机会，对中医药事业发展产生了巨大的破坏和负面影响。</p>
   <p>1952年，路老进入卫生部医政局医政处中医科工作，任职后，面对中医出现的存亡危机，路老为中医中药生存殚精竭虑、四处奔走，他是当时向中央反映、汇集资料、起草文件的具体承担者之一。正是由于有像路老这样心系苍生的中医先驱者们不懈努力，1954年毛泽东同志发出了“重视中医，学习中医，对中医加以研究整理并发扬光大，这将是我们祖国对全人类贡献中的伟大事业之一”的重要指示。为了贯彻毛泽东同志的指示精神，卫生部才决定设立中医司，组建中医研究院，并在全国建立四所中医院校，关系中医事业生死存亡的问题得以化解。</p>
-  <h2>躬身不辍为中医谋发展</h2>
+  <h2 id="躬身不辍为中医谋发展">躬身不辍为中医谋发展</h2>
   <p>1954年7月，中医司成立之初，人员仅为个位数。一司两院的建立，任务繁重，条件艰苦。为推进中医药之发展，提升其影响力与号召力，路老作为中医司为数不多的工作骨干，兢兢业业为中医药事业忙碌和奔波着。他奔波各地调查有关中医的各种问题，撰写调研报告，提出相应的解决方案，以供领导决策时参考。他没有门户之见，对一技之长的民间中医关爱、保护，整理挖掘中医特色疗法，编制《中医临床经验资料汇编》。他躬身不辍，亲力亲为，参与中医研究院（现中国中医科学院）的筹备工作，为其发展成为一所集科研、医疗、教育、产业为一体的国家级综合性中医药科研机构，引领全国中医药事业不断向前发展奠定坚实基础。他坚决执行中央“团结中西医”的卫生工作方针，与肖龙友、施今墨、赵树屏、魏龙骧等一起被聘为中华医学会中西医学术交流委员会第一届委员，为促进中西医加强团结合作做了大量推动工作。</p>
-  <h2>抓纲务本为中医育英才</h2>
+  <h2 id="抓纲务本为中医育英才">抓纲务本为中医育英才</h2>
   <p>夫育英才，务本正纲；教育之道，根基为要。1956年经国务院批准，北京、上海、广州、成都四市分别成立中医学院并开始招生，北京中医学院（现北京中医药大学）成为最早创办的四所高等中医院校之一。北京中医学院6月筹建至9月开学，时间紧迫，役事繁重。初期未列入高校招生目录，后协调补上，招生简章后发；建校之初条件难能令人满意，借用北京东城区北门仓胡同里的北京市中医进修学校，也就是“北中医”最初的办学地点。最初只有四位中医老师，即张志纯、方鸣谦、栾志仁、刘渡舟。除张志纯外，其他三位都是在京开业行医，都未从事过中医教学工作，教材也只能临时编写。入学不到一年，很多问题亟待解决，要求改善的呼声越来越高，有几位同学联名上书党中央、国务院、卫生部，随之而来的是拟迁校于南京等消息。后周总理亲自过问此事，卫生部中医司直接参与为周总理决策提供可行性方案，路老就北京中医学院建校的教师邀聘、校舍建设等问题作为联络员，奔走于国务院文教办、北京市政府与教育部之间，为学校建设做了大量工作，吾辈首届入学的1956年级的学生对先生感激至深，铭刻心胸。自此“北中医”校址选择、教师调聘、院领导班子调整等一系列问题迎刃而解，不但为“北中医”成为双一流的大学奠定了坚实的人才、师资基础，也培养出新中国成立后院校毕业的首批中医药高水平人才。</p>
   <p>1962年国家经济出现困难，国民经济进入大调整时期，各行各业都面临着精简问题，教育系统也不例外。根据指示精神，40%的中医院校要被精简，卫生部教育司提出全国23所中医学院只保留南京、北京、上海、成都、广州5所。卫生部中医司多次协商教育司，吕炳奎老司长立即组织给周总理写报告，报告中对中医学院的规模、学生的学习现状进行了阐述，并说“中医学院的建立对中医界产生了巨大影响，有的中医称中医学院是中医的‘命根子’”“学院一旦被取消，对他们将是一个极严重的打击。这对贯彻党的中医政策，继承与发扬祖国医学遗产非常不利，因此砍掉十多个中医学院需从实际情况加以考虑，恳请保留各省市中医学院”，引起了总理的高度重视，后经中央研究决定，20多所中医院校全部保留下来。吕炳奎所写的报告，路老是调研者、亲历者、参与者，功不可没。</p>
-  <h2>团结同道为中医明标准</h2>
+  <h2 id="团结同道为中医明标准">团结同道为中医明标准</h2>
   <p>标准规范对于学科来说至关重要，学术研究是制高点，学科建设是基石、是保障。西医之标准有西方医学之借鉴，而对于中医之标准规范，近世医家学者孜孜以求。20世纪30年代，中央国医馆之陆渊雷等提倡病名采用“西医所通行之华译病名”为主的“统一病名运动”，其论争甚烈，然终因骂声一片而败。其后，恽铁樵恪守国学原理，揆度奇恒，道通为一；秦伯未、章次公等亦致力于“中西医汇通”之学术探索。至1981年，在武汉洪山宾馆，中华全国中医学会内科学会成立，会议敦聘路志正、焦树德、步玉茹、吉良晨为学会常委，经董建华主委推介，我（时任内科学会秘书长）曾拜四位先生为师。在路老等四位老师及陆永昌、任继学、李秀林等智囊的参谋下，学会致力于众多工作，首开解决科学仁学无分中西，必须有标准规范问题之先河，中医药标准化建设遂取得长足之发展。</p>
   <p>路志正字子端、号行健，一生致力于中医学传承创新、中医药振兴发展，乃吾辈“学为人师、行为示范”之楷模。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

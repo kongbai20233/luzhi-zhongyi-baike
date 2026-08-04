@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>情绪也会中暑，夏季养生首先要让心平和</h1>
   <div class="meta">学术著作 / 养生\夏 | 1,525 字</div>
-  <h2>情绪也会中暑，夏季养生首先要让心平和</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="情绪也会中暑-夏季养生首先要让心平和">情绪也会中暑，夏季养生首先要让心平和</h2>
   <p>人们的情绪与自然环境的影响密切相关，夏季高温天气的变化，会对人的精神、情绪产生负面影响，以致出现情绪烦躁、爱发脾气、记忆力下降等现象。这种现象也叫“情绪中暑”，尤其当气温超过35℃、日照超过12小时、湿度高于80%时，对人体的影响会更加明显。加拿大的科学家通过对人大脑拍摄的图像证实，人在夏季情绪会更加亢奋，身体也更加具有活力。炎热的气候会使中枢神经支配的植物神经发生紊乱，从而出现情绪的异常和内分泌、胃肠功能的改变，女性激素也会因此受到影响，又由于夏季出汗过多，体内的电解质出现障碍，也会表现为情绪烦躁、思维混乱、爱发脾气、容易忘事、心境低落等，睡眠质量会降低，饮食减少，这种状态持续时间一长，就容易患上心脑血管病，因此夏季情绪的调节就显得十分重要。路老非常重视四季气候变化及五脏功能失调对情志的影响，认为夏季属火，易耗气伤阴，当人体情志发生异常时（如喜怒哀乐的情绪变化），就会由外火引动内火，致使人体的阴阳失调，从而发生多种疾病。因此在夏季，使亢奋的心情平静下来，通过自我调节，做到“心静自然凉”，是十分重要的。</p>
   <p>（案例故事可省略：</p>
   <p>去年夏季的一天，接诊一位患者，女性，27岁，主诉一周来心烦郁闷，夜不能寐，多梦易醒，纳食减少，头晕，尿黄赤，精神紧张时易发便秘，经前乳房胀痛，带下量多。路老看过病人，认为病人属于夏季暑热，气阴两伤，阴虚神扰，情绪不宁，又加上夏季暑湿蕴结，故出现以上病症。治以清暑益气，温胆宁心，佐以清化湿热法。药方：五爪龙，西洋参，麦冬，莲肉，炒苍术、炒白术，荷叶，生石膏，薏苡仁，知母，石斛，炒扁豆，茵陈，土茯苓，盐黄柏，半夏，炒枳实，生龙骨、生牡蛎等，用药后，患者情绪好转，失眠好转，能入睡，纳食较前增加，继用药调理一个月，患者基本恢复正常。）</p>
@@ -49,5 +66,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>夏季养生重在养心，养心重在养心情，马克思说：“一份愉快的心情胜过十剂良药。”每天拥有一个好心情，天天开心，就是健康的保障。路老常说，“只要心情好了，病就好了一半了”，尤其是夏天，防止心火扰动，主要就是保持平和的心态，心情平和了，心火会自然消失的。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

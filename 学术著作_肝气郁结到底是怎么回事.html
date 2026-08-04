@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,12 +51,65 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>肝气郁结到底是怎么回事？</h1>
   <div class="meta">学术著作 / 养生\体质&食疗\肝 | 729 字</div>
-  <h2>肝气郁结到底是怎么回事？</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="肝气郁结到底是怎么回事-">肝气郁结到底是怎么回事？</h2>
   <p>中医有个词叫肝气郁结，这个词在病症中出现的次数很多。经常说一个人肝气郁结，是什么意思呢？这其实是说一个人的情志障碍，就是情绪上发生了问题。比如说，一个小伙子，年纪轻轻的就是部门经理了，工作压力可想而知，经常加班熬夜，生活上饮食没有规律。加上之前与同事有点矛盾没能化解，郁闷烦恼统统积压在心里，这能健康的了吗？</p>
   <p>中医倡导把“身心”结合来治疗，为什么不良的情绪会有这么大的危害？因为肝主条达、性喜开朗疏泄，是人体的正常生理本性，如果你不能以宽广的胸怀与人和谐共事，老是因为一些小事跟自己过不去，你的身体能受得了吗？所以中医说“肝者罢极之本”这里的“罢”即“疲”之意，就是说，肝是造成疲劳的根本。如果再加上平时过劳，体力消耗过大又不能很好地恢复，生活没有规律，久而久之当“劳累”和“郁结”结合在一起时，还会爆发出疲劳综合征。</p>
   <p>所以，很多身体上的不适，都是“肝郁”引发的，肝属木，性主升发。如果长期工作紧张，思虑多，压力大，劳心过度，致使情怀不畅，就像一棵生长在春天里的树，被压住了枝丫，树木就失去生发之性，无法往上继续生长。人一旦失去生发之机门，就会精神委靡、抑郁，甚至对生活失去乐趣，并会引发其他四脏的功能失调。这时就要疏肝理气，让体内气机顺畅，振奋阳气，使其恢复盎然生机。</p>
   <p>调节这种肝郁引发的疲劳综合征，我有一个方便的茶饮方：西洋参6克、玫瑰花5克、厚朴花5克、扁豆花5克、炒杏仁9克、炒防风4克、生姜1片。14剂，水煎服。西洋参是益气养阴常用的食材药物，可在汤料中使用，玫瑰花香气走散，舒肝调气，防风疏发肝郁。其他的厚朴花、扁豆花也是升发肝气、调理情绪的食材，加上杏仁条畅气机，生姜温脾养胃，可以比较好的调理肝郁的问题。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

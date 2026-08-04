@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>肾脾亲如兄弟，冬季养肾莫忘补脾</h1>
   <div class="meta">学术著作 / 养生\冬 | 1,379 字</div>
-  <h2>肾脾亲如兄弟，冬季养肾莫忘补脾</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="肾脾亲如兄弟-冬季养肾莫忘补脾">肾脾亲如兄弟，冬季养肾莫忘补脾</h2>
   <p>我们知道冬季是养肾的季节，但养肾的同时也要补脾，为什么呢？因为肾为先天之本，脾为后天之本，这两者就像亲兄弟一样，先天与后天互相补充，产生生命的动力，推动各个脏腑的功能。路老认为，脾为人体气血生化之源，五脏的功能全赖脾化生气血来滋养，脾脏一虚，不但肾脏功能下降，其他各脏的功能也会受到影响，所以冬季在养肾的同时千万不要忘记补脾。</p>
   <p>首先从生活起居上，要做到早睡晚起，日出而动。这是因为，冬季阳气衰少，要时时注意保护阳气，在起居方面要顺应冬季闭藏的特性，做到早睡晚起，早睡以养阳气，晚起以蓄阴气。还要注意保暖防风寒，根据天气变化及时增减衣服。后背是人体阳气集中的地方，手脚是人体的四极，阳气最少，所以手脚、后背的保暖尤其重要。适量运动可生阳气，运动可根据天气的条件在室内或室外进行，可选择慢跑、打太极拳、练习八段锦、打篮球等，但应注意运动前的充分准备活动，强度不宜过大，以微微出汗为原则，避免扰动阳气，同时室外活动不可起得太早，等日出后阳气上升时为好。</p>
   <p>在这里教大家一个好的养生习惯，就是泡脚。俗话说：“睡前一盆汤，保暖又护阳”，指的就是在冬季想保护人体的阳气，除了养成早睡晚起的习惯之外，最好做到睡前泡脚。俗话说“寒从脚下起，冷从腿中来”，脚处于人体的末梢，血液循环最差，脚腿一冷，全身皆凉。入睡前用热水泡脚，能使血管扩张，血流加快，促进人体的阳气循环，既改善了脚部的循环，又使皮肤得到了营养。通过改善血液循环还可改善睡眠质量，可谓“睡前一盆汤，保暖又护阳”对于预防冻脚和养生保健都有一定的益处。</p>
@@ -51,5 +68,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>窍门三：按肾俞。肾俞穴位于第二、第三腰椎间水平两旁一寸处（从大椎穴开始，第十四椎）。两手搓热后用手掌上下来回按摩50~60次，两侧同时或交替进行。对肾虚腰痛等有防治作用，必要时可以让别人帮助拔罐或灸。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

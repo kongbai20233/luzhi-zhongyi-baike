@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,7 +51,8 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>冬季养生，肾为先天之本重在养肾固精</h1>
   <div class="meta">学术著作 / 养生\冬 | 1,110 字</div>
-  <h2>冬季养生，肾为先天之本重在养肾固精</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="冬季养生-肾为先天之本重在养肾固精">冬季养生，肾为先天之本重在养肾固精</h2>
   <p>冬三月，白天短，夜间长，是一年中气温最低、阴气最盛的时期。冬季草木凋零、万物闭藏，人的阳气也要潜藏于内。阳气闭藏后，人体新陈代谢缓慢，于是要依靠生命的原动力——“肾”来发挥作用，以保证生命活动适应自然界变化。《黄帝内经》中说：“冬气之应，养藏之道也。”冬季在五脏应于肾，肾有藏精、主生长、发育、生殖等功能，被称为“先天之本”，也是人体元阴元阳的根本。所以路老认为，冬季肾脏机能正常，才能调节机体适应严冬的变化，否则，就会导致新陈代谢失调而产生疾病。因此，冬季养生的重点就是“养肾防寒”。具体而言，可以从以下几个方面入手：</p>
   <p>冬季起居方面，路老引用《黄帝内经》中“冬三月，此谓闭藏，水冰地拆，无扰乎阳，早卧晚起，必待日光”的原则，建议大家晚上提早睡觉，早晨可随着太阳初升起床。注意保暖，避免汗出，防止阳气外泄。冬季养生的基本原则是顺应阳气的潜藏，以敛阴护阳为根本。</p>
   <p>路老强调，冬季养生着眼于“藏”。说到藏养肾气，首先是要节制性生活，冬季主闭藏，主肾，肾脏应和冬季的气候特点，肾精宜藏不宜泄。而且，精气是构成人体的基本物质，精的充实与否，也是决定人能否延年益寿的关键。精气流失过多，会有碍“天命”。</p>
@@ -44,5 +61,57 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
   <p>冬季还要注意养体以提高耐寒能力，养体就是加强体育锻炼。路老长期以来，养成了早练八段锦，傍晚散步的习惯，即便冬季也从不间断。俗话说“冬天动一动，少闹一场病，冬天懒一懒，多喝药一碗”，冬季锻炼能起到强身健体防寒的作用，但冬季锻炼不宜过早，宜随着太阳的初升活动，运动量要适当，散步、慢跑、打太极拳都是很好的运动方式。只要持之以恒，定能达到健肾强体之目的。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

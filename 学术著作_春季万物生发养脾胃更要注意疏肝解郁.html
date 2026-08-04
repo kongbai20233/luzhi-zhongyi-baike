@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,11 +51,64 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>春季万物生发，养脾胃更要注意疏肝解郁</h1>
   <div class="meta">学术著作 / 养生\春 | 570 字</div>
-  <h2>春季万物生发，养脾胃更要注意疏肝解郁</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="春季万物生发-养脾胃更要注意疏肝解郁">春季万物生发，养脾胃更要注意疏肝解郁</h2>
   <p>春天是一个生发的季节，阳气逐渐增加，向外发散，树木开始加速生长，动物开始外出活动。万物向荣，空气清新，是踏青春游的好时节。这个时候人体脏腑的活动也开始活跃，人的衣食住行以及精神情志在这个季节也要以“生发”为准则。我们应穿得宽松一点，适当增加运动量，活动肢体，以顺应阳气的生长。</p>
   <p>五脏六腑在不同的季节工作强度不一样，形成一种张弛有度的轮休制度。我们的饮食起居也要根据四时调整，以配合当值脏腑的工作。春天肝脏当值，肝主升发，喜条达舒畅，恶抑郁，因此这个时节想养生就需要保持一种舒畅旷达的心情，促进肝的疏泄条达。现在很多人无论工作还是休息，都一直坐在室内，不知道如何顺应四季气候的特点来调节我们的精神情志，春天如果违反了肝的好恶，就容易患上抑郁症。所以，春季可以吃点春笋、豆芽、香椿、春韭、苏叶、葱、生姜、胡萝卜、菠菜、芹菜等有助于阳气生发的食品。另外，即使没时间外出，也要经常眺望虚敞或翠绿花草之处，以赏心悦目，使心胸豁达，心情舒畅。</p>
   <p>如果是长期肝郁、情绪低落、容易心情烦躁、习惯叹气的人，春季也是最合适养肝解郁的时节。我们可以用决明子10克，菊花、桑叶各5克，适量冰糖调味，做为茶饮。还有一方五花开郁茶，用玫瑰花、芍药花、素馨花、百合花、佛手花各3克泡茶，对肝郁不解，忧郁成疾的患者颇有奇效。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>

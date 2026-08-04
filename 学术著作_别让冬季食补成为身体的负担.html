@@ -22,6 +22,22 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 .back-btn { display:block; width:fit-content; margin:30px auto; padding:12px 32px; background:#8B4513; color:#FFF8F0; border:none; border-radius:8px; font-size:15px; cursor:pointer; text-decoration:none; }
 .back-btn:hover { background:#A0522D; }
 .meta { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+
+/* 目录 */
+.toc{background:#FFF3E0;border:1px solid #E8D5C0;border-radius:8px;padding:16px 20px;margin:20px 0 30px}
+.toc-title{font-size:16px;font-weight:bold;color:#8B4513;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.toc-title::before{content:"📑";font-size:18px}
+.toc-toggle{cursor:pointer;font-size:13px;color:#A0522D;margin-left:auto;user-select:none}
+.toc-toggle:hover{color:#8B4513}
+.toc-list{list-style:none;max-height:300px;overflow-y:auto;transition:max-height 0.3s}
+.toc-list.collapsed{max-height:0;overflow:hidden}
+.toc-list li{margin:4px 0}
+.toc-list a{color:#5D4037;text-decoration:none;font-size:14px;padding:4px 8px;border-radius:4px;display:block;transition:background 0.2s;line-height:1.5}
+.toc-list a:hover{background:rgba(139,69,19,0.1);color:#8B4513}
+.toc-list a.active{background:#8B4513;color:#FFF8F0}
+.toc-list .toc-h3{padding-left:20px;font-size:13px}
+@media(max-width:600px){.toc{padding:12px 14px}.toc-list a{font-size:13px}}
+
 </style>
 </head>
 <body>
@@ -35,11 +51,64 @@ body { font-family: "PingFang SC","Microsoft YaHei","Noto Serif SC",serif; backg
 <div class="content">
   <h1>别让冬季食补成为身体的负担</h1>
   <div class="meta">学术著作 / 养生\冬 | 812 字</div>
-  <h2>别让冬季食补成为身体的负担</h2>
+<div class="toc"><div class="toc-title">目录 <span class="toc-toggle" id="toc-toggle" onclick="toggleToc()">收起 ▲</span></div><ul class="toc-list" id="toc-list"></ul></div>
+  <h2 id="别让冬季食补成为身体的负担">别让冬季食补成为身体的负担</h2>
   <p>民间俗语说“寒冬至，狗肉肥”，很多人都会在冬天吃狗肉进补。那冬季到底适不适合吃狗肉之类的美味来补呢？中医治病的原则是“虚则补之，实则泻之”。路老强调，“补”与“泻”要因地、因时、因人而异。冬季是进补的季节，但并非每个人都需要进补，只有“虚者补之”，不虚则正常饮食就可以了，需要进补的人，还要分清补品的性能是否适合自己，不顾身体状况盲目进补，反而会给身体造成额外的负担。具体到狗肉而言，的确，一些体质虚弱和患有关节炎等病的人，在严冬季节多吃些狗肉是有好处的，但并不是每个人都适合吃狗肉，因为狗肉性偏温，多食助火。另外，吃狗肉后不要喝茶，因为茶叶中的鞣酸与狗肉中的蛋白质结合会生成一种物质，这种物质具有一定的收敛作用，可使肠蠕动减弱，大便里的水分减少，导致便中的有毒物质和致癌物质在肠内停留时间过长而被人体吸收。</p>
   <p>鸡汤也不是所有的人都能喝的。清炖的鸡汤和辅助药材熬制的鸡汤营养丰富，其中的营养物质是从鸡油、鸡皮、鸡肉和鸡骨中溶解出的少量水溶性小分子，其蛋白质仅为鸡肉的7%左右，而汤里的鸡油大都属于饱和脂肪酸，所以有几种人不宜喝鸡汤：胆囊炎和胆结石经常发作者，因鸡汤中脂肪的消化需要胆汁参与，喝鸡汤后会刺激胆囊收缩，易引起胆囊炎发作；胃酸过多者不宜喝鸡汤，因为鸡汤有刺激胃酸分泌的作用，有胃溃疡、胃酸过多或胃出血的病人，一般不宜喝鸡汤；肾功能不全者不宜喝鸡汤，因为鸡汤内含有一些小分子蛋白质，患有急性肾炎、急慢性肾功能不全或尿毒症的患者，由于其肝肾对蛋白质分解物不能及时处理，喝多了鸡汤会引起高氮质血症，加重病情。</p>
   <p>最后还要提醒大家的是，冬季进补要适宜，身体虚弱、有慢性疾病者，以及虽无明显疾病，但需要调理增强体质的老年人，可适量进补。身体强壮无病的年轻人则不宜进补，盲目进补，既增加经济负担，又会增加身体负担，如鱼肝油过量可引起中毒，长期服用葡萄糖会引起发胖，过食滋补药会助痰生湿。</p>
   <a href="search.html" class="back-btn">← 返回文献检索</a>
 </div>
+
+// 目录功能
+(function(){
+  // 为所有h2添加锚点ID
+  var h2s=document.querySelectorAll(".content h2");
+  h2s.forEach(function(h,i){
+    if(!h.id) h.id="section-"+i;
+  });
+  
+  // 生成目录
+  var toc=document.getElementById("toc-list");
+  if(!toc) return;
+  h2s.forEach(function(h,i){
+    var li=document.createElement("li");
+    var a=document.createElement("a");
+    a.href="#"+h.id;
+    a.textContent=h.textContent.trim().substring(0,40);
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      h.scrollIntoView({behavior:"smooth",block:"start"});
+      // 更新高亮
+      toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+      a.classList.add("active");
+    });
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  
+  // Scroll Spy
+  function updateToc(){
+    var scrollY=window.scrollY+120;
+    h2s.forEach(function(h){
+      var top=h.offsetTop;
+      var h2h=h.offsetHeight;
+      if(scrollY>=top&&scrollY<top+h2h){
+        toc.querySelectorAll("a").forEach(function(l){l.classList.remove("active")});
+        var link=toc.querySelector('a[href="#'+h.id+'"]');
+        if(link) link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll",updateToc);
+  updateToc();
+})();
+
+function toggleToc(){
+  var list=document.getElementById("toc-list");
+  var btn=document.getElementById("toc-toggle");
+  list.classList.toggle("collapsed");
+  btn.textContent=list.classList.contains("collapsed")?"展开 ▼":"收起 ▲";
+}
+
 </body>
 </html>
