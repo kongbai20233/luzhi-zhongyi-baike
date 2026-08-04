@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>路氏中医百科 — 百年传承 济世救人</title>
+<style>
+:root {
+  --bg: #FFF8F0;
+  --primary: #8B4513;
+  --primary-dark: #5D3A1A;
+  --accent: #CD5C5C;
+  --text: #3D2B1F;
+  --card: #FDF6EE;
+  --card-alt: #F5E6D3;
+  --gold: #D4A574;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "SimSun", "宋体", "Noto Serif SC", serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--bg);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(93,58,26,0.3);
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--gold);
+}
+.logo span { color: var(--accent); }
+nav { display: flex; gap: 8px; flex-wrap: wrap; }
+nav a {
+  color: var(--bg);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+nav a:hover { background: rgba(255,248,240,0.15); }
+
+/* Hero */
+.hero {
+  background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+  color: var(--bg);
+  text-align: center;
+  padding: 60px 20px 50px;
+}
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 16px;
+  color: var(--gold);
+}
+.hero p {
+  font-size: 18px;
+  max-width: 800px;
+  margin: 0 auto 12px;
+  opacity: 0.9;
+}
+.hero .seal {
+  font-size: 28px;
+  color: var(--accent);
+  margin-top: 20px;
+  letter-spacing: 4px;
+}
+
+/* Sections */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+.section-title {
+  font-size: 28px;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 8px;
+  position: relative;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  margin: 12px auto 0;
+}
+.section-subtitle {
+  text-align: center;
+  color: var(--gold);
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+/* Bio Card */
+.bio-card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-left: 4px solid var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.bio-card p {
+  margin-bottom: 12px;
+  text-indent: 2em;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--accent), var(--primary));
+  border-radius: 2px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 24px;
+  background: var(--card);
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -33px;
+  top: 20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+}
+.timeline-year {
+  font-weight: bold;
+  color: var(--primary);
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.timeline-era {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 30px 0 16px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--gold);
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Details/Summary */
+details {
+  background: var(--card);
+  border-radius: 10px;
+  margin-bottom: 16px;
+  border: 1px solid var(--card-alt);
+  overflow: hidden;
+}
+details summary {
+  padding: 14px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--primary);
+  font-size: 17px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: "▶";
+  font-size: 12px;
+  transition: transform 0.3s;
+  color: var(--accent);
+}
+details[open] summary::before { transform: rotate(90deg); }
+details summary:hover { background: var(--card-alt); }
+details .detail-body { padding: 0 20px 20px; }
+
+/* Gallery Grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+.gallery-item {
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--card-alt);
+  position: relative;
+}
+.gallery-item img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+.gallery-item:hover img { transform: scale(1.05); }
+.gallery-item .caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(61,43,31,0.85);
+  color: var(--bg);
+  font-size: 11px;
+  padding: 4px 6px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.gallery-item:hover .caption { opacity: 1; }
+
+/* Certs Gallery */
+.certs-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+.cert-item {
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cert-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+.cert-item img {
+  width: 100%;
+  display: block;
+}
+
+/* Quote */
+.quote-box {
+  background: var(--card-alt);
+  border-left: 4px solid var(--accent);
+  padding: 20px 24px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.stat-item {
+  text-align: center;
+  background: var(--card);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.stat-num {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--accent);
+}
+.stat-label {
+  font-size: 14px;
+  color: var(--text);
+  margin-top: 4px;
+}
+
+/* Footer */
+footer {
+  background: var(--primary-dark);
+  color: var(--bg);
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 14px;
+}
+footer a { color: var(--gold); text-decoration: none; }
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.92);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.lightbox.active { display: flex; }
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px; right: 30px;
+  font-size: 36px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 2001;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+  .certs-gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .header-inner { flex-direction: column; gap: 10px; }
+  nav { justify-content: center; }
+}
+@media (max-width: 600px) {
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  .hero h1 { font-size: 24px; }
+  .section { padding: 30px 16px; }
+  .section-title { font-size: 22px; }
+  .bio-card { padding: 20px; }
+  nav a { font-size: 12px; padding: 4px 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="header-inner">
+    <div class="logo">路氏中医<span>百科</span></div>
+    <nav>
+      <a href="#intro">缘起</a>
+      <a href="#lzz">路志正</a>
+      <a href="#timeline">大事年表</a>
+      <a href="#academy">学术思想</a>
+      <a href="#lujie">路洁</a>
+      <a href="#academy">著作</a>
+      <a href="#certs">荣誉</a>
+      <a href="#calligraphy">墨宝</a>
+      <a href="#gallery">影集</a>
+    <a href="search.html" style="background:rgba(255,213,79,0.2);border:1px solid #FFD54F;border-radius:6px;padding:4px 10px;">📚 文献检索</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>路氏中医百科</h1>
+  <p>一门三代，薪火相传；百岁国医，济世救人</p>
+  <p>从河北藁城的乡间小路，到人民大会堂的国医殿堂</p>
+  <p>路志正（1920—2023）· 路洁 · 路氏四代中医传承</p>
+  <div class="seal">大医精诚 · 德艺双馨</div>
+</div>
+
+<!-- Section: 缘起 -->
+<div class="section" id="intro">
+  <h2 class="section-title">路氏中医传承</h2>
+  <p class="section-subtitle">从乡间杏林到国医殿堂</p>
+  <div class="bio-card">
+    <p>路氏中医，源于河北藁城，历经四代传承。路志正先生（1920—2023）是首届国医大师、国家级非物质文化遗产传统医药项目代表性传承人，从医八十余载，精通内外妇儿，铸就"持中央、运四旁、怡情志、调升降、顾润燥、纳化常"的学术思想，创建了中医风湿病学科，是新中国中医药事业发展的参与者、见证者和推动者。</p>
+    <p>其女路洁，继承父学，现任北京中医药大学中医临床特聘专家、三芝堂中医诊所主任医师，在脾胃病、老年病、妇科疾病的中医诊治方面独具特色，是路氏中医当代传承的中坚力量。</p>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num">103</div>
+      <div class="stat-label">路志正享年（岁）</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">80+</div>
+      <div class="stat-label">从医年限（年）</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">学术论文（篇）</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">20+</div>
+      <div class="stat-label">学术专著（部）</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">培养人才（人）</div>
+    </div>
+  </div>
+</div>
+
+<!-- Section: 路志正 -->
+<div class="section" id="lzz">
+  <h2 class="section-title">国医大师路志正</h2>
+  <p class="section-subtitle">字子端，号行健（1920—2023）</p>
+  
+  <div class="bio-card">
+    <p>路志正（1920—2023），男，字子端，号行健。中国共产党优秀党员，第六、七、八届全国政协委员，首届国医大师，中医教育家、书法家、社会活动家，新中国中医药事业开拓者之一。</p>
+    <p>路老1920年生于河北藁城。幼承家学，1934年入伯父路益修创办的河北中医学校学习，先后拜路益修、孟正己、王步举等名医为师，尽得真传。1939年医校毕业，步入杏林，悬壶乡里。</p>
+    <p>1952年入卫生部中医司工作，参与"一司两院"创建工作，最早参与并主持对中医药治疗乙脑成效的认定。1973年调入广安门医院，从事风湿病、心肺疾病、中医疑难病临床科研教学工作，成立全国最早以研究内科疑难病症痹证为主的内科研究室，创建风湿病学科。</p>
+    <p>从医八十余载，精通内外妇儿，精研外感内伤、伤寒温病之学，擅治杂病，屡起沉疴。崇尚脾胃学说，铸就"持中央、运四旁、怡情志、调升降、顾润燥、纳化常"的学术思想。笔耕不辍，著述等身，主编出版20余部专著，发表学术论文200余篇。</p>
+    <p>其忠于党，忠于人民，忠于中医药事业，以毕生精力推动中医药事业的传承与发展。他于九十岁高龄入党，将优秀共产党员的品质体现在崇高的医德医风上。百岁辉煌、灿烂人生，"路直成道业精妙，志正方圆享天年"！</p>
+  </div>
+</div>
+
+<!-- Section: 大事年表 -->
+<div class="section" id="timeline">
+  <h2 class="section-title">生平大事年表</h2>
+  <p class="section-subtitle">跨越百年的中医传奇</p>
+  
+  <div class="timeline">
+    <div class="timeline-era">1920年 — 1949年 · 少年求学，悬壶乡里</div>
+    <div class="timeline-item">
+      <div class="timeline-year">1920年</div>
+      <p>12月21日，出生于河北藁城县北洼村，取名路志正，后取字子端，号行健。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1926年</div>
+      <p>父亲路永修教路志正读《三字经》《百家姓》《弟子规》《千家诗》。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1934年</div>
+      <p>进入伯父路益修创办的河北中医专科学校学习。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1935年</div>
+      <p>拜师孟正己先生，学习《素问》《灵枢》《伤寒论》《金匮要略》等中医经典著作。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1937年</div>
+      <p>拜师王步举先生学习针灸，研读《灵枢》《针灸甲乙经》《针灸大成》等经典。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1939年</div>
+      <p>以全省第八名的成绩通过河北省中医资格考试，开始在本乡独立应诊。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1949年</div>
+      <p>和伯父路益修一起来到北京开诊行医。</p>
+    </div>
+
+    <div class="timeline-era">1950年 — 1966年 · 卫生部工作，医政双担</div>
+    <div class="timeline-item">
+      <div class="timeline-year">1952年</div>
+      <p>经组织考察，被卫生部医政司录取参加革命工作，负责全国中医信访及中医药人员进修等工作。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1953年</div>
+      <p>参加抗美援朝巡回医疗队，运用针灸为回国治疗的伤员治病，发现经外奇穴遗精穴。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1954年</div>
+      <p>参加对石家庄传染病院"流行性乙型脑炎治验"的鉴定工作，据理力争，最终确认中医中药对乙脑治疗的关键作用。这是新中国成立后首次重大疫情。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1955年</div>
+      <p>作为中央血吸虫病防治领导小组中唯一的中医专家，提出"先用中医药治疗腹水、再用西药杀虫"的方案并推广。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1960年</div>
+      <p>随卫生部中医研究院医疗队赴包钢职工医院支边，抢救五例大面积钢水烧伤患者，一死四愈。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1964年</div>
+      <p>《中国针灸学概要》中文版由人民卫生出版社出版，为针灸走向世界奠定基础。</p>
+    </div>
+
+    <div class="timeline-era">1973年 — 1990年 · 创建学科，著书立说</div>
+    <div class="timeline-item">
+      <div class="timeline-year">1973年</div>
+      <p>调入中医研究院广安门医院从事内科临床工作。冤案平反，举家返回北京。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1981年</div>
+      <p>同赵金铎、谢海洲等创办广安门医院内科研究室，主要研究治疗风湿病，为风湿病科前身。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1983年</div>
+      <p>当选第六届全国政协委员；中华中医药学会内科分会成立痹证、脾胃病学组，担任痹证学组组长。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1985年</div>
+      <p>《中医内科急症》由人民卫生出版社出版，获北方十省市优秀科技图书二等奖。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1987年</div>
+      <p>赴泰国参加"泰中中医药学术交流大会"，三个月诊治患者六千余人。</p>
+    </div>
+
+    <div class="timeline-era">1990年 — 2000年 · 八老上书，建言献策</div>
+    <div class="timeline-item">
+      <div class="timeline-year">1990年</div>
+      <p>联合邓铁涛等"八老上书"，致信江泽民总书记，建议加强国家中医管理局职能。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1991年</div>
+      <p>被聘为第一批全国老中医药专家学术经验继承工作指导老师；组织首届国际中医心病学术会议。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1996年</div>
+      <p>与焦树德共同主编《实用中医风湿病学》出版，首创尪痹、产后痹、燥痹等中医病名。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1997年</div>
+      <p>组织首届国际中医风湿病学术研讨会；赴法国、摩纳哥参加国际学术会议。</p>
+    </div>
+
+    <div class="timeline-era">2000年 — 2023年 · 国医大师，百岁辉煌</div>
+    <div class="timeline-item">
+      <div class="timeline-year">2003年</div>
+      <p>抗击非典期间，积极呼吁中医药参与疫情防治并得到高度重视，为日后中医药参与重大疫情奠定基础。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2008年</div>
+      <p>被评为传统医药国家级非物质文化遗产代表性传承人；建立"路志正名老中医工作室"。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2009年</div>
+      <p>被授予首届"国医大师"称号，吴仪副总理接见和祝贺；获中华中医药学会终身成就奖。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2018年</div>
+      <p>《路志正医案医话》由人民卫生出版社出版发行；举行国医大师路志正学术思想传承论坛暨医学丛书首发式。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2019年</div>
+      <p>从医八十周年暨百年华诞学术传承系列活动启动；收徒26人。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023年1月20日</div>
+      <p>于13时58分在北京仙逝，享年103岁。</p>
+    </div>
+  </div>
+</div>
+
+<!-- Section: 学术思想 -->
+<div class="section" id="academy">
+  <h2 class="section-title">学术思想与贡献</h2>
+  <p class="section-subtitle">崇东垣之学，尚脾胃为本</p>
+  
+  <details open>
+    <summary>核心学术思想</summary>
+    <div class="detail-body">
+      <div class="quote-box">
+        "持中央、运四旁、怡情志、调升降、顾润燥、纳化常"
+      </div>
+      <p>路志正教授崇尚脾胃学说，集百家之长，善温病之治，精养生之妙。从脾胃论治胸痹，承古推新发展湿病理论，首创燥痹、产后痹，研发痹病新药。提倡针药并施、内外合用、药食相配、身心同治。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>风湿病学科创建</summary>
+    <div class="detail-body">
+      <p>1981年创办广安门医院内科研究室，为中医研究院广安门医院风湿病科前身。担任第一届中华中医药学会风湿病分会主任委员，主编第一部中医风湿病学专著《实用中医风湿病学》，首创尪痹、产后痹、燥痹等中医病名。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>从脾胃论治胸痹</summary>
+    <div class="detail-body">
+      <p>独树一帜，从脾胃论治胸痹（冠心病）。"路志正调理脾胃法治疗胸痹经验的继承整理研究"课题获国家中医药管理局中医药基础研究二等奖。调理脾胃法治疗胸痹三百例临床观察，疗效显著。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>湿病理论发展</summary>
+    <div class="detail-body">
+      <p>提出"北方亦多湿"的论点，主编《中医湿病证治学》，发展了中医湿病理论。提出"湿邪阻滞是心律失常的一大致病因素"的学术观点，在国际学术会议上引起广泛关注。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>中医药建言献策</summary>
+    <div class="detail-body">
+      <p>1984年联合多位专家建议设立国家中医管理局；1990年"八老上书"加强国家中医管理局职能；2003年抗击非典期间推动中医药参与疫情防治；多次致信推动"中医药传承与创新百千万人才工程"启动。</p>
+    </div>
+  </details>
+
+  <details open>
+    <summary>主要著作 <span style="font-size:13px;color:#FFD54F;">（95篇文献可检索）</span></summary>
+    <div class="detail-body">
+      <p>主编出版《路志正医林集腋》《中医内科急症》《实用中医风湿病学》《中医湿病证治学》《路志正医学丛书》等20余部专著，发表学术论文200余篇。培养研究生、学术传承人、中医优秀人才或徒弟200余人。</p>
+      <div style="margin-top:16px;padding:16px;background:rgba(255,213,79,0.1);border:1px solid #FFD54F;border-radius:8px;text-align:center;">
+        <p style="text-indent:0;margin-bottom:10px;font-weight:bold;color:#8B4513;">📚 文献检索 · 95篇学术著作与纪念文章</p>
+        <p style="text-indent:0;font-size:14px;color:#666;margin-bottom:12px;">包含：学术著作82篇 · 缅怀纪念6篇 · 生平履历7篇</p>
+        <a href="search.html" style="display:inline-block;padding:10px 28px;background:#8B4513;color:#FFF8F0;border-radius:8px;text-decoration:none;font-size:15px;">进入文献检索 →</a>
+      </div>
+      <div style="margin-top:16px;">
+        <p style="text-indent:0;font-weight:bold;margin-bottom:8px;">核心著作分类：</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <a href="search.html" style="padding:6px 12px;background:#FFF3E0;border:1px solid #D7CCC8;border-radius:6px;text-decoration:none;color:#8B4513;font-size:13px;">十八字诀</a>
+          <a href="search.html" style="padding:6px 12px;background:#FFF3E0;border:1px solid #D7CCC8;border-radius:6px;text-decoration:none;color:#8B4513;font-size:13px;">脾胃与湿病</a>
+          <a href="search.html" style="padding:6px 12px;background:#FFF3E0;border:1px solid #D7CCC8;border-radius:6px;text-decoration:none;color:#8B4513;font-size:13px;">心血管</a>
+          <a href="search.html" style="padding:6px 12px;background:#FFF3E0;border:1px solid #D7CCC8;border-radius:6px;text-decoration:none;color:#8B4513;font-size:13px;">风湿免疫</a>
+          <a href="search.html" style="padding:6px 12px;background:#FFF3E0;border:1px solid #D7CCC8;border-radius:6px;text-decoration:none;color:#8B4513;font-size:13px;">情志妇科</a>
+          <a href="search.html" style="padding:6px 12px;background:#FFF3E0;border:1px solid #D7CCC8;border-radius:6px;text-decoration:none;color:#8B4513;font-size:13px;">养生功法</a>
+          <a href="search.html" style="padding:6px 12px;background:#FFF3E0;border:1px solid #D7CCC8;border-radius:6px;text-decoration:none;color:#8B4513;font-size:13px;">临床案例</a>
+          <a href="search.html" style="padding:6px 12px;background:#FFF3E0;border:1px solid #D7CCC8;border-radius:6px;text-decoration:none;color:#8B4513;font-size:13px;">用药心得</a>
+        </div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Section: 路洁 -->
+<div class="section" id="lujie">
+  <h2 class="section-title">路洁</h2>
+  <p class="section-subtitle">路氏中医当代传承人</p>
+  
+  <div class="bio-card">
+    <p>路洁，路志正教授之女，北京中医药大学中医临床特聘专家、三芝堂中医诊所主任医师。自幼随父学医，深得路氏中医真传，在脾胃病、老年病、妇科疾病的中医诊治方面独具特色。</p>
+    <p>继承父亲"调理脾胃"的学术思想，运用中医理、法、方、药，结合现代医学理论和检测技术，解决临床中的疑难问题。在脾胃病治疗上，采用和胃利胆、化浊祛湿法治疗眩晕，温中祛寒、补气健脾法治疗慢性胃炎；在老年病治疗上，清肝泻热法治疗高血压，温阳通便法治疗老年性便秘；在妇科疾病治疗上，养血调经法治疗月经病，益气健脾、温阳止泻法治不孕不育。</p>
+  </div>
+
+  <details open>
+    <summary>临床诊疗特色</summary>
+    <div class="detail-body">
+      <p><strong>脾胃病：</strong>和胃利胆、化浊祛湿法治疗胆郁痰扰所致的眩晕，方用温胆汤合藿朴夏苓汤为基础；益气养血法治疗气血两虚所致的眩晕，方用四物汤合生脉饮为基础。温中祛寒、补气健脾法治疗脾胃虚寒所致的慢性胃炎。</p>
+      <p><strong>老年病：</strong>清肝泻热法治疗肝阳上亢所致的高血压，方用当归龙荟汤；温阳通便法治疗老年性便秘，以参苓白术或藿朴夏苓打底，合用济川煎通便。</p>
+      <p><strong>妇科疾病：</strong>养血调经法治疗月经病，方用胶艾四物为基础的变法，合艾附暖宫；益气健脾、温阳止泻法治不孕不育，方用参苓白术、肉蔻四神丸。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>学术论文</summary>
+    <div class="detail-body">
+      <p>第一作者论文：《路志正教授知常达变辨治妇科病经验撷萃》《路志正教授论治痛风的学术思想》《路志正教授运用经方治疗疑难病证举隅》</p>
+      <p>合作论文：《路氏清金肃肺止咳方临床应用浅析》《路志正临证经验选介》等</p>
+    </div>
+  </details>
+</div>
+
+<!-- Section: 荣誉证书 -->
+<div class="section" id="certs">
+  <h2 class="section-title">荣誉与证书</h2>
+  <p class="section-subtitle">大医精诚的见证</p>
+  <div class="certs-gallery">
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_064_5e10f814.jpg" alt="1997 年法国巴黎世界中医药学会第二届大会路志正特别荣誉奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_065_dceb75da.jpg" alt="2000年中医研究院资深研究员称号 (2)">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_066_fb661589.jpg" alt="2000年中医研究院资深研究员称号">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_067_54958451.jpg" alt="2005年中央保健委先进个人证书">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_068_b7fb8a8a.jpg" alt="2009年国医大师奖牌">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_069_6290e5b3.jpg" alt="2009年国医大师称号">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_070_4abf1167.jpg" alt="2009年路老膏方调理技术荣誉证书">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_071_405f7361.jpg" alt="中医急诊特殊贡献奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_072_96a72603.jpg" alt="中医药特殊贡献奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_073_7e8885a1.jpg" alt="中华中医药学会学术著作奖(内）">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_074_3e3a377c.jpg" alt="中华中医药学会学术著作奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_075_da1fdcf3.jpg" alt="中华中医药学会授予路老“中医药传承特别贡献奖”">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_076_c49cc411.jpg" alt="中华全国中医内科学会的学术论文证书">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_077_5f4d4f90.jpg" alt="中华全国中医内科学会的学术论文证书（内）">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_078_b26872a0.jpg" alt="中国医学院终生成就奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_079_71cdc4a8.jpg" alt="中央人民广播电台医学宣传顾问证书">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_080_9052fffd.jpg" alt="中央保健工作突出贡献奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_081_a6cad22b.jpg" alt="中央保健工作突出贡献者">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_082_116b3989.jpg" alt="二零零五年中央保健委先进个人称号">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_083_ea71bd32.jpg" alt="从事中医工作六十年特殊贡献奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_084_fdf070d9.jpg" alt="全国老中医药专家学术经验继承指导老师荣誉证书">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_085_732f8f8a.jpg" alt="全国防治非典型肺炎优秀科技工作者">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_086_702a0811.jpg" alt="全国防治非典型肺炎优秀科技工作者（内）">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_087_43955689.jpg" alt="参葛胶囊证书">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_088_e31b6feb.jpg" alt="国医名师奖牌">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_089_908b7dd3.jpg" alt="国医楷模证书">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_090_408c7d7e.jpg" alt="国宝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_091_95347abc.jpg" alt="感谢路志正光临首届英国中医药国际大会作学术演讲">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_092_cef6af8c.jpg" alt="感谢路志正才能与中日医学学术研究会上主持学术交流">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_093_e7d8fe74.jpg" alt="燥庳的辩证论治评为优秀论文">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_094_ef41dce8.jpg" alt="肝心痛的源流与现状论文在第五次全国中医心病学术研究会上颇受欢">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_095_b432ed2a.jpg" alt="胶囊证书">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_096_800fff08.jpg" alt="表彰路志正对科学出版社突出贡献奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_097_352c1076.jpg" alt="路志正《糖尿病辨证论治》获 1993 年洛杉矶第五届国际针灸">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_098_d8f57349.jpg" alt="路志正《糖尿病辨证论治》获 1993 年洛杉矶第五届国际针灸">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_099_4e19c797.jpg" alt="路志正出席98年香港中医药防治现代难治病学术研讨会">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_100_bf608c6e.jpg" alt="路志正国医大师证书">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_101_745ccd13.jpg" alt="路志正国医大师证书（内）">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_102_c5bf7672.jpg" alt="路志正在中国中医药学会内科学会心病专业委员会第四次学术研究会">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_103_1b1a105d.jpg" alt="路志正在第二届中国中医药学会内分泌分会学会工作中取得优异成绩">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_104_080c2b2f.jpg" alt="路志正在防治非典型肺炎工作中被评为抗非典勇士荣誉称号">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_105_3d9a2db9.jpg" alt="路志正获1986年中国中医研究院优秀教师">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_106_6d1dfee3.jpg" alt="路志正获2003年度师带徒工作奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_107_8abbcbf2.jpg" alt="路志正获2004年度特殊医疗服务奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_108_9df91802.jpg" alt="路志正获2005年度特殊医疗服务奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_109_b6079176.jpg" alt="路志正获2008年特殊医疗服务奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_110_cb901687.jpg" alt="路志正获中医急诊工作突出贡献奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_111_d5709950.jpg" alt="路志正获中医药工作贡献奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_112_ef820158.jpg" alt="路志正获师带徒优秀奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_113_4fc55aa8.jpg" alt="路志正获得98年香港中医药防治现代难治病学术研讨会优秀论文奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_114_2f02c6fb.jpg" alt="路志正获得首届世界传统医学大会国际最高荣誉金奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_115_d8f9e328.jpg" alt="路志正被授予2010年度岐黄中医药基金会传承发展奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_116_2e283eea.jpg" alt="路志正被授予中华中医药学会首届中医药传承特别贡献奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_117_0f13d0f7.jpg" alt="路志正被授予中国中医科学院荣誉首席研究院称号">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_118_e88c4111.jpg" alt="路志正被授予全国老中医药专家学术经验继承工作优秀指导老师">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_119_fb6cb986.jpg" alt="路志正被授予同仁堂杯中医药工作60年特殊贡献奖">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_120_136ea9ab.jpg" alt="路志正被评为北京中医学会第七届理事会理事、副理事长">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_121_0e00c36d.jpg" alt="路志正被选为中国中医药学会内科学会心病专业第三届委员会副主任">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_122_82cc9642.jpg" alt="路志正被选为当代中医药发展研究中心第一届理事会理事">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_123_289c2f39.jpg" alt="路志正论文获96年国家科技进步三等奖  中国中医研究院科技进">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_124_139ba842.jpg" alt="路志正评为中国中医研究院抗非典勇士称号">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_125_fdcaca47.jpg" alt="路志正评为抗震救灾先进个人">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_126_428ec3df.jpg" alt="路老荣获中华中医药学会“终身成就奖”">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_127_e8be3bad.jpg" alt="首都国医名师证书">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_certs/img_128_9ee6bcc8.jpg" alt="首都国医名师证书（内)">
+    </div>
+  </div>
+</div>
+
+<!-- Section: 墨宝书法 -->
+<div class="section" id="calligraphy">
+  <h2 class="section-title">墨宝书法</h2>
+  <p class="section-subtitle">医道与书法融为一体</p>
+  <div class="certs-gallery">
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_021_f53e70ed.jpg" alt="1985年路志正教授给作者郎江南的题词">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_022_6cec152b.jpg" alt="2007年9月路老字振兴岐黄">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_023_34c571c0.jpg" alt="万友生祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_024_04007bbb.jpg" alt="任继学祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_025_d0a62529.jpg" alt="何锦添祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_026_e1304bec.jpg" alt="傅世恒祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_027_6a1b4e54.jpg" alt="刘铁宝祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_028_4e41504d.jpg" alt="勤奋墨宝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_029_749b0e20.jpg" alt="北京中医药大学祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_030_4e6dc2a0.jpg" alt="北京中医药大学祝001">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_031_f08ddc17.jpg" alt="北京中医药学会祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_032_2bd5eb7c.jpg" alt="史常永祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_033_1b0094d4.jpg" alt="同福墨宝整理">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_034_745231f6.jpg" alt="周仲瑛祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_035_65c1f881.jpg" alt="大医精诚书写画面 (2)">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_036_6d6e4752.jpg" alt="大医精诚书写画面">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_037_7cd08d30.jpg" alt="失野宥三祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_038_345d830b.jpg" alt="季今庸祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_039_5ee98555.jpg" alt="张琪祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_040_633655bc.jpg" alt="张璨坤">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_041_949cb943.jpg" alt="方逊华祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_042_07f46829.jpg" alt="李瘠仁祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_043_6d6fdd93.jpg" alt="李连达  靖雨珍祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_044_453f2acb.jpg" alt="江育仁祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_045_fa9a05c5.jpg" alt="满招损谦受益墨宝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_046_5df884ab.jpg" alt="王国三祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_047_3292e41e.jpg" alt="王永炎祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_048_a5468294.jpg" alt="盛国荣祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_049_59027cfc.jpg" alt="许武庆祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_050_f3db63e6.jpg" alt="评伤寒">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_051_eef25e42.jpg" alt="赵国青祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_052_34c2da57.jpg" alt="路志正-九十抒怀墨宝影印">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_053_da788167.jpg" alt="路志正2006年北京老年康复医学研究会寄信拓印">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_054_d9a17502.jpg" alt="路志正《黄帝内经・上古天真论》节选">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_055_25cfaaac.jpg" alt="路志正《黄帝内经・上古天真论》节选雕刻小样 ">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_056_2f0f81fa.jpg" alt="路志正十六字调理墨宝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_057_f1a232ee.jpg" alt="路志正赠国医大师干祖望1992 年恰逢其 80 岁、行医 6">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_058_c002148c.jpg" alt="郑岁宗祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_059_f3315fb8.jpg" alt="金松兰祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_060_9fb46943.jpg" alt="陈佑郅祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_061_736f7099.jpg" alt="颜正华祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_062_e561db41.jpg" alt="饶师泉祝">
+    </div>
+    <div class="cert-item" onclick="openLB(this.querySelector('img').src)">
+      <img loading="lazy" src="images/lzz_calligraphy/img_063_da33f3a3.jpg" alt="黄春源祝">
+    </div>
+  </div>
+</div>
+
+<!-- Section: 影集 -->
+<div class="section" id="gallery">
+  <h2 class="section-title">珍贵影集</h2>
+  <p class="section-subtitle">记录中医传承的点点滴滴</p>
+
+  <details open>
+    <summary>医疗活动（76张）</summary>
+    <div class="detail-body">
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_212_547e121e.jpg" alt="05年与前卫生部部长徐运北合影">
+          <div class="caption">05年与前卫生部部长徐运北合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_213_8969b756.jpg" alt="05年与前卫生部部长徐运北合影1">
+          <div class="caption">05年与前卫生部部长徐运北合影1</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_214_c89a5f81.jpg" alt="08年4月22日获国家级非物质文化遗产项">
+          <div class="caption">08年4月22日获国家级非物质文化遗产项</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_215_72f6894e.jpg" alt="11风湿病学术第一次会议1983-9-1">
+          <div class="caption">11风湿病学术第一次会议1983-9-1</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_216_5eef8440.jpg" alt="14中医药基本名词审定会2002-3">
+          <div class="caption">14中医药基本名词审定会2002-3</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_217_f31d8431.jpg" alt="14周燕青硕士生毕业答辩会北京市中医研究">
+          <div class="caption">14周燕青硕士生毕业答辩会北京市中医研究</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_218_459b8265.jpg" alt="15人民大会堂2003-8-31">
+          <div class="caption">15人民大会堂2003-8-31</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_219_7fb94947.jpg" alt="18第五次全国中医心病学术会">
+          <div class="caption">18第五次全国中医心病学术会</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_220_8091c097.jpg" alt="1961年于包头职工医院">
+          <div class="caption">1961年于包头职工医院</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_221_0388a0dc.jpg" alt="1961年于包头职工医院001">
+          <div class="caption">1961年于包头职工医院001</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_222_77502139.jpg" alt="1987年5月于东京与日本妇科科专家">
+          <div class="caption">1987年5月于东京与日本妇科科专家</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_223_7d11dce7.jpg" alt="1987年5月于东京与日本心外科专家">
+          <div class="caption">1987年5月于东京与日本心外科专家</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_224_79d8a74c.jpg" alt="1998年于日本">
+          <div class="caption">1998年于日本</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_225_0ab42d38.jpg" alt="2003香港北京名老中医讲座活动照片">
+          <div class="caption">2003香港北京名老中医讲座活动照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_226_e9832258.jpg" alt="23《中医证候规范》编写会议代表合影19">
+          <div class="caption">23《中医证候规范》编写会议代表合影19</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_227_62203cee.jpg" alt="28首届国际风湿病会议96-10">
+          <div class="caption">28首届国际风湿病会议96-10</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_228_77ee9ce7.jpg" alt="29、1997年10月">
+          <div class="caption">29、1997年10月</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_229_71e7e5a3.jpg" alt="2京津地区中医古籍整理工作会议合影198">
+          <div class="caption">2京津地区中医古籍整理工作会议合影198</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_230_f5a2b928.jpg" alt="31泰国作学术报告1987-6-23">
+          <div class="caption">31泰国作学术报告1987-6-23</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_231_d561789b.jpg" alt="3中医研究院广安门医院内科进修实习师生合">
+          <div class="caption">3中医研究院广安门医院内科进修实习师生合</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_232_2f226348.jpg" alt="3泰国参加亚细安会议2000-9">
+          <div class="caption">3泰国参加亚细安会议2000-9</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_233_a11dd204.jpg" alt="45北京参加痹病、脾胃病学组全体代表合影">
+          <div class="caption">45北京参加痹病、脾胃病学组全体代表合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_234_ccc75075.jpg" alt="5-1北京光明中医学院院庆16周年大会合">
+          <div class="caption">5-1北京光明中医学院院庆16周年大会合</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_235_b313aae4.jpg" alt="5全国名词委中医药学名词审定委员会成立大">
+          <div class="caption">5全国名词委中医药学名词审定委员会成立大</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_236_8e23d3c8.jpg" alt="5实用中医风湿病学定稿及医药结合研讨会1">
+          <div class="caption">5实用中医风湿病学定稿及医药结合研讨会1</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_237_b92ebf68.jpg" alt="6路志正对关幼波教授学术继承人进行出师答">
+          <div class="caption">6路志正对关幼波教授学术继承人进行出师答</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_238_9d814ead.jpg" alt="8鼓楼中医院京城名医馆诊室1994-8-">
+          <div class="caption">8鼓楼中医院京城名医馆诊室1994-8-</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_239_7d6eeeee.jpg" alt="9第八届全国中医风湿病血和速研讨会200">
+          <div class="caption">9第八届全国中医风湿病血和速研讨会200</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_240_b89bf79c.jpg" alt="与李乾标院长对关老弟子答辩论文审批200">
+          <div class="caption">与李乾标院长对关老弟子答辩论文审批200</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_241_e4919036.jpg" alt="与江西卫生厅副厅长王鱼门在澳门合影">
+          <div class="caption">与江西卫生厅副厅长王鱼门在澳门合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_242_af60d772.jpg" alt="与邓铁涛、任继学等教授一起">
+          <div class="caption">与邓铁涛、任继学等教授一起</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_243_3b0e48ca.jpg" alt="与邓铁涛、吉良辰任继学等教授一起于广东中">
+          <div class="caption">与邓铁涛、吉良辰任继学等教授一起于广东中</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_244_742f3920.jpg" alt="中华全国中医学会治疗感冒病1983.8.">
+          <div class="caption">中华全国中医学会治疗感冒病1983.8.</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_245_ad46044d.jpg" alt="中国人民政治协商会议照片 (2)">
+          <div class="caption">中国人民政治协商会议照片 (2)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_246_ee2e213e.jpg" alt="中国人民政治协商会议照片 (3)">
+          <div class="caption">中国人民政治协商会议照片 (3)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_247_108763fb.jpg" alt="中国人民政治协商会议照片 (4)">
+          <div class="caption">中国人民政治协商会议照片 (4)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_248_d699f8c0.jpg" alt="中国人民政治协商会议照片 (5)">
+          <div class="caption">中国人民政治协商会议照片 (5)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_249_609d6d40.jpg" alt="中国人民政治协商会议照片 (6)">
+          <div class="caption">中国人民政治协商会议照片 (6)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_250_3d5e5215.jpg" alt="中国人民政治协商会议照片 (7)">
+          <div class="caption">中国人民政治协商会议照片 (7)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_251_f2d8353f.jpg" alt="中国人民政治协商会议照片 (8)">
+          <div class="caption">中国人民政治协商会议照片 (8)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_252_d5873968.jpg" alt="中国人民政治协商会议照片">
+          <div class="caption">中国人民政治协商会议照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_253_0b561cdf.jpg" alt="全国名词委中医药名词审定委员会成立大会2">
+          <div class="caption">全国名词委中医药名词审定委员会成立大会2</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_254_3769d0ef.jpg" alt="北京中医工作60周年会议2010-12-">
+          <div class="caption">北京中医工作60周年会议2010-12-</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_255_992d0970.jpg" alt="北京中医工作60周年会议2010-12-">
+          <div class="caption">北京中医工作60周年会议2010-12-</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_256_f5b2d831.jpg" alt="河北省演讲照片">
+          <div class="caption">河北省演讲照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_257_44ec6799.jpg" alt="看诊照片 (2)">
+          <div class="caption">看诊照片 (2)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_258_0a2cce73.jpg" alt="看诊照片 (3)">
+          <div class="caption">看诊照片 (3)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_259_a2afdc5c.jpg" alt="看诊照片 (4)">
+          <div class="caption">看诊照片 (4)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_260_e1d2f61c.jpg" alt="看诊照片">
+          <div class="caption">看诊照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_261_d8d8114f.jpg" alt="看诊照片1990年11月">
+          <div class="caption">看诊照片1990年11月</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_262_4c6db227.jpg" alt="第九届中医风湿病会议结束照片">
+          <div class="caption">第九届中医风湿病会议结束照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_263_b39ead00.jpg" alt="路志正中医丛书发布合影">
+          <div class="caption">路志正中医丛书发布合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_264_c1b2bf89.jpg" alt="领奖合影">
+          <div class="caption">领奖合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_265_759feacd.jpg" alt="黄果树瀑布">
+          <div class="caption">黄果树瀑布</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_266_366b0213.jpg" alt="黄果树瀑布2004.9.2">
+          <div class="caption">黄果树瀑布2004.9.2</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_267_6cd69362.jpg" alt="０４）IMG_0101--２０００年９月">
+          <div class="caption">０４）IMG_0101--２０００年９月</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_268_a6140f6c.jpg" alt="０６）IMG_1933－　路老与他的部分">
+          <div class="caption">０６）IMG_1933－　路老与他的部分</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_269_dc220f29.jpg" alt="０７）31－－31-1991年8月，在马">
+          <div class="caption">０７）31－－31-1991年8月，在马</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_270_9f6b26b5.jpg" alt="１２）IMG_0001--这是在 收徒仪">
+          <div class="caption">１２）IMG_0001--这是在 收徒仪</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_medical/img_271_972b3382.jpg" alt="１４）27-1991年6月在日本东京，应">
+          <div class="caption">１４）27-1991年6月在日本东京，应</div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>合影留念（48张）</summary>
+    <div class="detail-body">
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_164_d9f7d980.jpg" alt="01-9-5甘肃嘉峪关">
+          <div class="caption">01-9-5甘肃嘉峪关</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_165_c271a8a9.jpg" alt="01路老八十大寿">
+          <div class="caption">01路老八十大寿</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_166_6f7df3d5.jpg" alt="01路老八十大寿004">
+          <div class="caption">01路老八十大寿004</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_167_bd46f968.jpg" alt="01路老八十大寿005">
+          <div class="caption">01路老八十大寿005</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_168_39ee2303.jpg" alt="01路老八十大寿006">
+          <div class="caption">01路老八十大寿006</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_169_641ae45e.jpg" alt="01路老八十大寿007">
+          <div class="caption">01路老八十大寿007</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_170_ecf1bd64.jpg" alt="06.1.27吴怡合照 (2)">
+          <div class="caption">06.1.27吴怡合照 (2)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_171_a5f4933e.jpg" alt="06.1.27吴怡合照">
+          <div class="caption">06.1.27吴怡合照</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_172_0de3d2b2.jpg" alt="1984年4月22日 于洛阳">
+          <div class="caption">1984年4月22日 于洛阳</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_173_a8d4eaf2.jpg" alt="1992-5-15下午于黄山">
+          <div class="caption">1992-5-15下午于黄山</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_174_1f8fed9a.jpg" alt="1996年6月教孙子孙女书法于巴黎">
+          <div class="caption">1996年6月教孙子孙女书法于巴黎</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_175_8f99e458.jpg" alt="2001全家福">
+          <div class="caption">2001全家福</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_176_c980f1d4.jpg" alt="2004年12月女路洁同父研习书法 (4">
+          <div class="caption">2004年12月女路洁同父研习书法 (4</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_177_10d4638a.jpg" alt="2004年12月女路洁同父研习书法 (5">
+          <div class="caption">2004年12月女路洁同父研习书法 (5</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_178_496bdbff.jpg" alt="2004年12月女路洁同父研习书法">
+          <div class="caption">2004年12月女路洁同父研习书法</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_179_678778f6.jpg" alt="2004年12月路老长孙向路老请教书法 ">
+          <div class="caption">2004年12月路老长孙向路老请教书法 </div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_180_b98615ea.jpg" alt="2004年12月路老长孙向路老请教书法 ">
+          <div class="caption">2004年12月路老长孙向路老请教书法 </div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_181_10df22a6.jpg" alt="2004年12月路老长孙向路老请教书法 ">
+          <div class="caption">2004年12月路老长孙向路老请教书法 </div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_182_469c6e29.jpg" alt="2004年12月路老长孙向路老请教书法">
+          <div class="caption">2004年12月路老长孙向路老请教书法</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_183_937e6992.jpg" alt="96-7-5法国">
+          <div class="caption">96-7-5法国</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_184_e2d9ad82.jpg" alt="97-1-8全家照">
+          <div class="caption">97-1-8全家照</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_185_f4657d56.jpg" alt="98路老教学001">
+          <div class="caption">98路老教学001</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_186_b4e666c9.jpg" alt="98路老教学002">
+          <div class="caption">98路老教学002</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_187_4d25b99d.jpg" alt="98路老教学孙辈">
+          <div class="caption">98路老教学孙辈</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_188_65c898c0.jpg" alt="三口合影">
+          <div class="caption">三口合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_189_d3b1825b.jpg" alt="与京打夫妇及子女们">
+          <div class="caption">与京打夫妇及子女们</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_190_2ae40f0a.jpg" alt="与长孙小聪于日本">
+          <div class="caption">与长孙小聪于日本</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_191_429e1eef.jpg" alt="全国中医药会议领奖侧面拍摄">
+          <div class="caption">全国中医药会议领奖侧面拍摄</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_192_903a7fd1.jpg" alt="全国中医药会议领奖吴怡握手照片">
+          <div class="caption">全国中医药会议领奖吴怡握手照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_193_71f3c031.jpg" alt="全国中医药会议领奖正面拍摄">
+          <div class="caption">全国中医药会议领奖正面拍摄</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_194_a06bbc2a.jpg" alt="刘延东">
+          <div class="caption">刘延东</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_195_8b6d13f4.jpg" alt="同王国强、陈可冀合影">
+          <div class="caption">同王国强、陈可冀合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_196_e1f05e0f.jpg" alt="吴仪副总理向优秀中医临床人才研修项目优秀">
+          <div class="caption">吴仪副总理向优秀中医临床人才研修项目优秀</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_197_ab2442a2.jpg" alt="吴怡">
+          <div class="caption">吴怡</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_198_9fa130b8.jpg" alt="吴怡2">
+          <div class="caption">吴怡2</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_199_e36d81a8.jpg" alt="吴怡3">
+          <div class="caption">吴怡3</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_200_d2ad1176.jpg" alt="国医大师合照">
+          <div class="caption">国医大师合照</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_201_35769158.jpg" alt="朱镕基">
+          <div class="caption">朱镕基</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_202_fe24fcfb.jpg" alt="百岁高龄带着一家人出诊（2022年9月1">
+          <div class="caption">百岁高龄带着一家人出诊（2022年9月1</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_203_a0b36c9e.jpg" alt="路志正-路洁-五人合影">
+          <div class="caption">路志正-路洁-五人合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_204_f4694974.jpg" alt="路志正-路洁-吴怡三人合影 全国中医药会">
+          <div class="caption">路志正-路洁-吴怡三人合影 全国中医药会</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_205_3814628f.jpg" alt="路志正-路洁-朱镕基合影">
+          <div class="caption">路志正-路洁-朱镕基合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_206_433f5743.jpg" alt="路志正-路洁领奖合影">
+          <div class="caption">路志正-路洁领奖合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_207_cbcf8a45.jpg" alt="路志正三人合影">
+          <div class="caption">路志正三人合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_208_493d085c.jpg" alt="路志正领奖合影 (2)">
+          <div class="caption">路志正领奖合影 (2)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_209_a16c0801.jpg" alt="路志正领奖合影 (3)">
+          <div class="caption">路志正领奖合影 (3)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_210_a0798a76.jpg" alt="路志正领奖合影">
+          <div class="caption">路志正领奖合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_group/img_211_e2b5c459.jpg" alt="路志正领奖握手合影">
+          <div class="caption">路志正领奖握手合影</div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>日常生活（35张）</summary>
+    <div class="detail-body">
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_129_76e720d4.jpg" alt="书房照1">
+          <div class="caption">书房照1</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_130_40de3ed9.jpg" alt="工作位置照片 (10)">
+          <div class="caption">工作位置照片 (10)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_131_b3418d33.jpg" alt="工作位置照片 (11)">
+          <div class="caption">工作位置照片 (11)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_132_7563022d.jpg" alt="工作位置照片 (12)">
+          <div class="caption">工作位置照片 (12)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_133_d5fee594.jpg" alt="工作位置照片 (2)">
+          <div class="caption">工作位置照片 (2)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_134_a7d37c77.jpg" alt="工作位置照片 (3)">
+          <div class="caption">工作位置照片 (3)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_135_54cbfa0b.jpg" alt="工作位置照片 (4)">
+          <div class="caption">工作位置照片 (4)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_136_32527879.jpg" alt="工作位置照片 (5)">
+          <div class="caption">工作位置照片 (5)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_137_e8d7826f.jpg" alt="工作位置照片 (6)">
+          <div class="caption">工作位置照片 (6)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_138_8bc30a1e.jpg" alt="工作位置照片 (7)">
+          <div class="caption">工作位置照片 (7)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_139_2469072b.jpg" alt="工作位置照片 (8)">
+          <div class="caption">工作位置照片 (8)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_140_a7fc2c53.jpg" alt="工作位置照片 (9)">
+          <div class="caption">工作位置照片 (9)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_141_9f8af0ab.jpg" alt="工作位置照片">
+          <div class="caption">工作位置照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_142_c1bdca0e.jpg" alt="广东照片1">
+          <div class="caption">广东照片1</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_143_6a50e89c.jpg" alt="旅游照片 (2)">
+          <div class="caption">旅游照片 (2)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_144_e41c5543.jpg" alt="旅游照片">
+          <div class="caption">旅游照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_145_13c64601.jpg" alt="照片路老 002">
+          <div class="caption">照片路老 002</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_146_12548d31.jpg" alt="照片路老 004">
+          <div class="caption">照片路老 004</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_147_869749df.jpg" alt="照片路老 007">
+          <div class="caption">照片路老 007</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_148_7fcbf22d.jpg" alt="聚餐照片-无路老 (1)">
+          <div class="caption">聚餐照片-无路老 (1)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_149_69950c31.jpg" alt="聚餐照片-无路老 (2)">
+          <div class="caption">聚餐照片-无路老 (2)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_150_131b52f8.jpg" alt="西装照片">
+          <div class="caption">西装照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_151_4e723f1a.jpg" alt="路志正">
+          <div class="caption">路志正</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_152_2b7f2ea9.jpg" alt="路志正1">
+          <div class="caption">路志正1</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_153_5090f556.jpg" alt="路志正书房合影">
+          <div class="caption">路志正书房合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_154_6bd25dce.jpg" alt="路志正会议后交谈握手照片">
+          <div class="caption">路志正会议后交谈握手照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_155_262ec86c.jpg" alt="路志正会议后交谈照片">
+          <div class="caption">路志正会议后交谈照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_156_3698efad.jpg" alt="路志正会议照片">
+          <div class="caption">路志正会议照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_157_030de5bc.jpg" alt="路志正保定直隶总督大门照片">
+          <div class="caption">路志正保定直隶总督大门照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_158_1592014b.jpg" alt="路志正照片">
+          <div class="caption">路志正照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_159_3c0ee68b.jpg" alt="路志正讲解照片">
+          <div class="caption">路志正讲解照片</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_160_7f8146b4.jpg" alt="路老001">
+          <div class="caption">路老001</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_161_315126ac.jpg" alt="路老太极3">
+          <div class="caption">路老太极3</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_162_5055a8ad.jpg" alt="路老照片1">
+          <div class="caption">路老照片1</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_daily/img_163_82bca86b.jpg" alt="首都国医名师">
+          <div class="caption">首都国医名师</div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>路洁影集（20张）</summary>
+    <div class="detail-body">
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_001_1f552348.jpg" alt="合影 路志正-路洁——中医科学院">
+          <div class="caption">合影 路志正-路洁——中医科学院</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_002_acc971d9.jpg" alt="合影 路志正-路洁——日常">
+          <div class="caption">合影 路志正-路洁——日常</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_003_f02aed92.jpg" alt="合影 路洁-路志正-张为佳">
+          <div class="caption">合影 路洁-路志正-张为佳</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_004_b99999be.jpg" alt="合影 路洁-邹燕勤-路志正">
+          <div class="caption">合影 路洁-邹燕勤-路志正</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_005_c7846c63.jpg" alt="合影 邹燕勤-路洁">
+          <div class="caption">合影 邹燕勤-路洁</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_006_b59db822.jpg" alt="朱良春与路洁">
+          <div class="caption">朱良春与路洁</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_007_24eb26d4.jpg" alt="朱良春与路老、路洁">
+          <div class="caption">朱良春与路老、路洁</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_008_57eb1846.jpg" alt="路洁 (2)">
+          <div class="caption">路洁 (2)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_009_c1fa0659.jpg" alt="路洁">
+          <div class="caption">路洁</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_010_aa71cc48.jpg" alt="路洁和国医大师邹燕勤">
+          <div class="caption">路洁和国医大师邹燕勤</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_011_4fe16a4e.jpg" alt="路洁和国医大师颜德馨">
+          <div class="caption">路洁和国医大师颜德馨</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_012_8051c998.jpg" alt="路洁政要合影 (2)">
+          <div class="caption">路洁政要合影 (2)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_013_14c5cf74.jpg" alt="路洁政要合影 (3)">
+          <div class="caption">路洁政要合影 (3)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_014_daf900a9.jpg" alt="路洁政要合影 (4)">
+          <div class="caption">路洁政要合影 (4)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_015_d30b749e.jpg" alt="路洁政要合影">
+          <div class="caption">路洁政要合影</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_016_91dfa796.jpg" alt="路洁看诊or会议 (2)">
+          <div class="caption">路洁看诊or会议 (2)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_017_e0e8ae65.jpg" alt="路洁看诊or会议 (3)">
+          <div class="caption">路洁看诊or会议 (3)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_018_a0658b0e.jpg" alt="路洁看诊or会议 (4)">
+          <div class="caption">路洁看诊or会议 (4)</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_019_4fe8aaff.jpg" alt="路洁看诊or会议">
+          <div class="caption">路洁看诊or会议</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lujie/img_020_1159ea1e.jpg" alt="路洁（3）">
+          <div class="caption">路洁（3）</div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>其他（3张）</summary>
+    <div class="detail-body">
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_other/img_288_96ff2410.jpg" alt="为中医药教育上书李岚清展览馆拍摄">
+          <div class="caption">为中医药教育上书李岚清展览馆拍摄</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_other/img_289_eda11ad9.jpg" alt="十老上书李岚清展览馆拍摄">
+          <div class="caption">十老上书李岚清展览馆拍摄</div>
+        </div>
+        <div class="gallery-item" onclick="openLB(this.querySelector('img').src)">
+          <img loading="lazy" src="images/lzz_other/img_290_258e439b.jpg" alt="成立中国中医大学建议签字">
+          <div class="caption">成立中国中医大学建议签字</div>
+        </div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>路氏中医百科 · 百年传承 济世救人</p>
+  <p style="margin-top:8px;opacity:0.7">路志正（1920—2023）首届国医大师 · 国家级非物质文化遗产传统医药项目代表性传承人</p>
+  <p style="margin-top:4px;opacity:0.5;font-size:12px">本页面为家族资料整理，仅供学习参考</p>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLB()">
+  <span class="lightbox-close">&times;</span>
+  <img id="lb-img" src="" alt="放大查看">
+</div>
+
+<script>
+function openLB(src) {
+  document.getElementById("lb-img").src = src;
+  document.getElementById("lightbox").classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+function closeLB() {
+  document.getElementById("lightbox").classList.remove("active");
+  document.body.style.overflow = "auto";
+}
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") closeLB();
+});
+document.querySelectorAll("nav a").forEach(function(a) {
+  a.addEventListener("click", function(e) {
+    e.preventDefault();
+    var target = document.querySelector(a.getAttribute("href"));
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+</script>
+</body>
+</html>
